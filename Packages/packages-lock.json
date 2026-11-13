@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.tryliom.colorless-core": {
+      "version": "https://github.com/Tryliom/Colorless-Core.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d1e1adcd2802b248e408529728d82c5cd5e4e13e"
+    },
     "com.unity.2d.animation": {
       "version": "15.1.0",
       "depth": 0,
