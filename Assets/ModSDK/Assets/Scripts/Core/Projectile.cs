@@ -228,7 +228,7 @@ public class Projectile : MonoBehaviour
         public Ray Ray;
         public ProjectileAttachedRaySettings Settings;
     }
-    [SerializeField] private RunData _runData;
+
     
     [SerializeField] 
     private Material _defaultMaterial;

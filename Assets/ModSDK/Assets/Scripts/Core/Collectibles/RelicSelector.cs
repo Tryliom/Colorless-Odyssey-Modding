@@ -7,9 +7,10 @@ using Random = UnityEngine.Random;
 
 public class RelicSelector : GroundItem
 {
-    [SerializeField] protected RunData RunData;
     
     public CollectibleType Type ;
+
+    protected RunData RunData =>throw null;
     
     public override CollectibleType GetCollectibleType() {throw new System.NotImplementedException();}    public ObjectLauncher ObjectLauncher =>throw null;
     protected List<string> AvailableRelicsIds ;

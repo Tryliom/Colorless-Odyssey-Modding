@@ -17,7 +17,7 @@ public enum HoverState
 internal class CampPerClassType
 {
     [SerializeField] public ClassTypeEnum ClassType;
-    
+
     public Sprite GetCarpet(PermanentData permanentData)
 {throw new System.NotImplementedException();}}
 

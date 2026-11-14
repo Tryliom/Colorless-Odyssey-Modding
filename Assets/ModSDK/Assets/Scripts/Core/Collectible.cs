@@ -16,13 +16,14 @@ public class GroundItem : MonoBehaviour, ICollectible
 
 public class Collectible : GroundItem
 {
-    [SerializeField] protected RunData RunData;
     
     [SerializeField] protected SpriteRenderer SpriteRenderer;
     [SerializeField] protected SpriteRenderer ShadowSpriteRenderer;
 public ObjectLauncher ObjectLauncher;
     
     public CollectibleType Type ;
+
+    protected RunData RunData =>throw null;
 
     public override CollectibleType GetCollectibleType() {throw new System.NotImplementedException();}    
     protected virtual void OnStart() {throw new System.NotImplementedException();}    

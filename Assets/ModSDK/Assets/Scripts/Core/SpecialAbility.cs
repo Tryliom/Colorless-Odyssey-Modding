@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class SpecialAbility : MonoBehaviour
 {
-    [SerializeField] protected RunData RunData;
+
+    protected RunData RunData =>throw null;
     
     public string Name =>throw null;
     public string Description =>throw null;
