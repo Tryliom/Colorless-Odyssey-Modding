@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 8b2e427eb1ac8c949970a092cda35725
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _imageDelayedPrefab: {fileID: -341451993765470529, guid: c57be3a1172df1749a8dea6dbacf1a30, type: 3}
+  - _normalMapLight: {fileID: 2452699891843793312, guid: 71a5aaf91198bd74780ea7cb591bd3bb, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

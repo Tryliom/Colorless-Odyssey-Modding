@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d959212b3b6491141bee1a1f96e1b609
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _runData: {instanceID: 0}
+  - _effectUI: {fileID: 2888429590432543467, guid: 65f1acff46ab51c4cbdd336f07bbb0d6, type: 3}
+  - _effectData: {fileID: 11400000, guid: 950e93ab8e61da148a3a658e560c9978, type: 2}
+  - _textNumberPrefab: {fileID: 8682624118378597756, guid: 4698d8dfeb81f124ebcf3a4ee93b561f, type: 3}
+  - _light2D: {fileID: -5333552099761479490, guid: 49c77fbd4802c3a41a14ebe7939800fc, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
