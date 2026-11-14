@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using ColorlessCore.Inspector;
 using TMPro;
 using TryliomUtility;
 using UnityEngine;

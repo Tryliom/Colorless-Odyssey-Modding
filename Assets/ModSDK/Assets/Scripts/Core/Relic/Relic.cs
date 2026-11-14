@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ColorlessCore.Inspector;
 using TryliomUtility;
 using UnityEditor;
 using UnityEngine;
@@ -17,7 +18,13 @@ internal class LevelData
 public class RelicCondition
 {
     public ComparisonCondition Comparison;
+    [ValueDropdown(nameof(GetRelicOptions))]
     public List<Relic> Relics ;
+
+    private IEnumerable<Relic> GetRelicOptions()
+    {
+        return RunData.Asset.RelicData.GetAllRelics();
+    }
     
 }
 
@@ -45,15 +52,26 @@ public enum AltarRelicChoice
 
 public class Relic : MonoBehaviour
 {
-    [SerializeField] 
-    protected RunData RunData;
+    [SerializeField]
+    [EnumToggleButtons]
+    private RelicType _relicType;
+    
+    
+    [Header("Tags")]
+    [SerializeField] [Tooltip("Tags that the relic has, what things it affects")]
+    private List<Tag> _tags; 
+    
+    // Odin
+    private bool ShowThemeColor() => _relicType is RelicType.Boss or RelicType.Altar;
     
 
+	protected RunData RunData => RunData.Asset;
+	
     public string Name =>throw null;
     public string LocalizationNamePrefix =>throw null;
     public string UniqueID =>throw null;
     
-    public RelicType RelicType =>throw null;
+    public RelicType RelicType => _relicType;
     public ThemeColor ThemeColor =>throw null;
     public AltarTier AltarTier =>throw null;
     public AltarRelicChoice AltarRelicChoice =>throw null;
@@ -63,7 +81,7 @@ public class Relic : MonoBehaviour
     public readonly StatsData Stats ;
     protected bool IsUsedByPlayer;
     
-    public List<Tag> Tags =>throw null;
+    public List<Tag> Tags => _tags;
     public List<StatName> ScalingStats =>throw null;
     public List<StatName> StatsGiven =>throw null;
     public Rarity Rarity =>throw null;

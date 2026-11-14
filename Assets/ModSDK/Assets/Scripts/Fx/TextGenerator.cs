@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ColorlessCore.Inspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -42,13 +43,19 @@ internal class ProAsset
 public struct TextDisplay
 {
     public TextDisplayType Type;
+    [EnumToggleButtons]
     public TextType TextType;
     public Color DefaultColor;
     public bool UseIcon;
+    [ShowIf(nameof(ShouldShowIcon))]
     public Icon Icon;
+    [ShowIf(nameof(UseIcon))]
     public List<Icon> Icons;
+    [ShowIf(nameof(UseIcon))]
     public bool UseIconText;
     [FormerlySerializedAs("UILocalizationName")] public string StatLocalizationName;
+    
+    private bool ShouldShowIcon => UseIcon && Icons.Count == 0;
 }
 
 public class TextGenerator : MonoBehaviour

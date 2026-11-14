@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ColorlessCore.Inspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -23,11 +24,16 @@ public class EnemySpawnWeight
 {
 	public EnemySpawnDistanceLevel DistanceLevel;
 	public bool ForceSpawnOne;
+	
+	[HideIf(nameof(ForceSpawnOne))]
 	public float BaseWeight;
+	[HideIf(nameof(ForceSpawnOne))]
 	public float WeightPerSubLevel;
+	[HideIf(nameof(ForceSpawnOne))]
 	public float WeightPerEndlessLoops;
 
 	[Range(0f, 1f),Tooltip("Maximum percentage of the room that can be occupied by this enemy type. 0 means no limit.")]
+	[HideIf(nameof(ForceSpawnOne))]
 	public float MaxPercentageOfRoom;
 }
 
@@ -37,9 +43,11 @@ public class EnemyWeightDictionary : UnitySerializedDictionary<EnemyName, EnemyS
 [Serializable]
 public class EnemyScenario
 {
+	[HideLabel]
 	public string Name;
 	public int Weight;
 	public bool OverrideWaveSettings;
+	[ShowIf(nameof(OverrideWaveSettings))]
 	public EnemyWaveSettings WaveSettings;
 	public EnemyWeightDictionary EnemyWeights ;
 }
@@ -49,6 +57,7 @@ public class EnemyWaveSettings
 {
 	public int MaxEnemiesInRoom;
 	public int EnemyCountThatTriggerNextWave;
+	[MinMaxSlider(1, 10)]
 	public Vector2Int WaveSize;
 
 	public EnemyWaveSettings Clone()

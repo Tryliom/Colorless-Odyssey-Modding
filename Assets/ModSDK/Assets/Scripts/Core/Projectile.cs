@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ColorlessOdyssey;
+using ColorlessCore.Inspector;
 using TryliomUtility;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -47,7 +48,19 @@ public class PullEnemiesSettings
 
     /// <summary>Returns a shallow copy of these settings.</summary>
     public PullEnemiesSettings Clone()
-{throw new System.NotImplementedException();}
+    {
+        return new PullEnemiesSettings
+        {
+            PullingDuration = PullingDuration,
+            PullingForce = PullingForce,
+            SpeedThreshold = SpeedThreshold,
+            ForceMultiplierWithSize = ForceMultiplierWithSize,
+            CenterPullWeight = CenterPullWeight,
+            BackForceBoost = BackForceBoost,
+            FrontForceReduction = FrontForceReduction
+        };
+    }
+
     /// <summary>
     /// Applies the pull knockback to an enemy for a single frame.
     /// The <paramref name="sourceSpeed"/> is clamped to <see cref="SpeedThreshold"/> internally.
@@ -77,7 +90,16 @@ public class ReturnToSenderSettings
     
     /// <summary>Returns a copy of these settings.</summary>
     public ReturnToSenderSettings Clone()
-{throw new System.NotImplementedException();}}
+    {
+        return new ReturnToSenderSettings
+        {
+            InwardStrength = InwardStrength,
+            TangentialStrength = TangentialStrength,
+            MinDistanceToSender = MinDistanceToSender,
+            OverrideSpeed = OverrideSpeed
+        };
+    }
+}
 
 /// <summary>
 /// All configurable settings that can be applied to a spawned projectile.
@@ -86,33 +108,65 @@ public class ReturnToSenderSettings
 [Serializable]
 public class ProjectileSettings
 {
+    [Title("Projectile")]
     public ProjectileId Id;
+
+    [BoolTitle("Override Damage Type"),Foldout("OverrideDamageType")]
     public bool OverrideDamageType;
+    [ShowIf(nameof(OverrideDamageType)),Foldout("OverrideDamageType")]
     public DamageType DamageType ;
-    [Tooltip("Chance to apply effect linked to the damage type")]
+    [ShowIf(nameof(OverrideDamageType)),Tooltip("Chance to apply effect linked to the damage type"),Foldout("OverrideDamageType")]
     public float ChanceToApplyEffect;
+    [ShowIf(nameof(OverrideDamageType)),Foldout("OverrideDamageType")]
     public int EffectStacks ;
+    
+    [Title("Stats")]
     public float Speed;
     public float LifeTime;
     public float Knockback;
     public float BaseDamage;
     public StatsData AdditionalStats ;
+
+    [Title("Effects")]
     public List<StatOverTime> StatsOverTime ;
     public List<EffectOnHit> EffectsOnHit ;
     public List<AoeOnHit> AoeOnHit ;
+    
+    [Title("Miscellaneous")]
+    [BoolField]
     public bool StuckOnEnemies;
+	
+    [BoolTitle,Foldout("StaticLatentHoming")]
     public bool StaticLatentHoming;
+    [ShowIf(nameof(StaticLatentHoming)),Foldout("StaticLatentHoming")]
     public float LatentHomingWaitTime ;
+    [ShowIf(nameof(StaticLatentHoming)),Foldout("StaticLatentHoming")]
     public bool StopHomingAfterLatentLaunch;
+
+    [BoolTitle,Foldout("AoeLineSpawner")]
     public bool AoeLineSpawner;
+    [ShowIf(nameof(AoeLineSpawner)),Foldout("AoeLineSpawner")]
     public AoeType AoeType;
+    [ShowIf(nameof(AoeLineSpawner)),Foldout("AoeLineSpawner")]
     [Tooltip("Delay before each spawned aoe activates. 0 = use the aoe default.")]
     public float AoeLineDurationBeforeLaunch;
+
+    [BoolTitle,Foldout("PullEnemies")]
     public bool PullEnemies;
+    [ShowIf(nameof(PullEnemies)),Foldout("PullEnemies")]
+    [InlineProperty]
     public PullEnemiesSettings PullEnemiesSettings ;
+
+    [BoolTitle,Foldout("Trajectory")]
     public bool Trajectory;
+    [ShowIf(nameof(Trajectory)),Foldout("Trajectory")]
+    [InlineProperty]
     public TrajectorySettings TrajectorySettings ;
+
+    [BoolTitle,Foldout("ReturnToSender")]
     public bool ReturnToSender;
+    [ShowIf(nameof(ReturnToSender)),Foldout("ReturnToSender")]
+    [InlineProperty]
     public ReturnToSenderSettings ReturnToSenderSettings ;
 
     /// <summary>
@@ -126,7 +180,38 @@ public class ProjectileSettings
 {throw new System.NotImplementedException();}
     /// <summary>Returns a copy of these settings.</summary>
     public ProjectileSettings Clone()
-{throw new System.NotImplementedException();}}
+    {
+        return new ProjectileSettings
+        {
+            Id = Id,
+            Speed = Speed,
+            LifeTime = LifeTime,
+            Knockback = Knockback,
+            BaseDamage = BaseDamage,
+            AdditionalStats = new StatsData(AdditionalStats),
+            StatsOverTime = new List<StatOverTime>(StatsOverTime),
+            EffectsOnHit = new List<EffectOnHit>(EffectsOnHit),
+            AoeOnHit = new List<AoeOnHit>(AoeOnHit),
+            OverrideDamageType = OverrideDamageType,
+            DamageType = DamageType,
+            ChanceToApplyEffect = ChanceToApplyEffect,
+            EffectStacks = EffectStacks,
+            StuckOnEnemies = StuckOnEnemies,
+            StaticLatentHoming = StaticLatentHoming,
+            LatentHomingWaitTime = LatentHomingWaitTime,
+            StopHomingAfterLatentLaunch = StopHomingAfterLatentLaunch,
+            AoeLineSpawner = AoeLineSpawner,
+            AoeType = AoeType,
+            AoeLineDurationBeforeLaunch = AoeLineDurationBeforeLaunch,
+            PullEnemies = PullEnemies,
+            PullEnemiesSettings = PullEnemiesSettings?.Clone(),
+            Trajectory = Trajectory,
+            TrajectorySettings = TrajectorySettings?.Clone(),
+            ReturnToSender = ReturnToSender,
+            ReturnToSenderSettings = ReturnToSenderSettings?.Clone()
+        };
+    }
+}
 
 /// <summary>Settings defining a custom angular trajectory applied over the projectile lifetime.</summary>
 [Serializable]
@@ -143,7 +228,16 @@ public class TrajectorySettings
 
     /// <summary>Returns a copy of these settings.</summary>
     public TrajectorySettings Clone()
-{throw new System.NotImplementedException();}}
+    {
+        return new TrajectorySettings
+        {
+            Trajectory = new AnimationCurve(Trajectory.keys),
+            TrajectoryTime = TrajectoryTime,
+            TrajectoryRandomMultiplier = TrajectoryRandomMultiplier,
+            DoNotUseSignRandomization = DoNotUseSignRandomization
+        };
+    }
+}
 
 /// <summary>Settings used to spawn a burst of projectiles in a circle when the carrier projectile is destroyed.</summary>
 [Serializable]
@@ -154,11 +248,21 @@ public class ConcentratedProjectileSettings
     public bool CopyFromSource ;
     [Tooltip("Damage percentage of the source projectile to apply to the spawned projectiles, applied after the source projectile's damage modifiers")]
     public float DamagePercentage ;
+    
     public ProjectileSettings Settings ;
 
     /// <summary>Returns a copy of these settings.</summary>
     public ConcentratedProjectileSettings Clone()
-{throw new System.NotImplementedException();}}
+    {
+        return new ConcentratedProjectileSettings
+        {
+            Amount = Amount,
+            CopyFromSource = CopyFromSource,
+            DamagePercentage = DamagePercentage,
+            Settings = Settings.Clone()
+        };
+    }
+}
 
 [Serializable]
 public class ProjectileOverTimeSettings
@@ -168,18 +272,33 @@ public class ProjectileOverTimeSettings
 	public bool RandomizeSpawnAngle;
 	[Tooltip("If true, the first spawned projectiles will be aimed at the nearest enemy")]
 	public bool TargetNearestEnemy;
-	[Tooltip("Angle offset in degrees to add to the spawn direction each shoots")]
+	[HideIf(nameof(RandomizeSpawnAngle)),Tooltip("Angle offset in degrees to add to the spawn direction each shoots")]
 	public float SpawnAngleIncrease ;
 	public int Amount ;
 	
 	public float BaseDamage;
 	[Tooltip("Damage percentage of the source projectile to apply to the spawned projectiles, applied after the source projectile's damage modifiers")]
 	public float DamagePercentage;
+	
 	public ProjectileSettings Settings ;
 
 	/// <summary>Returns a copy of these settings.</summary>
 	public ProjectileOverTimeSettings Clone()
-{throw new System.NotImplementedException();}}
+	{
+		return new ProjectileOverTimeSettings
+		{
+			DisabledInRoomClear = DisabledInRoomClear,
+			SpawnInterval = SpawnInterval,
+			RandomizeSpawnAngle = RandomizeSpawnAngle,
+			TargetNearestEnemy = TargetNearestEnemy,
+			SpawnAngleIncrease = SpawnAngleIncrease,
+			Amount = Amount,
+			BaseDamage = BaseDamage,
+			DamagePercentage = DamagePercentage,
+			Settings = Settings.Clone()
+		};
+	}
+}
 
 /// <summary>
 /// Settings for a single ray "glued" to a projectile: it follows the projectile's position, rotation and scale every
@@ -189,9 +308,14 @@ public class ProjectileOverTimeSettings
 [Serializable]
 public class ProjectileAttachedRaySettings
 {
+    [Title("Ray")]
     public RayType Type;
     public RayControlType RayControlType;
+
+    [Title("Settings")]
+    [ShowIf(nameof(RayControlType), RayControlType.Instant)]
     public RayInstantSettings RayInstantSettings ;
+    [ShowIf(nameof(RayControlType), RayControlType.Grow)]
     public RayGrowSettings RayGrowSettings ;
 
     [Header("Common settings")]
@@ -200,10 +324,12 @@ public class ProjectileAttachedRaySettings
     [Tooltip("Damage ratio applied from the projectile's damage to the ray's damage")]
     public float DamageRatio ;
 
-    [Tooltip("Offset from the projectile's center, in the projectile's local space: it follows its rotation and scale")]
+    [Title("Placement"),Tooltip("Offset from the projectile's center, in the projectile's local space: it follows its rotation and scale")]
     public Vector3 PositionOffset;
     [Tooltip("Rotation, in degrees around the Z axis and added on top of the projectile's own rotation, defining the direction the ray points to")]
     public float RotationOffset;
+
+    [Title("Other")]
     public StatsData AdditionalStats ;
     public List<StatOverTime> StatsOverTime ;
     public List<EffectOnHit> EffectsOnHit ;
@@ -211,7 +337,29 @@ public class ProjectileAttachedRaySettings
 
     /// <summary>Returns a copy of these settings.</summary>
     public ProjectileAttachedRaySettings Clone()
-{throw new System.NotImplementedException();}}
+    {
+        return new ProjectileAttachedRaySettings
+        {
+            Type = Type,
+            RayControlType = RayControlType,
+            RayInstantSettings = new RayInstantSettings
+            {
+                LifeTime = RayInstantSettings.LifeTime
+            },
+            RayGrowSettings = new RayGrowSettings
+            {
+                RotationSpeed = RayGrowSettings.RotationSpeed,
+                GrowSpeed = RayGrowSettings.GrowSpeed
+            },
+            MaxScaleX = MaxScaleX,
+            AttackPerSeconds = AttackPerSeconds,
+            DamageRatio = DamageRatio,
+            PositionOffset = PositionOffset,
+            RotationOffset = RotationOffset,
+            AdditionalStats = new StatsData(AdditionalStats)
+        };
+    }
+}
 
 public class Projectile : MonoBehaviour
 {
@@ -228,158 +376,184 @@ public class Projectile : MonoBehaviour
         public Ray Ray;
         public ProjectileAttachedRaySettings Settings;
     }
-
     
-    [SerializeField] 
+    [SerializeField,Foldout("Global References"),InfoBox("These fields must be only modified in the parent projectile !")]
     private Material _defaultMaterial;
-    [SerializeField] 
+    [SerializeField,Foldout("Global References")]
     private Material _fullSaturationMaterial;
-    [SerializeField] 
+    [SerializeField,Foldout("Global References")]
     private Material _enemyMaterial;
     
-    [SerializeField] private CircleCollider2D _physicalCollider;
-    [SerializeField] private Collider2D _hitCollider;
+    [SerializeField,Foldout("Internal References"),Required] private CircleCollider2D _physicalCollider;
+    [SerializeField,Foldout("Internal References"),Required] private Collider2D _hitCollider;
     
-    [SerializeField] private List<SpriteRenderer> _spritesPerLevel;
-    [SerializeField] private List<TraditionalAnimation> _animationLevels;
-    [SerializeField] private bool _scaleAnimationWithSpeed;
-    [SerializeField] private AnimationCurve _alphaOverTime;
+    [SerializeField,Foldout("Sprite & Animation")] private List<SpriteRenderer> _spritesPerLevel;
+    [SerializeField,Foldout("Sprite & Animation")] private List<TraditionalAnimation> _animationLevels;
+    [SerializeField,Foldout("Sprite & Animation")] private bool _scaleAnimationWithSpeed;
+    [SerializeField,Foldout("Sprite & Animation")] private AnimationCurve _alphaOverTime;
     
     
-    [SerializeField] private BurstExplosionSettings _explosionOnExpireSettings;
+    [SerializeField,Foldout("Other")] private BurstExplosionSettings _explosionOnExpireSettings;
     
     private enum ProjectileMaterialTypes { Default, FullSaturation, Enemy }
-    [SerializeField] 
-    private ProjectileId _projectileId;
-    [SerializeField] private ProjectileModifier _projectileModifier;
-    [SerializeField] private DamageType _damageType ;
-    [SerializeField,Tooltip("Chance to apply effect linked to the damage type")]
-    private float _chanceToApplyEffect;
+
+    [Title("Main Properties")]
     [SerializeField]
+    private ProjectileId _projectileId;
+    [SerializeField,Label("Default Modifier")] private ProjectileModifier _projectileModifier;
+    [SerializeField] private DamageType _damageType ;
+    [SerializeField,Tooltip("Chance to apply effect linked to the damage type"),ShowIf(nameof(HasDamageTypeAnEffect))]
+    private float _chanceToApplyEffect;
+    [SerializeField,ShowIf(nameof(HasDamageTypeAnEffect))]
     private int _effectStacks ;
     
-    [SerializeField] 
+    [SerializeField,BoolTitle,Foldout("Rotate")]
     private bool _rotate;
-    [SerializeField,Range(-1080, 1080)] 
+    [SerializeField,Range(-1080, 1080),ShowIf(nameof(_rotate)),Foldout("Rotate")]
 	private float _rotationSpeed;
-    [SerializeField] 
+    [SerializeField,ShowIf(nameof(_rotate)),Foldout("Rotate")]
 	private bool _randomizeRotationSign;
-    [SerializeField] 
+    [SerializeField,ShowIf(nameof(_rotate)),Foldout("Rotate")]
 	private MinMaxRange<float> _randomBaseRotation ;
-	[SerializeField]
+	[SerializeField,ShowIf(nameof(_rotate)),Foldout("Rotate")]
 	private bool _increaseRotationOverTime;
-	[SerializeField]
+	[SerializeField,ShowIf(nameof(ShowRotationMaxMultiplier)),Foldout("Rotate")]
 	private float _rotationMaxMultiplier;
 	
-    [SerializeField]
+    [SerializeField,BoolTitle,Foldout("Grow From Start")]
 	private bool _growFromStart;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_growFromStart)),Foldout("Grow From Start")]
 	private float _growTime;
 
-    [SerializeField]
+    [SerializeField,BoolTitle,Foldout("Static Latent Homing")]
 	private bool _staticLatentHoming;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_staticLatentHoming)),Foldout("Static Latent Homing")]
 	private float _staticLatentHomingTime ;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_staticLatentHoming)),Foldout("Static Latent Homing")]
 	private bool _stopHomingAfterLatentLaunch;
 	
-    [SerializeField]
+    [SerializeField,BoolTitle,Foldout("Pull Enemies On Hit")]
 	private bool _pullEnemiesOnHit;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_pullEnemiesOnHit)),Foldout("Pull Enemies On Hit")]
+	[InlineProperty]
 	private PullEnemiesSettings _defaultPullEnemiesSettings ;
 
-    [SerializeField]
+    [SerializeField,BoolTitle,Foldout("Concentrated Projectile On Expire")]
 	private bool _concentratedProjectileOnExpire;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_concentratedProjectileOnExpire)),Foldout("Concentrated Projectile On Expire")]
+	[InlineProperty]
 	private ConcentratedProjectileSettings _defaultConcentratedSettings ;
 	
-	[SerializeField]
+	[SerializeField,BoolTitle,Foldout("Projectile Over Time")]
 	private bool _projectileOverTime;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_projectileOverTime)),Foldout("Projectile Over Time")]
+	[InlineProperty]
 	private ProjectileOverTimeSettings _defaultProjectileOverTimeSettings ;
 	
-    [SerializeField] 
+    [SerializeField,BoolTitle,Foldout("Stuck On Entity")]
 	private bool _stuckOnEntity;
 	
-	[SerializeField]
+	[SerializeField,BoolTitle,Foldout("Use Custom Trajectory")]
 	private bool _useCustomTrajectory;
-	[SerializeField]
+	[SerializeField,ShowIf(nameof(_useCustomTrajectory)),Foldout("Use Custom Trajectory")]
+	[InlineProperty]
 	private TrajectorySettings _defaultTrajectorySettings ;
     
-    [SerializeField] 
+    [SerializeField,BoolTitle,Foldout("Return To Sender On Expire")]
 	private bool _returnToSenderOnExpire;
-	[SerializeField]
+	[SerializeField,ShowIf(nameof(_returnToSenderOnExpire)),Foldout("Return To Sender On Expire")]
+	[InlineProperty]
 	private ReturnToSenderSettings _defaultReturnToSenderSettings ;
 	
-	[SerializeField]
+	[SerializeField,BoolTitle,Foldout("Has Attached Rays")]
 	private bool _hasAttachedRays;
-	[SerializeField]
+	[SerializeField,ShowIf(nameof(_hasAttachedRays)),Foldout("Has Attached Rays"),InfoBox("Rays glued to the projectile, following its position, rotation and scale every frame (similar to what EnergyBall does). Select this projectile in the Scene view to display handles allowing to place and orient each ray.")]
 	private List<ProjectileAttachedRaySettings> _attachedRays ;
-    [SerializeField,FormerlySerializedAs("_spawnClouds")] 
+	
+    [Title("Particles Properties")]
+    [SerializeField,FormerlySerializedAs("_spawnClouds")]
     private bool _spawnParticles;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_spawnParticles))]
     private ParticleSystemSettings _particleSystemSettings ;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_spawnParticles))]
     private Vector3 _particlePositionOffset;
-    [SerializeField,Space]
+    [SerializeField,ShowIf(nameof(_spawnParticles)),Space]
     private bool _useDifferentParticleOffsetInOrbit;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_useDifferentParticleOffsetInOrbit))]
     private Vector3 _particleOrbitPositionOffset;
     [FormerlySerializedAs("_doNotSpawnCloudsOnDestroy")]
-    [SerializeField] 
+    [SerializeField]
     private bool _doNotSpawnParticlesOnDestroy;
-    [SerializeField] 
+
+    [Title("Trail Properties")]
+    [SerializeField]
     private bool _useTrail;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_useTrail))]
     private PixelTrailData _trailData ;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_useTrail))]
     private Vector3 _trailPositionOffset;
-    [SerializeField,Space]
+    [SerializeField,ShowIf(nameof(_useTrail)),Space]
     private bool _useDifferentTrailInOrbit;
-    [SerializeField,Tooltip("Trail data used when the projectile is orbiting. Replaces the normal trail data during orbit.")]
+    [SerializeField,ShowIf(nameof(_useDifferentTrailInOrbit)),Tooltip("Trail data used when the projectile is orbiting. Replaces the normal trail data during orbit.")]
     private PixelTrailData _orbitTrailData ;
-    [SerializeField,Tooltip("The position offset when the projectile orbit around an object")]
+    [SerializeField,Tooltip("The position offset when the projectile orbit around an object"),ShowIf(nameof(_useTrail))]
     private Vector3 _trailOrbitPositionOffset;
+    
+    [Title("Disabled Properties")]
     [SerializeField] private bool _noBreakSound;
     [Tooltip("Will not apply the color to the projectile, useful for projectiles that have a custom color")]
     [SerializeField] private bool _doNotApplyColor;
     [SerializeField] private bool _noDamage;
     [SerializeField] private bool _disableEffectParticle;
+    
+    [Title("Effects")]
     [SerializeField] private List<StatOverTime> _statsOverTime ;
     [SerializeField] private List<EffectOnHit> _effectsOnHit ;
     [SerializeField] private List<AoeOnHit> _aoeOnHit ;
-    [SerializeField,Tooltip("Time is the angle in degrees, R is the radius multiplier"),FormerlySerializedAs("_turnAroundRadiusMultiplier")] 
+    
+    [Title("Orbiting Properties")]
+    [SerializeField,Tooltip("Time is the angle in degrees, R is the radius multiplier"),FormerlySerializedAs("_turnAroundRadiusMultiplier")]
     private AnimationCurve _orbitRadiusMultiplier;
     [SerializeField,FormerlySerializedAs("_turnAroundRangeOnEnemy")]
     private AnimationCurve _orbitRangeOnEnemy;
-    [SerializeField,Tooltip("The angle before it trigger the turn range to an enemy, in degrees"),FormerlySerializedAs("_turnAroundRangeAngleOffset")] 
+    [SerializeField,Tooltip("The angle before it trigger the turn range to an enemy, in degrees"),FormerlySerializedAs("_turnAroundRangeAngleOffset")]
     private float _orbitingRangeAngleOffset ;
     [SerializeField,Tooltip("Will change its angle to follow the orbit direction, if false it will keep its initial angle")]
     private bool _followOrbitDirection;
-    [SerializeField,Tooltip("The added angle to the face target direction, in degrees multiplied by the speed percentage (max 1)"),FormerlySerializedAs("_turnFaceTargetAddedAngle")] 
+    [SerializeField,Tooltip("The added angle to the face target direction, in degrees multiplied by the speed percentage (max 1)"),FormerlySerializedAs("_turnFaceTargetAddedAngle"),HideIf(nameof(_followOrbitDirection))]
     private float _orbitFaceTargetAddedAngle;
+    
+    [Title("Break")]
     [SerializeField] private bool _brokeIntoPieces;
     [SerializeField] private bool _brokeTypeRandom;
     [FormerlySerializedAs("_breakNumberType")]
     [SerializeField] private ScrapNumberType _scrapNumberType;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(_scrapNumberType), ScrapNumberType.AnyPixelsSquare)]
     private int _pixelsSquare;
     [SerializeField] private bool _forceSpawnAllBrokenParts;
     [SerializeField] private bool _useOpacityMap;
+    
+    [Title("Shader")]
     [SerializeField] private float _baseSaturation;
     [SerializeField] private bool _useEmissiveMap;
     [SerializeField] private Color _emissiveColor;
     [SerializeField] private List<Color> _emissiveColorPerLevel ;
+    
+    [Title("Falling properties")]
     [Tooltip("The time it takes to reach the falling point")]
     [SerializeField] private float _fallingTime ;
-    [SerializeField,Tooltip("Will follow player and break on it after triggering the OnPlayerContactWithInteractableProjectile")] 
+    
+    [Title("Follow Player")]
+    [SerializeField,Tooltip("Will follow player and break on it after triggering the OnPlayerContactWithInteractableProjectile")]
     private bool _followPlayer;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(ShowCircularFollow))]
     private bool _circularFollow;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(ShowCircularFollowSettings))]
     private float _circularInwardStrength ;
-    [SerializeField]
+    [SerializeField,ShowIf(nameof(ShowCircularFollowSettings))]
     private float _circularTangentialStrength ;
+    
+    [Title("Default Properties")]
     [SerializeField] private float _defaultBaseDamage;
     [FormerlySerializedAs("_defaultLifetime")]
     [SerializeField] private float _defaultMaxDuration;
@@ -387,6 +561,23 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _defaultKnockback;
     [SerializeField] private bool _useCursorDirectionByDefault;
     [SerializeField] private StatsData _baseStats;
+    
+    // Odin
+    private bool HasDamageTypeAnEffect => _damageType != DamageType.Typeless && _damageType != DamageType.Normal && _damageType != DamageType.Soul;
+    private bool ShowRotationMaxMultiplier => _increaseRotationOverTime && _rotate;
+    private bool ShowCircularFollow => _circularFollow || _followPlayer;
+    private bool ShowCircularFollowSettings => _circularFollow || _followPlayer && _circularFollow;
+    
+    // Current damage type
+    private DamageType _currentDamageType;
+    private float _currentChanceToApplyEffect;
+    private int _currentEffectStacks;
+
+    // Return to sender
+    private bool _returnToSenderActive;
+    private ReturnToSenderSettings _returnToSenderActiveSettings;
+    
+    private Transform _senderTransform;
 
     public void Reset()
 {throw new System.NotImplementedException();}    
@@ -630,14 +821,24 @@ public class Projectile : MonoBehaviour
     public int GetDefaultEffectStacks()
 {throw new System.NotImplementedException();}    
     public void OverrideDamageType(DamageType damageType, float chanceToApplyEffect = 0f, int effectStacks = 0)
-{throw new System.NotImplementedException();}
+    {
+        _currentDamageType = damageType;
+        _currentChanceToApplyEffect = chanceToApplyEffect;
+        _currentEffectStacks = effectStacks;
+    }
+
     /// <summary>
     /// Enables the return-to-sender behavior on this projectile: once its lifetime expires, it will curve back toward the
     /// sender and get destroyed on contact with it. When settings are provided they will be used; otherwise the default
     /// inspector settings are applied. Must be called before the first <see cref="OnUpdate"/> frame.
     /// </summary>
     public void ReturnToSender(Transform sender, ReturnToSenderSettings settings = null)
-{throw new System.NotImplementedException();}
+    {
+        _returnToSenderActive = true;
+        _returnToSenderActiveSettings = settings != null ? settings.Clone() : _defaultReturnToSenderSettings.Clone();
+        _senderTransform = sender;
+    }
+
     /// <summary>Returns whether the return-to-sender behavior is currently active on this projectile.</summary>
     public bool IsReturnToSenderActive()
 {throw new System.NotImplementedException();}

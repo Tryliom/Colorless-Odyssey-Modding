@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ColorlessCore.Inspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -22,19 +23,47 @@ public enum BossType
 
 public class EnemyPattern : MonoBehaviour
 {
+    
+    [Title("Special Values")]
+    [Foldout("Internal References")]
     public AnimationCurve ChargeFxRadiusCurve;
+    [Foldout("Internal References")]
     public AnimationCurve ChargeFxSpeedCurve;
+    [Foldout("Internal References")]
     public AnimationCurve ChargeFxSpawnTimeCurve;
-    [FormerlySerializedAs("_enemyType")] [SerializeField] 
+    
+    [Title("Datas")]
+    [FormerlySerializedAs("_enemyType")] [SerializeField]
+    [EnumToggleButtons]
     public EnemyType EnemyType;
-    [SerializeField] 
+    [SerializeField,ShowIf(nameof(DisplayBossType))]
     public BossType BossType;
-    [FormerlySerializedAs("_fly")] [SerializeField] 
+    [FormerlySerializedAs("_fly")] [SerializeField]
     public bool Flying;
     
     public GridManager GridManager =>throw null;
-    [SerializeReference] 
+    
+    [Title("Patterns")]
+    [SerializeReference,OnValueChanged("OnPatternsChanged")]
     public List<Pattern> NoTargetPatterns;
+    [SerializeField]
+    private List<CombinedPattern> _combinedPatterns ;
+
+    private IEnumerable<ValueDropdownItem> GetCombinedPatternIndices()
+    {
+        return _combinedPatterns.Select((t, i) => new ValueDropdownItem(t.Name, i));
+    }
+    
+    // Odin
+    private bool DisplayBossType => EnemyType == EnemyType.Boss;
+
+    private void OnPatternsChanged()
+    {
+        foreach (var pattern in NoTargetPatterns)
+        {
+            pattern.UpdateActionType();
+        }
+    }
     
     [HideInInspector] public bool IsControlledByPlayer;
     public bool WasSummonedByWeapon { private set; get; }

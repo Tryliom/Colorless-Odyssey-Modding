@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ColorlessCore.Inspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -25,18 +26,21 @@ public class RewardCondition
     public int MaxPerFortress ;
     public int MaxPerRun ;
     public bool PreventTwiceInARow;
+    [EnumToggleButtons]
     public Condition Condition;
     public bool ColorRestriction;
+    [ShowIf(nameof(ColorRestriction))]
     public ThemeColor ThemeColor;
 }
 
 [CreateAssetMenu(fileName = "EmptyReward", menuName = "Rewards/Empty", order = 0)]
 public class Reward : ScriptableObject
 {
-    [Header("Information")] 
+    [Header("Information")]
     public string LocalizedPrefix;
     public Sprite Icon;
     public bool ColorIconWithTheme;
+    [EnumToggleButtons]
     public RoomType RoomType;
     [HideInInspector]
     public ThemeColor ThemeColor ;
@@ -45,9 +49,11 @@ public class Reward : ScriptableObject
     
     [Header("Condition")]
     public bool HasCondition;
+    [ShowIf(nameof(HasCondition))]
     public RewardCondition Condition;
-    [FormerlySerializedAs("CannotBeElite")] 
+    [FormerlySerializedAs("CannotBeElite")]
     public bool NoModifiers;
+    [EnumToggleButtons]
     public Rarity Rarity;
 
     public virtual void GiveReward(Vector3 rewardPosition) {throw new System.NotImplementedException();}    

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ColorlessOdyssey;
+using ColorlessCore.Inspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PrefabData", menuName = "ScriptableObjects/PrefabData")]
 public class PrefabData : ScriptableObject
 {
+	[Title("Prefabs - Use button to fill lists")]
 	public List<Projectile> ProjectilePrefabs ;
 	public List<Aoe> AoePrefabs ;
 	public List<Ray> RayPrefabs ;

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ColorlessOdyssey;
+using ColorlessCore.Inspector;
 using TryliomUtility;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -49,9 +50,19 @@ public class RunData : ScriptableObject
     public bool ExpoMode;
     public bool LanMode; // Unlock all classes at level 1 and altar but no color shard gain
     public bool AskLanguageOnStart;
-    public float EnemyHealthMultiplier ;
-    public List<Relic> DebugRelics ;
     
+    [Title("Global Settings")]
+    public float EnemyHealthMultiplier ;
+    
+    [Title("Debug"),InfoBox("Start game with these items when isDebug is enabled")]
+    [ValueDropdown(nameof(GetRelicOptions))]
+    public List<Relic> DebugRelics ;
+
+    private IEnumerable<Relic> GetRelicOptions()
+    {
+        return RelicData ? RelicData.GetAllRelics() : Enumerable.Empty<Relic>();
+    }
+
     public List<Collectible> DebugCollectiblesInInventory ;
     public List<GameObject> DebugItemsSpawned ;
     public int DebugStartGold;

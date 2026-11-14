@@ -14,6 +14,8 @@ public enum PlayerAnimation
 public class PlayerAnimator : MonoBehaviour
 {
     
+    private static readonly int Mask ;
+    
     public void SetAnimation(PlayerAnimation playerAnimation)
 {throw new System.NotImplementedException();}    
     public TraditionalAnimation GetSittingAnimation()
