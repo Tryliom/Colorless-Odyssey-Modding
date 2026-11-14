@@ -7,9 +7,6 @@ using UnityEngine.UI;
 
 public class RelicSelectorMenu : BaseMenu
 {
-    [SerializeField] private Button _rerollButton;
-    [SerializeField] private GameObject _noRelicsText;
-    [SerializeField] private RelicDisplayer _relicDisplayerPrefab;
 
     protected override void OnUpdate()
 {throw new System.NotImplementedException();}

@@ -59,8 +59,6 @@ public class PoolingManager : MonoBehaviour
         public Projectile Projectile;
         public float DisabledTimer;
     }
-    
-    [SerializeField] private RunData _runData;
 
     public Aoe CreateAoe(AoeType type, Vector3 position, bool playerTeam)
 {throw new System.NotImplementedException();}    

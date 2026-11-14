@@ -144,22 +144,6 @@ internal class ParticleSettingsDictionary : UnitySerializedDictionary<ParticleTy
  */
 public class ParticleManager : MonoBehaviour
 {
-    [SerializeField] private RunData _runData; 
-    [SerializeField] private GameObject _particlePrefab;
-    [SerializeField] private PixelTrail _trailParticlePrefab;
-    [SerializeField] private ParticleSystem _defaultParticleEmitterPrefab;
-    [SerializeField] private ParticleSystem _defaultExplosionBurstPrefab;
-    
-    [SerializeField,Space,Tooltip("Default gradient used for trails and particles")]
-    private Gradient _defaultGradient;
-    [SerializeField]
-    private Gradient _defaultBurstGradient;
-    
-    [SerializeField,Space] 
-    private ParticleSettingsDictionary _particleSettingsDictionary ;
-
-    [SerializeField,Space]
-    private float _baseTrailTime ;
     
     public Gradient DefaultGradient =>throw null;
     

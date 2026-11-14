@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class AltarMenu : BaseMenu
 {
-    [SerializeField] private List<AltarChoices> _choices;
-    [SerializeField] private List<AltarExperienceBar> _experienceBar;
-    [SerializeField] private TextMeshProUGUI _name;
 
     public void Display(ThemeColor themeColor)
 {throw new System.NotImplementedException();}    

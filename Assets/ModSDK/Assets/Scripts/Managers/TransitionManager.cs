@@ -16,12 +16,6 @@ public enum TransitionState
  */
 public class TransitionManager : MonoBehaviour
 {
-    [SerializeField] private Image _shadowScreen;
-    [SerializeField] private Image _worldSpaceShadowScreen;
-    [SerializeField] private Volume _volume;
-    
-    [Header("Transition Settings")]
-    [SerializeField] private float _transitionDuration ;
 
     public void StartHide(bool worldSpace = false)
 {throw new System.NotImplementedException();}    

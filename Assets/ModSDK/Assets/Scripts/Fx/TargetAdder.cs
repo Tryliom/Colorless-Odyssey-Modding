@@ -9,6 +9,4 @@ public class TargetAdder : MonoBehaviour
 		PlayerAura,
 		BossAura
 	}
-	[SerializeField] private RunData _runData;
-	[SerializeField] private TargetType _targetType ;
 }

@@ -24,8 +24,6 @@ public class DataJsonConverter : JsonConverter<Data>
 [Serializable]
 public class Data : ISerializationCallbackReceiver
 {
-	[SerializeField] 
-	private SerializableObjectDictionary _serializedObjects ;
 
 	public Data() {}
 	/**

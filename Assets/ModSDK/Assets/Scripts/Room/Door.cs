@@ -24,25 +24,6 @@ public class ModifierText
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    
-    [Header("References")]
-    [SerializeField] private SpriteRenderer _doorRenderer;
-    [SerializeField] private TextMeshPro _rewardName;
-    [SerializeField] private TextMeshPro _rewardDescription;
-    [SerializeField] private SpriteRenderer _rewardIcon;
-    [SerializeField] private ModifierText _rightModifier;
-    [SerializeField] private ModifierText _leftModifier;
-    [SerializeField] private ModifierText _rightMeta;
-    [SerializeField] private ModifierText _leftMeta;
-    [SerializeField] private BoxCollider2D _explanationTrigger;
-    
-    [Header("Sprites")]
-    [SerializeField] private Sprite _lockedDoorSprite;
-    [SerializeField] private TraditionalAnimation _openDoorAnimation;
-
-    [Header("Lights")] 
-    [SerializeField] private GameObject _normalLights;
     
     public SpriteRenderer DoorRenderer =>throw null;
     

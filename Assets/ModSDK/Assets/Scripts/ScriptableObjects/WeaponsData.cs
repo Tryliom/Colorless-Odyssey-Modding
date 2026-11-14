@@ -7,9 +7,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponsData", menuName = "ScriptableObjects/WeaponsData", order = 6)]
 public class WeaponsData : ScriptableObject
 {
-	[SerializeField] private RunData _runData;
-	[SerializeField] private List<Weapon> _allWeapons ;
-	[SerializeField] private PriceRarityDictionary _recyclePricePerRarity ;
 
 public StatsData PerfectTimingBoostStats ;
     

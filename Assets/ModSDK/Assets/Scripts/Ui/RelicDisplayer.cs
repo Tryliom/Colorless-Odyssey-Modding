@@ -33,55 +33,6 @@ public class SpritePerRarity : UnitySerializedDictionary<Rarity, RaritySprites> 
 
 public class RelicDisplayer : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private Image _cardBackFace;
-    [SerializeField] private Image _cardBorder;
-    [SerializeField] private Image _rarityBackgroundColor;
-    [SerializeField] private Image _rarityPatterns;
-    [SerializeField] private Image _rarityPatternsEffect;
-    [SerializeField] private Image _glowingFrame;
-    [SerializeField] private SpritePerRarity _raritySprites ;
-    [SerializeField] private RectTransform _rectTransform;
-    [SerializeField] private TextMeshProUGUI _newText;
-    [SerializeField] private TextMeshProUGUI _name;
-    [SerializeField] private TextMeshProUGUI _level;
-    [SerializeField] private TextMeshProUGUI _description;
-    [SerializeField] private Image _icon;
-    [SerializeField] private GameObject _relicCollectionOfInformation;
-    [SerializeField] private RelicUI _relicUI;
-    [SerializeField] private TextWithBackground _textWithBackground;
-    [SerializeField] private TextWithBackground _extraTextWithBackground;
-    
-    [Header("Linked Items")]
-    [SerializeField] private GameObject _linkedItemsParent;
-    [SerializeField] private RelicImage _relicImagePrefab;
-    [SerializeField] private WeaponImage _weaponImagePrefab;
-    [SerializeField] private SpecialAbilityImage _specialAbilityImagePrefab;
-
-    [Header("Hover")] 
-    [SerializeField] private RectTransform _card;
-    [SerializeField] private float _hoverMaxTime ;
-    [SerializeField] private float _hoverSizeMultiplier ;
-    [SerializeField] private Color _hoverColor ;
-    [SerializeField] private Color _normalColor ;
-    [SerializeField] private AnimationCurve _hoverScaleCurve;
-    
-    [Header("Tilt Effect")]
-    [SerializeField] private float _tiltMaxAngleX ;
-    [SerializeField] private float _tiltMaxAngleY ;
-    [SerializeField] private float _tiltSpeed ;
-    [SerializeField] private float _patternOffsetIntensity ;
-    
-    [Header("Floating Effect")]
-    [SerializeField] private float _floatAmplitude ;
-    [SerializeField] private float _floatFrequencyX ;
-    [SerializeField] private float _floatFrequencyY ;
-    
-    [Header("Opening Animation")]
-    [SerializeField] private AnimationCurve _openingAnimationCurve;
-    [SerializeField] private float _openingAnimationScaleTime ;
-    [SerializeField] private float _openingAnimationGlowTime ;
-    [SerializeField] private Color _glowColor ;
     public Action<Relic> OnClick;
     
 	public void SkipAnimation()

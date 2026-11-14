@@ -5,14 +5,6 @@ using UnityEngine;
 
 public class WeaponsController : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    
-    [Header("Weapons position")]
-    [SerializeField] private float _leftWeaponRadius ;
-    [SerializeField] private float _rightWeaponRadius ;
-    
-    [Header("References")]
-    [SerializeField] private List<PlayerAnimator> _playerAnimators;
 
     public void RotateWeapon(GameObject weapon, Weapon script, float radius, float angle)
 {throw new System.NotImplementedException();}

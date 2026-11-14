@@ -17,14 +17,6 @@ public class DamageNumberManager : MonoBehaviour
         public IReadOnlyList<DamageNumberText> ActiveTexts =>throw null;
 
         public void RegisterText(DamageNumberText text) {throw new System.NotImplementedException();}        public void UnregisterText(DamageNumberText text) {throw new System.NotImplementedException();}    }
-    
-    [SerializeField] private RunData _runData;
-    [SerializeField] private DamageNumberText _prefab;
-
-    [Header("Layout")]
-    [SerializeField] private float _baseOffsetY ;
-    [SerializeField] private float _slotSpacingX ;
-    [SerializeField] private float _extraWidthPerDigit ;
 
     /**
      * Displays damage for a given enemy and hit, aggregating into sticky texts by source and spawning small hit texts

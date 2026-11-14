@@ -29,10 +29,6 @@ public class TrailCurvePerType : UnitySerializedDictionary<PixelTrailWidthType, 
 [RequireComponent(typeof(TrailRenderer))]
 public class PixelTrail : MonoBehaviour
 {
-	[SerializeField] private TrailCurvePerType _trailCurves ;
-	
-	[SerializeField,Space] private TrailRenderer _trailRenderer;
-	[SerializeField] private GradientMode _mode ;
 	
 	public TrailRenderer TrailRenderer =>throw null;
 	

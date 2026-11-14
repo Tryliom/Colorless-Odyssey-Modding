@@ -6,19 +6,6 @@ using UnityEngine.Serialization;
 
 public class ClassType : MonoBehaviour
 {
-	[SerializeField] private PlayerComponents _playerComponents;
-    [SerializeField] private ClassTypeEnum _classType;
-    
-    [Header("Weapons")]
-    [SerializeField] private Weapon _startingLeftWeapon;
-    [SerializeField] private Weapon _startingRightWeapon;
-    
-    [Header("Special Ability")]
-    [SerializeField] private SpecialAbility _specialAbility;
-    
-    [FormerlySerializedAs("_passives")]
-    [Header("Passive")]
-    [SerializeField] private List<Relic> _passiveRelics;
     
     [Header("Stats")]
     public StatsData DefaultStats;

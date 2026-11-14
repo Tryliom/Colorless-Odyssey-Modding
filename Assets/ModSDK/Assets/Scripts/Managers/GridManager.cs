@@ -23,17 +23,6 @@ internal struct AccessibleCellsCacheKey : IEquatable<AccessibleCellsCacheKey>
 
 public class GridManager : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-	
-	[SerializeField,Space] private Transform _forcedPlayerSpawnPosition;
-    [SerializeField] private Tilemap _walls;
-    [SerializeField] private Tilemap _floor;
-    [SerializeField] private Tilemap _holes;
-    [SerializeField] private Tilemap _aboveWalls;
-    [SerializeField] private CompositeCollider2D _holeSolidCollider;
-    [SerializeField] private CompositeCollider2D _wallCollider;
-    [SerializeField] private Door _doorPrefab;
-    [SerializeField] private RuleTile _wallTile;
 
     public Vector3 TopLeftPosition =>throw null;
     public Vector3 TopRightPosition =>throw null;

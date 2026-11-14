@@ -19,7 +19,6 @@ public enum CollectibleUseType
 
 public class CollectibleManager : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
 	
 	public IReadOnlyList<GroundItem> GroundItems =>throw null;
 	public IReadOnlyList<Weapon> WeaponsOnGround =>throw null;

@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
     
     [NonSerialized] public Vector2 MoveValue;
     [NonSerialized] public bool AttackValue;

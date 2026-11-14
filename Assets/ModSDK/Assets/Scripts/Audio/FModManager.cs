@@ -111,14 +111,6 @@ public class Sound
 
 public class FModManager : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-	[SerializeField] private AudioData _audioData;
-	[SerializeField] private AnimationCurve _volumeFadeCurve;
-	[SerializeField] private MusicPerMusicEnum _musicPerMusicEnum ;
-	[SerializeField] private SoundPerSoundEnum _soundPerSoundEnum ;
-	[SerializeField] private string _globalVolume ;
-	[SerializeField] private string _musicVolume ;
-	[SerializeField] private string _soundVolume ;
 	
 	public void SetGlobalVolume(float volume)
 {throw new System.NotImplementedException();}	

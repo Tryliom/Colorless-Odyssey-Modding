@@ -13,47 +13,6 @@ internal enum AnimationState
 
 public class WeaponChest : Chest
 {
-    [Header("Data")]
-    [SerializeField] private RunData _runData;
-    [SerializeField] private WeaponsData _weaponsData;
-    [SerializeField] private CollectibleType _collectibleType;
-    
-    [Header("Internal references")]
-    [SerializeField] private SpriteRenderer _bottomChestSprite;
-    [SerializeField] private SpriteRenderer _interiorChestSprite;
-    [SerializeField] private SpriteRenderer _topChestSprite;
-    [SerializeField] private SpriteRenderer _gemstonesSprite;
-    [SerializeField] private CircleCollider2D _interactionCollider;
-    [SerializeField] private Light2D _lightAround;
-    
-    [Header("Animations")]
-    [SerializeField] private TraditionalAnimation _commonGemAnimation;
-    [SerializeField] private TraditionalAnimation _rareGemAnimation;
-    [SerializeField] private TraditionalAnimation _epicGemAnimation;
-    [SerializeField] private TraditionalAnimation _legendaryGemAnimation;
-    [SerializeField] private TraditionalAnimation _uniqueGemAnimation;
-    [SerializeField] private TraditionalAnimation _topChestBreakAnimation;
-    
-    [Header("Gems lights")]
-    [SerializeField] private Light2D _commonGemLight;
-    [SerializeField] private Light2D _rareGemLight;
-    [SerializeField] private Light2D _epicGemLight;
-    [SerializeField] private Light2D _legendaryGemLight;
-    [SerializeField] private Light2D _uniqueGemLight;
-    
-    [Header("Curves")]
-    [SerializeField] private AnimationCurve _gemLightCurve;
-    
-    [Header("After break")]
-    [SerializeField] private GameObject _toActiveAfterBreak;
-    [SerializeField] private ParticleGenerator _chestParticles;
-    [SerializeField] private Light2D _chestLight;
-    
-    [Header("Settings")]
-    [SerializeField] private float _timeBeforeBreak ;
-    [SerializeField] private float _timeGemsFade ;
-    [FormerlySerializedAs("_hoverTime")] [SerializeField] private float _hoverTimeMax ;
-    [SerializeField] private float _hoverLightMultiplier ;
 
     public override CollectibleType GetCollectibleType() {throw new System.NotImplementedException();}
     /**

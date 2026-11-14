@@ -6,14 +6,6 @@ using UnityEngine;
 
 public class InformationTooltip : MonoBehaviour
 {
-    [Header("Information")]
-    [SerializeField] private RunData _runData;
-    [SerializeField] private RectTransform _rectTransform;
-    [SerializeField] private TextMeshProUGUI _nameText;
-    [SerializeField] private TextMeshProUGUI _descriptionText;
-    [SerializeField] private TextMeshProUGUI _fullInventoryText;
-    [SerializeField] private TextMeshProUGUI _pickUpText;
-    [SerializeField] private GameObject _pickup;
 
     public void DisplayCollectible(Collectible collectible, bool isFullInventory, bool displayPickup = false)
 {throw new System.NotImplementedException();}

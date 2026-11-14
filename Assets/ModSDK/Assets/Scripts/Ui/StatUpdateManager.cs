@@ -11,9 +11,6 @@ internal class StatSlot
 
 public class StatUpdateManager : MonoBehaviour
 {
-    [SerializeField] private RectTransform _startPosition;
-    [SerializeField] private float _yOffset;
-    [SerializeField] private StatUpdateDisplayer _statUpdatePrefab;
 
     public void DisplayStat(StatName statName, int currentValue, int addedValue)
 {throw new System.NotImplementedException();}}

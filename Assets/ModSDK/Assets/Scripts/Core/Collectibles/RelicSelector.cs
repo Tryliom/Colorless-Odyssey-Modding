@@ -8,24 +8,8 @@ using Random = UnityEngine.Random;
 public class RelicSelector : GroundItem
 {
     [SerializeField] protected RunData RunData;
-    [SerializeField] private GameObject _movableComponents;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private SpriteSortingZ _spriteSortingZ;
-    [SerializeField] private Rigidbody2D _rigidbody2D;
-    [SerializeField] private Collider2D _physicalCollider2D;
-    [SerializeField] private ObjectLauncher _objectLauncher;
-    [SerializeField] private List<Light2D> _lights ;
     
     public CollectibleType Type ;
-    
-    [Header("Animation")]
-    [SerializeField] private float _radius ;
-    
-    [Header("Relic Selector Settings")]
-    [SerializeField] 
-    private RelicType _type;
-    [SerializeField]
-    private ThemeColor _themeColor;
     
     public override CollectibleType GetCollectibleType() {throw new System.NotImplementedException();}    public ObjectLauncher ObjectLauncher =>throw null;
     protected List<string> AvailableRelicsIds ;

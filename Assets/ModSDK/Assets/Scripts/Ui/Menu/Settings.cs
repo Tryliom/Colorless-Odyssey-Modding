@@ -14,6 +14,4 @@ public class SettingsLink
 
 public class Settings : MonoBehaviour
 {
-    [SerializeField] private List<SettingsLink> _settingsLinks ;
-    [SerializeField] private List<ScriptableObject> _settingsData ;
 }

@@ -22,47 +22,6 @@ public class WeaponSpritePerRarity : UnitySerializedDictionary<Rarity, WeaponRar
 
 public class WeaponTooltip : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    
-    [Header("Information")]
-    [SerializeField] private TextMeshProUGUI _nameText;
-    [SerializeField] private TextMeshProUGUI _damageTypeText;
-    [SerializeField] private TextMeshProUGUI _levelText;
-    [SerializeField] private TextMeshProUGUI _descriptionText;
-    [SerializeField] private TextMeshProUGUI _levelDescriptionText;
-    [SerializeField] private List<Image> _colorsImages;
-    [SerializeField] private WeaponSpritePerRarity _raritySprites ;
-    [SerializeField] private Image _rarityBackground;
-    [SerializeField] private Image _rarityPatterns;
-    [SerializeField] private Image _cardBorder;
-    [SerializeField] private Image _cardBackground;
-    [SerializeField] private Image _cardMotifs;
-    
-    [Header("Weapon Mastery")]
-    [SerializeField] private List<Sprite> _experienceSpritePerRarity ;
-    [SerializeField] private Image _experienceBar;
-    
-    [Header("Hands")]
-    [SerializeField] private RectTransform _oneHand;
-    [SerializeField] private RectTransform _twoHand;
-    
-    [Header("Localization")]
-    [SerializeField] private TextMeshProUGUI _damageText;
-    [SerializeField] private TextMeshProUGUI _attackSpeedText;
-    [SerializeField] private TextWithBackground _textWithBackground;
-    [SerializeField] private TextWithBackground _extraTextWithBackground;
-    
-    [Header("Stats")]
-    [SerializeField] private TextMeshProUGUI _baseDamageText;
-    [SerializeField] private TextMeshProUGUI _totalDamageText;
-    [SerializeField] private TextMeshProUGUI _baseAttackSpeedText;
-    [SerializeField] private TextMeshProUGUI _totalAttackSpeedText;
-    
-    [Header("Colors infused")]
-    [SerializeField] private List<TextMeshProUGUI> _colorTexts;
-
-    [Header("Settings")]
-    [SerializeField] private Color _highlightColor;
 
     /// <summary>
     /// Whether the currently displayed weapon has a minified description different from its normal one.

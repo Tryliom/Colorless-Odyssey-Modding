@@ -4,23 +4,6 @@ using UnityEngine;
 
 public class Dash : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private AutoTrail _autoTrail;
-    
-    [Header("Settings")]
-    [SerializeField] private float _dashSpeed ;
-    [SerializeField] private float _dashLength ;
-    [SerializeField] private float _dashCooldown ;
-    
-    [Header("On Cooldown Settings")]
-    [SerializeField] private Transform _cooldownTransform;
-    [SerializeField] private Sprite _dashBackground;
-    [SerializeField] private Sprite _dashFill;
-    [SerializeField] private float _distanceBetweenDashes ;
-    [SerializeField] private float _cooldownDisplayDuration ;
-    [SerializeField] private float _cooldownApparitionDuration ;
-    [SerializeField] private float _cooldownDisparitionDuration ;
-    [SerializeField] private Material _dashMaterial;
 
     /// <summary>
     /// Effective duration of a dash in seconds.

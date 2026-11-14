@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Compression : Relic
 {
-    [SerializeField] private List<StatsData> _statPerProjectilesPerLevel ;
 
     protected override void OnStart()
 {throw new System.NotImplementedException();}

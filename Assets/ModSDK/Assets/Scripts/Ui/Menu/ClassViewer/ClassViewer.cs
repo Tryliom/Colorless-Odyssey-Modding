@@ -9,38 +9,6 @@ using UnityEngine.UI;
 
 public class ClassViewer : BaseMenu
 {
-    [SerializeField] private ClassTypeData _classTypeData;
-    
-    [Header("Local References")]
-    [SerializeField] private TextMeshProUGUI _classNameText;
-    [SerializeField] private TextMeshProUGUI _noRedHeartText;
-    [SerializeField] private HeartDisplayer _heartDisplayer;
-    [SerializeField] private Image _classSpriteRenderer;
-    [SerializeField] private Button _chooseButton;
-    [SerializeField] private TextMeshProUGUI _chooseButtonText;
-    [SerializeField] private PriceButton _unlockClassButton;
-    [SerializeField] private PriceButton _unlockSecondRelicButton;
-    [SerializeField] private List<PriceButton> _upgradeButtons;
-    [SerializeField] private List<RelicDisplayer> _relics;
-    [SerializeField] private Image _hiddenFirstRelicImage;
-    [SerializeField] private Image _hiddenSecondRelicImage;
-    [SerializeField] private AnimatedValueText _colorShardsText;
-    
-    [Header("Weapon")]
-    [SerializeField] private WeaponImage _leftWeaponImage;
-    [SerializeField] private WeaponImage _rightWeaponImage;
-    
-    [Header("Special ability")]
-    [SerializeField] private Image _specialAbilityImage;
-    [SerializeField] private TextMeshProUGUI _specialAbilityNameText;
-    [SerializeField] private TextMeshProUGUI _specialAbilityDescText;
-    [SerializeField] private GameObject _abilityGlossaryHint;
-    [SerializeField] private TextMeshProUGUI _abilityGlossaryText;
-
-    [Header("Special him class objects")] 
-    [SerializeField] private List<Sprite> _masks;
-    [SerializeField] private GameObject _specialButtonsToActivate;
-    [FormerlySerializedAs("_youSprite")] [SerializeField] private Sprite _himSprite;
 
     public void Display(ClassTypeEnum classType, ClassSelector originalInteraction)
 {throw new System.NotImplementedException();}

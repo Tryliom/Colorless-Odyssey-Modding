@@ -8,10 +8,6 @@ public enum CoinType
 
 public class Coin : Collectible
 {
-    [SerializeField] private Sprite _oneCoinSprite;
-    [SerializeField] private Sprite _tinyBagCoinSprite;
-    [SerializeField] private Sprite _mediumBagCoinSprite;
-    [SerializeField] private Sprite _bigBagCoinSprite;
     
     // Start is called before the first frame update
     protected override void OnStart()

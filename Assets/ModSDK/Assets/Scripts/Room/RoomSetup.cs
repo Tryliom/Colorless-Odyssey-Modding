@@ -12,56 +12,6 @@ using Random = UnityEngine.Random;
 
 public class RoomSetup : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private RewardData _rewardData;
-    [SerializeField] private CinemachineCamera _cinemachineVirtualCamera;
-    [SerializeField] private GameObject _cursor;
-    [SerializeField] private GameObject _textGenerator;
-    [SerializeField] private PlayerUi _playerUi;
-    [SerializeField] private GameObject _relicStorage;
-    [SerializeField] private WeaponTooltip _weaponTooltip;
-    [SerializeField] private InformationTooltip _informationTooltip;
-    [SerializeField] private WeaponChangeMenu _weaponChangeMenu;
-    [SerializeField] private WeaponUpgradeMenu _weaponUpgradeMenu;
-    [FormerlySerializedAs("_uniqueRelicsMenu")] [SerializeField] private RelicSelectorMenu _relicSelectorMenu;
-    [SerializeField] private CursorController _cursorController;
-    [SerializeField] private HealthBossBar _healthBossBar;
-    [SerializeField] private EndScreen _endScreen;
-    [SerializeField] private TransitionScreen _transitionScreen;
-    [SerializeField] private ClassViewer _classViewer;
-    [FormerlySerializedAs("_weaponSynthesizerMenu")]
-    [SerializeField] private SynthesizerMenu _synthesizerMenu;
-    [FormerlySerializedAs("_brokenPartManager")]
-    [FormerlySerializedAs("_breakThingsManager")] [SerializeField] private ScrapManager _scrapManager;
-    [SerializeField] private RelicDisplayer _relicDisplayer;
-    [SerializeField] private AltarMenu _altarMenu;
-    [SerializeField] private ExplanationManager _explanationManager;
-    [SerializeField] private Canvas _canvas;
-    [SerializeField] private GameObject _decorations;
-    [SerializeField] private Volume _globalVolume;
-    [SerializeField] private TransitionManager _transitionManager;
-    [SerializeField] private StatUpdateManager _statUpdateManager;
-    [SerializeField] private GrowingUIImage _growingUIImagePrefab;
-    [SerializeField] private Glossary _glossary;
-    [SerializeField] private Recycler _recycler;
-    [SerializeField] private RunAdvancement _runAdvancement;
-    [SerializeField] private YesNoMenu _yesNoMenu;
-    [SerializeField] private Canvas _worldSpaceCanvas;
-    [SerializeField] private Transform _playerAuraSolver;
-    [SerializeField] private Transform _globalAuraSolver;
-    [SerializeField] private Transform _otherAuraSolver;
-    [SerializeField] private Transform _bossAuraSolver;
-    [SerializeField] private Light2D _globalMainLight;
-    [SerializeField] private Light2D _globalEnvironmentLight;
-    
-    [Header("Grid")]
-    [SerializeField] private Grid _grid;
-
-    [Header("Light objects")] 
-    [SerializeField] private GameObject _torch;
-
-    [Header("Expo mode")] 
-    [SerializeField] private ExpoUi _expoUi;
 
     [HideInInspector] public List<BoxCollider2D> DecorationsWallColliders ;
     public GameObject Decorations =>throw null;

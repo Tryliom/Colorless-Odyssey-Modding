@@ -5,9 +5,6 @@ using UnityEngine;
 [Serializable]
 public class TimeStore
 {
-    [SerializeField] private int _hours;
-    [SerializeField] private int _minutes;
-    [SerializeField] private float _seconds;
 
     public void Update()
 {throw new System.NotImplementedException();}    

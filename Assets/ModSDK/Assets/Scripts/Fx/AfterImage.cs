@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AfterImage : MonoBehaviour
 {
-    [SerializeField]
-    private SpriteRenderer _spriteRenderer;
     
     // Fires when this after image gets deactivated to return it to the pool. Cleared in Reset() to avoid stale subscriptions.
     public event Action<AfterImage> OnDeactivated;

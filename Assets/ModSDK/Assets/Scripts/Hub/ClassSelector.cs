@@ -17,44 +17,12 @@ public enum HoverState
 internal class CampPerClassType
 {
     [SerializeField] public ClassTypeEnum ClassType;
-    [SerializeField] private List<Sprite> _carpetPerLevel;
     
     public Sprite GetCarpet(PermanentData permanentData)
 {throw new System.NotImplementedException();}}
 
 public class ClassSelector : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private ClassTypeData _classTypeData;
-    [SerializeField] private ClassTypeEnum _classType;
-    
-    [Header("Camp")]
-    [SerializeField] private List<CampPerClassType> _camps;
-    
-    [Header("Sprites")]
-    [SerializeField] private Sprite _unlockedIcon;
-    [SerializeField] private Sprite _upgradeIcon;
-    [SerializeField] private Sprite _emptySprite;
-
-    [Header("Local References")] 
-    [SerializeField] private GameObject _player;
-    [SerializeField] private SpriteRenderer _classSpriteRenderer;
-    [SerializeField] private GameObject _sign;
-    [SerializeField] private SpriteRenderer _carpet;
-    [SerializeField] private SpriteRenderer _carpetShadow;
-    [SerializeField] private SpriteRenderer _icon;
-    [SerializeField] private GameObject _hoverObject;
-    [SerializeField] private GameObject _signBoxCollider;
-    
-    [FormerlySerializedAs("_youClassSpriteRenderers")]
-    [Header("Special Him Class References")]
-    [SerializeField] private List<SpriteRenderer> _himClassSpriteRenderers;
-    [FormerlySerializedAs("_youCarpets")] [SerializeField] private List<SpriteRenderer> _himCarpets;
-    [FormerlySerializedAs("_youSpriteMasks")] [SerializeField] private List<TraditionalAnimation> _himSpriteMasks;
-    [FormerlySerializedAs("_youCarpetMasks")] [SerializeField] private List<Sprite> _himCarpetMasks;
-    
-    [Header("Hover Settings")]
-    [SerializeField] private float _hoverTimeMax;
     
     public void StartHover()
 {throw new System.NotImplementedException();}    

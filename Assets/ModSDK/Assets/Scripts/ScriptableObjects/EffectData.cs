@@ -38,8 +38,6 @@ public class EffectsSettings
 [CreateAssetMenu(fileName = "EffectData", menuName = "ScriptableObjects/EffectData", order = 1)]
 public class EffectData : ScriptableObject
 {
-    [SerializeField] private EffectDictionary _effectDict ;
-    [SerializeField] private EffectsSettings _effectsSettings ;
     
     public EffectsSettings EffectsInternalSettings =>throw null;
     

@@ -18,14 +18,6 @@ internal class ReservedSlot
 
 public class ReservedDisplaySlots : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-    [SerializeField] private float _spacing ;
-    [SerializeField] private float _fadeOutDuration ;
-    [SerializeField] private float _fadeInDuration ;
-    [SerializeField] private float _waitBeforeFade ;
-    [SerializeField] private float _repositionDuration ;
-    [SerializeField] private RectTransform _rectPrefab;
-    [SerializeField] private TextMeshProUGUI _textPrefab;
 
     /**
      * Reserves a vertical space below the previous slots.

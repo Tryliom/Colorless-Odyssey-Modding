@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CollectibleData", menuName = "ScriptableObjects/CollectibleData")]
 public class CollectibleData : ScriptableObject
 {
-	[SerializeField] private List<GroundItem> _collectibles ;
 	
 	
 	/**

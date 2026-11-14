@@ -104,33 +104,6 @@ public class RoomSizeDictionary : UnitySerializedDictionary<RoomSizeType, RoomLi
 [CreateAssetMenu(fileName = "RoomData", menuName = "ScriptableObjects/RoomData", order = 2)]
 public class RoomData : ScriptableObject
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private Room _firstEntry;
-    [SerializeField] private Room _hub;
-    [SerializeField] private Room _tutorialRoad;
-    [SerializeField] private Room _tutorialCave;
-    [SerializeField] private BossRoomDictionary _bossRoomDictionary ;
-    [SerializeField] private RoomSizeDictionary _roomSizeDictionary ;
-    
-    [SerializeField]
-    private AnimationCurve _enemiesPerSubLevel;
-    [SerializeField,Tooltip("Percentage of the base enemies to add as additional enemies")] 
-    private Vector2 _additionalRandomEnemies;
-    [SerializeField,Tooltip("Flat number of enemies to add per endless loop")] 
-    private Vector2Int _additionalRandomEnemiesPerEndlessLoops;
-    
-    [SerializeField]
-    private AnimationCurve _enemiesPerTowerSubLevel;
-    [SerializeField,Tooltip("Percentage of the base enemies to add as additional enemies")] 
-    private Vector2 _additionalRandomEnemiesTower;
-    [SerializeField,Tooltip("Flat number of enemies to add per endless loop")] 
-    private Vector2Int _additionalRandomEnemiesPerEndlessLoopsTower;
-    [SerializeField] private EnemyWaveSettings _defaultWaveSettings;
-    [SerializeField] private List<EnemyScenario> _yellowScenarios ;
-    [SerializeField] private List<EnemyScenario> _yellowEliteScenarios ;
-    
-    [Header("Structures")]
-    [SerializeField] private List<Structure> _structures ;
     
     public Room Hub =>throw null;
     public Room TutorialRoad =>throw null;

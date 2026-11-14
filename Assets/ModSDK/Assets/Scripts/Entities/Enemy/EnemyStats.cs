@@ -6,18 +6,6 @@ using Random = UnityEngine.Random;
 
 public class EnemyStats : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private EnemyComponents _self;
-    [SerializeField] private float _healthRatio ;
-    [SerializeField] private float _armorRatio ;
-    [SerializeField] private float _contactDamage ;
-    [SerializeField] private float _projectileDamage ;
-    [SerializeField] private float _damagePercentagePerLevelAlly ;
-    [SerializeField] private float _damagePercentagePerLevelEnemy ;
-    [SerializeField] private StatsData _baseStats;
-    [SerializeField] private StatsData _statsBonusPerFortress;
-    [SerializeField] private StatsData _statsBonusPerLoops;
-    [SerializeField] private float _loopsMultiplier ;
 
     /**
      * Total stats of the weapon calculated for the frame, reset every frame

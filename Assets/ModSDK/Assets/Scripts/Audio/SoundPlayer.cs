@@ -20,28 +20,6 @@ public class ProjectileSoundClip
 
 public class SoundPlayer : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private AudioData _audioData;
-
-    [Header("Sounds")]
-    [SerializeField] private List<AoeSoundClip> _aoeSounds;
-    [SerializeField] private List<ProjectileSoundClip> _projectileSounds;
-    
-    [Header("Other sounds")]
-    [SerializeField] private List<AudioClip> _projectileBreak;
-    [SerializeField] private AudioClip _buttonClick;
-    [SerializeField] private AudioClip _roomClear;
-    [SerializeField] private AudioClip _useItem;
-    [SerializeField] private AudioClip _pickupItem;
-    [SerializeField] private AudioClip _pickupRelic;
-    [SerializeField] private List<AudioClip> _pickupGold;
-    [SerializeField] private AudioClip _falling;
-    
-    [Header("Abilities sounds")]
-    [SerializeField] private AudioClip _absoluteControlUseSound;
-    [SerializeField] private AudioClip _absoluteControlKickSound;
-    [SerializeField] private AudioClip _abilityOnCooldownSound;
-    [SerializeField] private AudioClip _abilityReadySound;
     
     public void PlaySound(AoeSound aoeSound)
 {throw new System.NotImplementedException();}    

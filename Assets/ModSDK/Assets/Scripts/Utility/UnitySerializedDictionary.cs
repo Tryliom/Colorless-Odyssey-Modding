@@ -6,11 +6,6 @@ using UnityEngine;
 [Serializable]
 public abstract class UnitySerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
 {
-    [SerializeField,HideInInspector]
-    private List<TKey> keyData ;
-	
-    [SerializeField,HideInInspector]
-    private List<TValue> valueData ;
 
     void ISerializationCallbackReceiver.OnAfterDeserialize()
 {throw new System.NotImplementedException();}

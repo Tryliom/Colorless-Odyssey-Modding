@@ -15,13 +15,6 @@ public class ShopSlotItemData
 
 public class Shop : Structure
 {
-	[Header("References")]
-    [SerializeField] private List<ShopSlot> _slots;
-	[SerializeField] private ShopBell _shopBell;
-    
-    [Header("Settings")]
-    [SerializeField] private float _chanceToGetDiscount;
-    [SerializeReference] private List<ShopItem> _shopItems;
     
     protected override void OnSetup()
 {throw new System.NotImplementedException();}

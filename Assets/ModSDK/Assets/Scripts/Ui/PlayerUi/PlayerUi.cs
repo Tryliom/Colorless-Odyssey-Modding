@@ -9,64 +9,6 @@ using UnityEngine.UI;
 
 public class PlayerUi : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private PauseMenu _pauseMenu;
-    
-    [Header("Ui objects")]
-    [SerializeField] private DashContainer _dashPrefab;
-    [SerializeField] private HeartContainer _heartPrefab;
-
-    [Header("Ui positions")]
-    [SerializeField] private RectTransform _heartStartPosition;
-    [SerializeField] private RectTransform _dashStartPosition;
-    [SerializeField] private RectTransform _relicMenuPosition;
-    
-    [Header("Texts")]
-    [SerializeField] private TextMeshProUGUI _levelText;
-    [SerializeField] private TextMeshProUGUI _dpsText;
-    [SerializeField] private TextMeshProUGUI _totalDamageText;
-    [SerializeField] private TextMeshProUGUI _timeText;
-    [SerializeField] private TextMeshProUGUI _maxSummonsText;
-    [SerializeField] private TextMeshProUGUI _tabRelicText;
-    [SerializeField] private AnimatedValueText _colorShardText;
-    [SerializeField] private AnimatedValueText _goldText;
-    [SerializeField] private AnimatedValueText _rerollText;
-    
-    [Header("Animations")]
-    [SerializeField] private AnimationCurve _textAlphaCurve;
-    [SerializeField] private float _textAnimationDuration ;
-    
-    [Header("Slots")]
-    [SerializeField] private List<Slot> _slots ;
-    [SerializeField] private WeaponImage _leftWeaponImage;
-    [SerializeField] private AmmoFilling _leftAmmo;
-    [SerializeField] private EnergyFilling _leftEnergy;
-    [SerializeField] private WeaponImage _rightWeaponImage;
-    [SerializeField] private AmmoFilling _rightAmmo;
-    [SerializeField] private EnergyFilling _rightEnergy;
-    [SerializeField,Tooltip("Vertical offset (in pixels) applied to the energy bar when displayed above the ammo bar")]
-    private float _energyAboveAmmoYOffset ;
-    [SerializeField] private SpecialAbilityImage _specialAbilityImage;
-    [SerializeField] private Color _usableSlotColor ;
-    [SerializeField] private Color _unusableSlotColor ;
-    
-    [Header("Cooldowns")]
-    [SerializeField] private Image _leftWeaponCooldown;
-    [SerializeField] private Image _rightWeaponCooldown;
-    [SerializeField] private Image _specialAbilityCooldown;
-    
-    [Header("Ability")]
-    [SerializeField] private Color _inUseAbilityColor;
-    [SerializeField] private Color _baseColor;
-    
-    [Header("Tutorial")]
-    [SerializeField] private AnimationCurve _scaleCurve;
-    [SerializeField] private AnimationCurve _moveCurve;
-    [SerializeField] private float _apparitionScale ;
-    [SerializeField] private float _revealDuration ;
-    [SerializeField] private RectTransform _weaponsRect;
-    [SerializeField] private RectTransform _abilityRect;
-    [SerializeField] private RectTransform _slotsRect;
     
     public void Init()
 {throw new System.NotImplementedException();}

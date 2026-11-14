@@ -34,35 +34,6 @@ internal class ThemeSettingsDictionary : UnitySerializedDictionary<RoomThemes, T
 
 public class RoomTheme : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    
-    [Header("Tilemaps")]
-    [SerializeField] private Tilemap _floor;
-    [SerializeField] private Tilemap _holes;
-    [SerializeField] private Tilemap _walls;
-    [SerializeField] private Tilemap _aboveWalls;
-    [SerializeField] private Tilemap _aboveAboveWalls;
-    [SerializeField] private Tilemap _aboveFloor;
-    [SerializeField] private Tilemap _aboveAboveFloor;
-    
-    [Header("Tiles")]
-    [SerializeField] private Tile _originalGroundTile;
-    [SerializeField] private RuleTile _originalWallTile;
-    [SerializeField] private RuleTile _originalHoleTile;
-    [SerializeField] private RuleTile _flameTile;
-    [SerializeField] private RuleTile _shadowTile;
-    [SerializeField] 
-    private ThemeSettingsDictionary _themeSettings ;
-    
-    [Header("Exterior Tiles")]
-    [SerializeField] private float _lightIntensityInExterior ;
-    [SerializeField] private float _environmentLightIntensityInExterior ;
-    [SerializeField] private float _lightIntensityInHub ;
-    [SerializeField] private float _environmentLightIntensityInHub ;
-    [SerializeField] private List<GameObject> _decorationsPreventedFromSpawning ;
-    
-    [Header("Testing")]
-    [SerializeField] private bool _useLaboratoryTheme;
 
     /**
      * Will be called at the start of the room generation, before any tile is placed. It will choose a theme for the room based on the current sublevel and if it's an exterior room or not.

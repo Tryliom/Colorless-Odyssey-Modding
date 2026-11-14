@@ -9,13 +9,6 @@ using UnityEngine;
 /// </summary>
 public class PlayerManaManager : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-	[SerializeField] private SpriteRenderer _manaBarBackground;
-	[SerializeField] private SpriteRenderer _manaBarContent;
-	[SerializeField,Tooltip("Seconds to fade in when mana changes")]
-	private float _fadeInDuration ;
-	[SerializeField,Tooltip("Seconds to fade out when room is cleared")]
-	private float _fadeOutDuration ;
 
 	// -------------------------------------------------------------------------
 	// Mana accessors

@@ -48,37 +48,6 @@ public class Relic : MonoBehaviour
     [SerializeField] 
     protected RunData RunData;
     
-    [FormerlySerializedAs("_name")]
-    [Header("Information")]
-    [SerializeField] 
-    private string _localizationNamePrefix;
-    [SerializeField] 
-    private Rarity _rarity;
-    [SerializeField] 
-    private RelicType _relicType;
-    [SerializeField] 
-    private ThemeColor _themeColor;
-    [SerializeField]
-    private AltarTier _altarTier;
-    [SerializeField]
-    private AltarRelicChoice _altarRelicChoice;
-    
-    
-    [Header("Tags")]
-    [SerializeField][Tooltip("Tags that the relic has, what things it affects")] 
-    private List<Tag> _tags; 
-    [FormerlySerializedAs("_requireTagss")] [SerializeField][Tooltip("Tags that the relic needs to be used")] 
-    private List<TagCondition> _neededTags;
-    [SerializeField,Tooltip("Relics that the relic needs to be used")] 
-    private List<RelicCondition> _neededRelics;
-    [SerializeField][Tooltip("Stats that affect the relic and make it stronger")] 
-    private List<StatName> _scalingStats;
-    [SerializeField][Tooltip("Stats given by the relics at any level")] 
-    private List<StatName> _statsGiven;
-
-    [Header("Levels")]
-    [SerializeField] private List<LevelData> _levels ;
-    
 
     public string Name =>throw null;
     public string LocalizationNamePrefix =>throw null;

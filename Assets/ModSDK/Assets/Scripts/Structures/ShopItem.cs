@@ -44,10 +44,6 @@ public class PriceRarityDictionary : UnitySerializedDictionary<Rarity, int> { }
 [Serializable]
 public class WeaponShopItem : ShopItem
 {
-    [SerializeField]
-    private PriceRarityDictionary _priceRarityDictionary ;
-    [SerializeField] 
-    private int _bonusRarityLevel;
 
     public override void InitItem()
 {throw new System.NotImplementedException();}
@@ -70,8 +66,6 @@ public class HeartPriceDictionary : UnitySerializedDictionary<HeartCollectibleTy
 [Serializable]
 public class HeartShopItem : ShopItem
 {
-    [SerializeField] 
-    private HeartPriceDictionary _pricesDict ;
 
     public override void InitItem()
 {throw new System.NotImplementedException();}
@@ -87,10 +81,6 @@ public class HeartShopItem : ShopItem
 [Serializable]
 public class CollectibleShopItem : ShopItem
 {
-    [SerializeField]
-    private CollectibleType _collectibleType;
-    [SerializeField]
-    private int _price;
 
     public override void InitItem() {throw new System.NotImplementedException();}
     public override void SpawnItem(Vector3 position, Transform pillar)
@@ -103,12 +93,6 @@ public class CollectibleShopItem : ShopItem
 [Serializable]
 public class RuneShopItem : ShopItem
 {
-    [SerializeField] 
-    private int _normalPrice;
-    [SerializeField] 
-    private int _bigPrice;
-    [SerializeField] 
-    private float _chanceToBeBig;
 
     public override void InitItem()
 {throw new System.NotImplementedException();}
@@ -128,8 +112,6 @@ public class RelicShopItem : ShopItem
 {
     [SerializeField]
     public CollectibleType RelicType ;
-    [SerializeField] 
-    private int _price;
 
     public override void InitItem() {throw new System.NotImplementedException();}
     public override void SpawnItem(Vector3 position, Transform pillar)

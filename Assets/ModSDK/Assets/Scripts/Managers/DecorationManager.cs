@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DecorationManager : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
 	
 	public void UpdateDecorations()
 {throw new System.NotImplementedException();}	

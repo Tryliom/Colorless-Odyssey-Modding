@@ -29,66 +29,6 @@ public class Aoe : MonoBehaviour
         public EnemyComponents Enemy;
         public float PullDuration;
     }
-    [SerializeField] private RunData _runData;
-    
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Sprite _appearanceForPlayer;
-    [FormerlySerializedAs("_enemySprite")] 
-    [SerializeField] private Sprite _appearanceForEnemy;
-    [SerializeField] private AoeAnimation _apparitionAnimation;
-    [SerializeField] private AoeAnimation _idleAnimation;
-    [SerializeField] private AoeAnimation _disparitionAnimation;
-    [SerializeField] private AoeAnimation _enemyApparitionAnimation;
-    [SerializeField] private AoeAnimation _enemyIdleAnimation;
-    [SerializeField] private AoeAnimation _enemyDisparitionAnimation;
-    [SerializeField] private AoeType _aoeType;
-    [SerializeField] private AoeSound _aoeSound;
-    [SerializeField] private bool _noDamage;
-    [SerializeField] 
-    private float _defaultDamage;
-    [SerializeField] 
-    private DamageType _damageType ;
-    [SerializeField,Tooltip("Chance to apply effect linked to the damage type")] 
-    private float _chanceToApplyEffect;
-    [SerializeField]
-    private int _effectStacks ;
-    [SerializeField] private float _apparitionDuration;
-    [FormerlySerializedAs("_duration")] [SerializeField] private float _idleDuration;
-    [SerializeField] private float _disparitionDuration;
-    [SerializeField] private float _defaultEnemyDurationBeforeLaunch;
-    [SerializeField] private float _defaultPlayerDurationBeforeLaunch;
-    [SerializeField]
-    private float _animationFramesPerSecond;
-    [SerializeField] private float _maxScale;
-    [SerializeField] private bool _growing;
-    [SerializeField] private float _knockbackForce;
-    [SerializeField] private AnimationCurve _alphaOverTime;
-    [SerializeField] private List<float> _randomStartRotation;
-    [SerializeField] private bool _randomFlipX;
-
-    [SerializeField,Space]
-    private bool _pullEnemiesOnHit;
-    [SerializeField]
-    private PullEnemiesSettings _defaultPullEnemiesSettings ;
-    
-    [SerializeField,Space]
-    private bool _concentratedProjectileOnExpire;
-    [SerializeField]
-    private ConcentratedProjectileSettings _defaultConcentratedSettings ;
-    [SerializeField] private bool _isHollow;
-    [SerializeField] private float _hollowRadius;
-    [SerializeField] private List<EffectOnHit> _effects ;
-    [SerializeField] private bool _rotate;
-    [SerializeField] private float _rotationSpeed;
-    [SerializeField] private bool _pulse;
-    [SerializeField,Range(0, 10)]
-    private int _pulseCount;
-    [SerializeField,Tooltip("Make the AOE pulse in size according to this curve (x is normalized time, y is scale multiplier)")]
-    private AnimationCurve _pulseCurve ;
-    [SerializeField] private bool _pulseColor;
-    [SerializeField] private Color _pulseColor1;
-    [SerializeField] private Color _pulseColor2;
-    [SerializeField] private StatsData _baseStats ;
     
     public AoeType AoeType =>throw null;
 

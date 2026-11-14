@@ -6,10 +6,4 @@ using UnityEngine;
  */
 public class AutoTrail : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private TrailRenderer _trailRenderer;
-    [SerializeField] private PixelTrailData _pixelTrailData;
-    
-    [Header("Optional")]
-    [SerializeField] private Rigidbody2D _rigidbody2D;
 }

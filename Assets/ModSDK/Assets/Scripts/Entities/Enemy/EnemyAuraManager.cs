@@ -9,6 +9,4 @@ using UnityEngine;
  */
 public class EnemyAuraManager : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-	[SerializeField] private EnemyComponents _self;
 }

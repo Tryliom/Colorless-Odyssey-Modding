@@ -13,20 +13,6 @@ internal enum UpdateState
 
 public class StatUpdateDisplayer : MonoBehaviour
 {
-    [SerializeField] private LocalizationData _localizationData;
-    
-    [Header("References")]
-    [SerializeField] private TextMeshProUGUI _statName;
-    [SerializeField] private Image _background;
-
-    [Header("Settings")] 
-    [SerializeField] private Color _goodColor;
-    [SerializeField] private Color _badColor;
-    [SerializeField] private float _apparitionDuration ;
-    [SerializeField] private float _changeDuration ;
-    [SerializeField] private float _disappearanceDuration ;
-    [SerializeField] private float _waitDurationBetweenStates ;
-    [SerializeField] private int _xOffset ;
     
     public StatName StatName { get; private set; }
     

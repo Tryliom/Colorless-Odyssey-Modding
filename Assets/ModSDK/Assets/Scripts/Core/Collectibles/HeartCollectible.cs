@@ -21,21 +21,6 @@ public class HeartTypeLocalizationKeyDictionary : UnitySerializedDictionary<Hear
 
 public class HeartCollectible : Collectible
 {
-    [SerializeField] private HeartCollectibleType _defaultHeartType ;
-    
-    [Header("Sprites")]
-    [SerializeField] private Sprite _redHeartContainerSprite;
-    [SerializeField] private Sprite _halfRedHeartSprite;
-    [SerializeField] private Sprite _fullRedHeartSprite;
-    [FormerlySerializedAs("_blueHeartSprite")] [SerializeField] private Sprite _shieldSprite;
-    [FormerlySerializedAs("_halfBlueHeartSprite")] [SerializeField] private Sprite _halfShieldSprite;
-    [SerializeField] private Sprite _greenHeartSprite;
-    [SerializeField] private Sprite _halfGreenHeartSprite;
-    [SerializeField] private Sprite _yellowHeartSprite;
-    [SerializeField] private Sprite _halfYellowHeartSprite;
-    
-    [Header("Localization Keys")]
-    [SerializeField] private HeartTypeLocalizationKeyDictionary _localizationKeys ;
 
     protected override void OnStart()
 {throw new System.NotImplementedException();}

@@ -10,17 +10,6 @@ using Random = UnityEngine.Random;
  */
 public class ObjectLauncher : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-	[SerializeField] private Rigidbody2D _rigidbody2D;
-	[SerializeField] private Collider2D _physicsCollider2D;
-	[SerializeField] private bool _launchOnStart ;
-	[SerializeField] private float _gravity ;
-	[SerializeField] private float _maxRadius ;
-	[SerializeField] private float _arcHeight ;
-	[SerializeField] private int _bounceCount ;
-	[SerializeField] private float _bounceHeightMultiplier ;
-	[SerializeField] private float _minBounceVelocity ;
-	[SerializeField] private bool _forceLaterals;
 
 	private enum LaunchState { Idle, Flying, Bouncing }
 	public void Launch()

@@ -16,7 +16,6 @@ public enum StructureType
 public abstract class Structure : MonoBehaviour
 {
 	[SerializeField] protected RunData RunData;
-	[SerializeField] private StructureType _structureType;
 
 	/**
 	 * Called when a save load the run with the structure

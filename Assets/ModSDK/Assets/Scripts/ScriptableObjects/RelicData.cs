@@ -11,20 +11,6 @@ public class TagMultiplierDictionary : UnitySerializedDictionary<Tag, float> { }
 [CreateAssetMenu(fileName = "RelicData", menuName = "ScriptableObjects/RelicData", order = 2)]
 public class RelicData : ScriptableObject
 {
-    [SerializeField] private RunData _runData;
-
-    [Header("Settings")] 
-    [SerializeField] private int _commonRelicWeight ;
-    [SerializeField] private int _rareRelicWeight ;
-    [SerializeField] private int _epicRelicWeight ;
-    [SerializeField] private int _legendaryRelicWeight ;
-    
-    [Header("Influence by tags")]
-    [SerializeField] private float _chanceToGetSimilarRelic ;
-    [SerializeField] private TagMultiplierDictionary _tagInfluenceMultiplier ;
-    
-    [Header("Relics")]
-    [SerializeField] private List<Relic> _relics ;
     
     public PriceRarityDictionary RecyclePricePerRarity ;
     public float DamageAddPerRecycle ;

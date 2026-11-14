@@ -5,20 +5,6 @@ using UnityEngine.Rendering.Universal;
 
 public class CameraManager : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-	[SerializeField] private CinemachineCamera _camera;
-	[SerializeField] private Transform _cameraFollowTarget;
-	[SerializeField] private PolygonCollider2D _cameraConfine;
-	[SerializeField] private CinemachineConfiner2D _cameraConfiner;
-	[SerializeField] private Camera _worldSpaceCamera;
-	[SerializeField] private GameObject _waterCameras;
-	
-	[Header("Settings")]
-	[SerializeField] private float _maxTargetDistance ;
-	[SerializeField] private float _mouseInfluence ;
-	[SerializeField] private float _smoothTime ;
-	[SerializeField] private Renderer2DData _rendererData;
-	[SerializeField] private string _featureName ;
 	
 	public CinemachineCamera PlayerCamera =>throw null;
 	public Camera WorldSpaceCamera =>throw null;

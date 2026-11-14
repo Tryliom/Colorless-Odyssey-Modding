@@ -4,8 +4,4 @@ using UnityEngine;
 
 public class RotationController : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    
-    [Header("References")]
-    [SerializeField] private List<SpriteRenderer> _spriteRenderers;
 }

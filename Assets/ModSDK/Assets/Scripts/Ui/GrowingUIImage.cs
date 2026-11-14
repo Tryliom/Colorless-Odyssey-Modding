@@ -7,13 +7,6 @@ using UnityEngine.UI;
  */
 public class GrowingUIImage : MonoBehaviour
 {
-    [Header("Internal references")]
-    [SerializeField] private RectTransform _rectTransform;
-    [SerializeField] private Image _image;
-    
-    [Header("Animation settings")]
-    [SerializeField] private float _duration ;
-    [SerializeField] private AnimationCurve _scaleAndColorCurve;
 
     public void StartAnimation(Sprite sprite)
 {throw new System.NotImplementedException();}}

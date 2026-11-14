@@ -7,8 +7,6 @@ using UnityEngine;
 [Serializable]
 internal class TagRelation
 {
-	[SerializeField,Tooltip("Used to describe what this tag is or is used to")]
-	private string _devDescription;
 
     public string DevDescription =>throw null;
 
@@ -22,8 +20,6 @@ internal class TagRelationDictionary : UnitySerializedDictionary<Tag, TagRelatio
 [CreateAssetMenu(fileName = "TagData", menuName = "ScriptableObjects/TagData", order = 1)]
 public class TagData : ScriptableObject
 {
-    [SerializeField,Tooltip("What tags are added when this tag is present, like thunder means it adds debuff tag, debuff add effect tag, etc.")] 
-    private TagRelationDictionary _tagDefinitions ;
 
     /**
      * Get all tags that are related to the given tag (given tag included).

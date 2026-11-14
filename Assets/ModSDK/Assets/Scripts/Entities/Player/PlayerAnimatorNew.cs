@@ -10,34 +10,6 @@ using UnityEngine;
 /// </summary>
 public class PlayerAnimatorNew : MonoBehaviour
 {
-	//TODO: When this will be used for the player, these things need to be done:
-	// - Remove the weapon order animation (going on way then another)
-	// - Remove the weapon animation curve since the animation will be set via the animation itself
-	// - Change attack animator number for each weapon type
-	// - Adapt health manager to apply hit feedback on the player
-	
-	[SerializeField] private RunData _runData;
-
-    [Header("References")]
-    [SerializeField] private SpriteRenderer _bodyRenderer;
-    [SerializeField] private AfterImageGenerator _bodyImageGenerator;
-    [Tooltip("Hand sprite drawn above the body (the one holding the weapon).")]
-    [SerializeField] private SpriteRenderer _handRenderer;
-    [SerializeField] private AfterImageGenerator _handImageGenerator;
-    [SerializeField] private SpriteSortingZ _handSpriteSortingZ;
-    [Tooltip("Body sorting Z, used as the weapon link when the mouse is above the character.")]
-    [SerializeField] private SpriteSortingZ _bodySpriteSortingZ;
-
-    [Header("Settings")]
-    [Tooltip("One animation set per weapon rotation animation type.")]
-    [SerializeField] private PlayerWeaponAnimationDictionary _animationSets ;
-    [SerializeField] private WeaponRotationAnimationType _weaponAnimationType ;
-    [Tooltip("Sprites are drawn looking to the left, so they are flipped when the mouse is on the right.")]
-    [SerializeField] private bool _spritesFaceLeft ;
-    [Tooltip("Angle (degrees, above/below the horizontal) from which the Up / Down sprites are used.")]
-    [SerializeField] private float _verticalAngleThreshold ;
-    [Tooltip("Last frame of the attack clip played at the native speed when shooting, the next ones are played while the weapon reloads (ignored for charged weapons).")]
-    [SerializeField] private int _attackShotFrame ;
 
     public PlayerActionAnimation CurrentAction =>throw null;
     public PlayerAimDirection AimDirection =>throw null;

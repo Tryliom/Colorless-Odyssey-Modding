@@ -21,24 +21,6 @@ public enum HeartState
 
 public class HeartContainer : MonoBehaviour
 {
-    [Header("Data")]
-    [SerializeField] private RunData _runData;
-    
-    [Header("Ui objects")]
-    [SerializeField] private Image _emptyHeartContainer;
-    [SerializeField] private Image _heart;
-    [SerializeField] private RectTransform _rectTransform;
-    
-    [Header("Sprites")]
-    [SerializeField] private Sprite _redEmptyHeartContainer;
-    [SerializeField] private Sprite _redHeart;
-    [SerializeField] private Sprite _redHalfHeart;
-    [FormerlySerializedAs("_shieldHeart")] [FormerlySerializedAs("_blueHeart")] [SerializeField] private Sprite _shield;
-    [FormerlySerializedAs("_shieldHalfHeart")] [FormerlySerializedAs("_blueHalfHeart")] [SerializeField] private Sprite _shieldHalf;
-    [SerializeField] private Sprite _greenHeart;
-    [SerializeField] private Sprite _greenHalfHeart;
-    [SerializeField] private Sprite _yellowHeart;
-    [SerializeField] private Sprite _yellowHalfHeart;
     
     public RectTransform RectTransform =>throw null;
     public HeartType HeartType { get; private set; }

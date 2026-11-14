@@ -49,27 +49,6 @@ internal struct RayPart
 
 public class DangerCircle : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    
-    [SerializeField]
-    private SpriteRenderer _spriteRenderer;
-    [SerializeField]
-    private SpriteRenderer _spriteFiller;
-    [SerializeField]
-    private SpriteRenderer _spriteBase;
-    [SerializeField]
-    private SpriteRenderer _spriteBaseFiller;
-    [SerializeField]
-    private SpriteRenderer _spriteTip;
-    [SerializeField]
-    private SpriteRenderer _spriteTipFiller;
-    
-    [Header("Sprites")]
-    [SerializeField] private DangerSpriteDictionary _dangerSpriteDictionary ;
-    
-    [Header("Parameters")]
-    [SerializeField] private float _visibleDuration ;
-    [SerializeField] private float _disparitionDuration ;
 
     // Fires when this danger circle gets deactivated to return it to the pool. Cleared in Reset() to avoid stale subscriptions.
     public event Action<DangerCircle> OnDeactivated;

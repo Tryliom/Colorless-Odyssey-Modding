@@ -3,6 +3,4 @@ using UnityEngine;
 
 public class AfterImageGenerator : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private bool _scaleOverTime ;
 }

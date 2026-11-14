@@ -11,12 +11,6 @@ public class BaseMenu : MonoBehaviour
 {
 	[SerializeField] 
 	protected RunData RunData;
-	[SerializeField] private bool _worldSpace;
-	[SerializeField] private bool _useDarkBackground ;
-	[SerializeField] private bool _pauseMusic;
-	[SerializeField] private bool _disableOnHide ;
-	[SerializeField] private bool _stopTime ;
-	[SerializeField] private bool _stopMovements ;
 
 	protected bool IsDisplayed { get; private set; }
 	

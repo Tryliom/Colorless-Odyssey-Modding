@@ -53,9 +53,6 @@ public struct TextDisplay
 
 public class TextGenerator : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private GameObject _prefab;
-    [SerializeField] private List<TextDisplay> _textDisplays;
 
     public void DisplayText(TextDisplayType type, int amount, Vector3 position, Color color = default)
 {throw new System.NotImplementedException();}    

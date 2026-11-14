@@ -8,14 +8,6 @@ internal class SelfKnockbackDictionary : UnitySerializedDictionary<WeaponSelfKno
 
 public class MovementController : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private List<SpriteRenderer> _spriteRenderers;
-    [SerializeField] private List<PlayerAnimator> _playerAnimators;
-    [SerializeField] private float _cloudSpawnRate ;
-    [SerializeField] private float _cloudLifetime ;
-    [SerializeField] private AnimationCurve _finalSpeedCurveOnShoot;
-    [SerializeField] private float _slowdownDuration ;
-    [SerializeField] private SelfKnockbackDictionary _selfKnockbackDuration ;
 
     public void Shooting(Weapon weapon, Vector2 direction)
 {throw new System.NotImplementedException();}    

@@ -7,27 +7,10 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private EnemyComponents _self;
-    [SerializeField] private AutoTrail _autoTrail;
 
     [Header("Stats")]
     [SerializeField] public EnemyName Name;
     [SerializeField] public ThemeColor ThemeColor;
-    
-    [Header("Animations")]
-    [SerializeField] private TraditionalAnimation _idleAnimation;
-    [SerializeField] private TraditionalAnimation _preAttackAnimation;
-    [SerializeField] private TraditionalAnimation _attackAnimation;
-    [SerializeField] private TraditionalAnimation _postAttackAnimation;
-    [SerializeField] private TraditionalAnimation _hitAnimation;
-    
-    [Header("Boss Dying Animation")]
-    [SerializeField] private AnimationCurve _xOffsetCurve;
-    [SerializeField] private float _xOffsetCurveDuration;
-    [SerializeField] private float _dyingDuration ;
-    [SerializeField] private float _explosionDuration ;
-    [SerializeField] private float _bigExplosionDuration ;
     
     public float LifeTime {get; private set; }
 

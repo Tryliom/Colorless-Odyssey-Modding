@@ -6,15 +6,6 @@ using UnityEngine;
 public class SpecialAbility : MonoBehaviour
 {
     [SerializeField] protected RunData RunData;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    
-    [Header("Information")]
-    [SerializeField] private string _localizedPrefix;
-    [SerializeField] private float _cooldown;
-    
-    [Header("Tags")]
-    [SerializeField] private List<Tag> _tags;
-    [SerializeField] private List<StatName> _scalingStats;
     
     public string Name =>throw null;
     public string Description =>throw null;

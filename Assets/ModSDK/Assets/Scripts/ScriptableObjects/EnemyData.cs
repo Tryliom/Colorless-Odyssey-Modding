@@ -15,7 +15,6 @@ public enum EnemyName
 [CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObjects/EnemyData", order = 1)]
 public class EnemyData : ScriptableObject
 {
-    [SerializeField] private List<EnemyComponents> _enemies;
 
 
     public EnemyComponents GetEnemyByName(EnemyName enemyName)

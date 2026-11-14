@@ -8,13 +8,7 @@ namespace TryliomUtility
 	[Serializable]
 	public class SerializableObject
 	{
-		[SerializeField]
-		private SerializableSystemType _systemType;
 		public object Value =>throw null;
-
-		// Stores the serialized version of Value
-		[SerializeField]
-		private string _serializedData;
 
 		public SerializableObject(object value)
 {throw new System.NotImplementedException();}	}

@@ -23,8 +23,6 @@ public class Collectible : GroundItem
 public ObjectLauncher ObjectLauncher;
     
     public CollectibleType Type ;
-    [FormerlySerializedAs("_collectibleType")]
-    [SerializeField] private CollectibleUseType _collectibleUseType;
 
     public override CollectibleType GetCollectibleType() {throw new System.NotImplementedException();}    
     protected virtual void OnStart() {throw new System.NotImplementedException();}    

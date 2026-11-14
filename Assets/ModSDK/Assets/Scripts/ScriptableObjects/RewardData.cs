@@ -7,16 +7,6 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu(fileName = "RewardData", menuName = "ScriptableObjects/RewardData", order = 2)]
 public class RewardData : ScriptableObject
 {
-    [SerializeField] private RunData _runData;
-    
-    [Header("Rewards")]
-    [SerializeField] private List<Reward> _rewards;
-    [SerializeField] private List<Reward> _biomeRewards;
-    [SerializeField] private List<Reward> _bossReward;
-    [SerializeField] private Reward _monarchReward;
-    
-    [Header("Modifiers")]
-    [SerializeField] private List<Modifier> _modifiers;
         
     public List<Reward> GetBiomeRewards()
 {throw new System.NotImplementedException();}

@@ -4,24 +4,6 @@ using UnityEngine.UI;
 
 public class CursorController : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    
-    [Header("Ui")]
-    [SerializeField] private GameObject _visuals;
-    [SerializeField] private GameObject _outsideCircleFill;
-    [SerializeField] private GameObject _insideCircleFill;
-    [SerializeField] private GameObject _border;
-    [SerializeField] private GameObject _crosshair;
-    
-    [Header("Animation")]
-    [SerializeField] private float _outsideCircleRedTime ;
-    [SerializeField] private float _triggerAbilityAvailableTime ;
-    
-    [Header("Colors")]
-    [SerializeField] private Color _inUseAbilityColor;
-    [SerializeField] private Color _inRechargeAbilityColor;
-    [SerializeField] private Color _readyAbilityColor;
-    [SerializeField] private Color _perfectTimingColor;
 
     public void TryToUseSpecialAbility()
 {throw new System.NotImplementedException();}    

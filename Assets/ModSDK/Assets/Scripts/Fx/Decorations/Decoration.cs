@@ -22,26 +22,6 @@ internal class HeartTypeChance
 
 public class Decoration : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private List<Sprite> _randomSprites;
-    [SerializeField] private List<Material> _materialPerSprite;
-    [SerializeField] private SpriteRenderer _shadow;
-    [SerializeField] private bool _dontReplaceShadowSprite;
-    [SerializeField] private bool _randomizeFlipX;
-    [SerializeField] private MinMaxRange<float> _randomScale ;
-
-    [Header("Settings")] 
-    [SerializeField] private bool _breakByEntityContact;
-    [FormerlySerializedAs("_breakNumberType")]
-    [SerializeField] private ScrapNumberType _scrapNumberType;
-    [SerializeField]
-    private int _pixelsSquare;
-    [SerializeField] private bool _isAPot;
-    [SerializeField] private bool _isABox;
-
-    [Header("Loot")]
-    [SerializeField] private float _chanceToDropLoot;
-    [SerializeField] private Loots _loots;
     
     public int GetTotalSprites()
 {throw new System.NotImplementedException();}    

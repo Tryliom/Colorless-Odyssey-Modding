@@ -2,8 +2,30 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - PlayerAlly
+  - Enemy
+  - PlayerProjectile
+  - EnemyProjectile
+  - PlayerMeatShield
+  - EnemyMeatShield
+  - Wall
+  - Hole
+  - EnemyTrigger
+  - Relic
+  - Weapon
+  - Collectible
+  - ColorFragment
+  - ClassSelector
+  - WeaponSynthesizer
+  - RelicSelector
+  - Altar
+  - BreakableObject
+  - Chest
+  - SacrificialAltar
+  - InteractableProjectile
+  - RTCamera
   layers:
   - Default
   - TransparentFX
@@ -11,24 +33,24 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - CollisionOnlyWall
+  - Player
+  - Enemy
+  - Ally
+  - Projectile
+  - Hole
+  - Decoration
+  - OnlyPhysics
+  - ProjectilePhysics
+  - WaterReflection
+  - SolidDecoration
+  - WorldFullColor
+  - ColorAura
+  - WorldSpaceUI
+  - PlayerAura
+  - WaterShape
+  - WorldFullColorOccluder
   - 
   - 
   - 
@@ -41,3 +63,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Cloud
+    uniqueID: 3823475579
+    locked: 0
+  - name: Relic
+    uniqueID: 2749290345
+    locked: 0
+  - name: Entity
+    uniqueID: 1285385913
+    locked: 0
+  - name: Projectile
+    uniqueID: 1888634921
+    locked: 0
+  - name: Weapon
+    uniqueID: 1869928983
+    locked: 0
+  - name: Above
+    uniqueID: 3985906825
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  m_MigratedRenderPipelines: []

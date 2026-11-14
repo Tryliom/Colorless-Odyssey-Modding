@@ -12,19 +12,6 @@ public enum WeaponUpgradeType
 
 public class WeaponUpgradeMenu : BaseMenu
 {
-	[Header("Weapon Upgrade Menu")]
-    [SerializeField] private TextMeshProUGUI _descText;
-    
-    [Header("Weapons")]
-    [SerializeField] private WeaponImage _leftWeapon;
-    [SerializeField] private WeaponImage _rightWeapon;
-
-    [Header("Tooltips")]
-    [SerializeField] private WeaponTooltip _originalWeaponTooltip;
-    [SerializeField] private WeaponTooltip _futureUpgradedWeaponTooltip;
-    [SerializeField] private Image _arrowsAnimation;
-    [SerializeField] private GameObject _leftArrow;
-    [SerializeField] private GameObject _rightArrow;
 
     public void Display(ThemeColor themeColor, Action onCancel = null)
 {throw new System.NotImplementedException();}

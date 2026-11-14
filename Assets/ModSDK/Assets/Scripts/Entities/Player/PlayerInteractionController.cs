@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class PlayerInteractionController : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    
-    [SerializeField] private TextMeshPro _pickupText;
-    [SerializeField] private SpriteRenderer _pickupBackground;
-    [SerializeField] private TextMeshPro _secondaryText;
-    [SerializeField] private SpriteRenderer _secondaryBackground;
     
     public void DisplayBuyText(string text, string priceText, Color priceColor)
 {throw new System.NotImplementedException();}    

@@ -26,15 +26,6 @@ public class ImageMoverManager : MonoBehaviour
 {throw new System.NotImplementedException();}
 		public void Update(float completionT, float scale)
 {throw new System.NotImplementedException();}	}
-	
-	[SerializeField] private RunData _runData;
-	[SerializeField] private Material _grayScaleMaterial;
-	[SerializeField]
-	private float _moveDuration ;
-	[SerializeField] 
-	private AnimationCurve _scaleCurve;
-	[SerializeField] 
-	private AnimationCurve _completionCurve;
 
 	/**
 	 * Creates a new ImageMover that will move the given sprite from the start position to the target position.

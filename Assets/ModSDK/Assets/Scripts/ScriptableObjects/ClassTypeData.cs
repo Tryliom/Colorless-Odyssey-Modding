@@ -32,12 +32,6 @@ public class ClassTypePrefabDictionary : UnitySerializedDictionary<ClassTypeEnum
 [CreateAssetMenu(fileName = "ClassTypeData", menuName = "ScriptableObjects/ClassTypeData", order = 2)]
 public class ClassTypeData : ScriptableObject
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private ClassTypePrefabDictionary _classTypes ;
-    [SerializeField] 
-    private ClassTypeCostDictionary _classTypeCostDictionary;
-    [SerializeField] 
-    private List<ClassTypeCostWrapper> _passiveCosts ;
     
     
     public ClassType GetClassType(ClassTypeEnum classType)

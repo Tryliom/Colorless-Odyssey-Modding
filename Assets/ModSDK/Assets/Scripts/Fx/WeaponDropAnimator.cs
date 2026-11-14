@@ -10,20 +10,6 @@ using UnityEngine.Rendering.Universal;
  */
 public class WeaponDropAnimator : MonoBehaviour
 {
-    [Header("Internal References")]
-    [SerializeField] private RunData _runData;
-    [SerializeField] private Weapon _weapon;
-    [SerializeField] private List<SpriteRenderer> _spritesPerLevel;
-    [SerializeField] private List<SpriteRenderer> _shadowSpritesPerLevel;
-    [SerializeField] private ParticleGenerator _particleGenerator;
-    [SerializeField] private Light2D _decorativeLight;
-    [SerializeField] private CircleCollider2D _pickupCollider;
-    
-    [Header("Settings")]
-    [SerializeField] private AnimationCurve _scaleCurve;
-    [SerializeField] private float _timer ;
-    [SerializeField] private float _startY ;
-    [SerializeField] private float _yOffset ;
     
     public void SkipScale()
 {throw new System.NotImplementedException();}    

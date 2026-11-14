@@ -16,13 +16,6 @@ internal enum ExplanationContentType
 
 public class ExplanationManager : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-	[SerializeField] private IconData _iconData;
-	[SerializeField] private ExplanationWindow _explanationWindowPrefab;
-	[SerializeField] private TextWithBackground _textWithBackgroundPrefab;
-
-	[Header("Settings")]
-	[SerializeField] private float _offsetBetweenWindows ;
 
 	public bool IsDisplaying()
 {throw new System.NotImplementedException();}

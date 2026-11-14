@@ -22,11 +22,6 @@ public enum BossType
 
 public class EnemyPattern : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] 
-    private AutoTrail _autoTrail;
-    [SerializeField] 
-    private EnemyComponents _self;
     public AnimationCurve ChargeFxRadiusCurve;
     public AnimationCurve ChargeFxSpeedCurve;
     public AnimationCurve ChargeFxSpawnTimeCurve;
@@ -40,10 +35,6 @@ public class EnemyPattern : MonoBehaviour
     public GridManager GridManager =>throw null;
     [SerializeReference] 
     public List<Pattern> NoTargetPatterns;
-    [SerializeField]
-    private List<int> _selectedCombinedPatternIndices ;
-    [SerializeField]
-    private List<CombinedPattern> _combinedPatterns ;
     
     [HideInInspector] public bool IsControlledByPlayer;
     public bool WasSummonedByWeapon { private set; get; }

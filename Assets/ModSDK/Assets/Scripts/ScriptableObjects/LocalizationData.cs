@@ -9,19 +9,6 @@ using UnityEngine.Localization.Tables;
 [CreateAssetMenu(fileName = "LocalizationData", menuName = "ScriptableObjects/LocalizationData", order = 1)]
 public class LocalizationData : ScriptableObject
 {
-    [SerializeField] private IconData _iconData;
-    [SerializeField] private SharedTableData _relics;
-    [SerializeField] private SharedTableData _weapons;
-    [SerializeField] private SharedTableData _specialAbilities;
-    [SerializeField] private SharedTableData _collectibles;
-    [SerializeField] private SharedTableData _rewards;
-    [SerializeField] private SharedTableData _menu;
-    [SerializeField] private SharedTableData _ui;
-    [SerializeField] private SharedTableData _explanations;
-    [SerializeField] private SharedTableData _stats;
-    [SerializeField] private SharedTableData _enemies;
-    [SerializeField] private SharedTableData _player;
-    [SerializeField] private SharedTableData _glossary;
 
     /**
      * Used for relic name and descriptions

@@ -5,29 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class EndScreen : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private ClassTypeData _classTypeData;
-    [SerializeField] private TextMeshProUGUI _text;
-    [SerializeField] private GameObject _expoModeQrCode;
-    [SerializeField] private GameObject _victoryReviewDiscord;
-    [SerializeField] private RectTransform _playAgainButton;
-    [SerializeField] private TextMeshProUGUI _playAgainButtonText;
-    [SerializeField] private RectTransform _endlessModeButton;
-    [SerializeField] private TextMeshProUGUI _endlessText;
-    [SerializeField] private TextMeshProUGUI _versionText;
-    [SerializeField] private TextMeshProUGUI _endlessRulesText;
-    
-    [Header("Score")]
-    [SerializeField] private TextMeshProUGUI _scoreText;
-    
-    [Header("Color Shards")]
-    [SerializeField] private TextMeshProUGUI _colorShardText;
-    [SerializeField] private float _maxBonus ;
-    [SerializeField] private float _malusOnDeath ;
-    [SerializeField]
-    private float _maxBonusOverTime ;
-    [SerializeField] private float _maxShardTimer ;
-    [SerializeField] private AnimationCurve _timerCurve;
 
     public void Display(bool byDeath)
 {throw new System.NotImplementedException();}    

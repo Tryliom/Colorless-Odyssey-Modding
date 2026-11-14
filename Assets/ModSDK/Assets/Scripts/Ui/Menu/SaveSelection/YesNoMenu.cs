@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class YesNoMenu : BaseMenu
 {
-	[SerializeField] private TextMeshProUGUI _questionText;
 
     /**
      * Displays the Yes/No menu with the given question and actions for confirm and cancel.

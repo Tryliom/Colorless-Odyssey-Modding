@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerComponents : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
 public Rigidbody2D Rigidbody2D;
 public MovementController MovementController;
 public EffectManager EffectManager;

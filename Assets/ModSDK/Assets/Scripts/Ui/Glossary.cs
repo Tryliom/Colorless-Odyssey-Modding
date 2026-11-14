@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public class Glossary : BaseMenu
 {
-	[SerializeField] private TextMeshProUGUI _title;
-	[SerializeField] private TextMeshProUGUI _description;
-	[SerializeField] private RelicDisplayer _relicDisplayer;
-	[SerializeField] private Image _abilityIcon;
-	[SerializeField] private WeaponTooltip _weaponTooltip;
 	
 	/**
 	 * Check if the G key is pressed and if a relic or ability is hovered

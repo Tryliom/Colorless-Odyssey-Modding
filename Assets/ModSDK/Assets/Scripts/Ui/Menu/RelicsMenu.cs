@@ -6,12 +6,6 @@ using UnityEngine.UI;
 
 public class RelicsMenu : BaseMenu
 {
-    [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private Image _backgroundImage;
-    [SerializeField] private RectTransform _relicPageScrollView;
-    [SerializeField] private RelicImage _relicImagePrefab;
-    [SerializeField] private float _animationDuration ;
-    [SerializeField] private float _distanceXFrom ;
 
     protected override void OnUpdate()
 {throw new System.NotImplementedException();}

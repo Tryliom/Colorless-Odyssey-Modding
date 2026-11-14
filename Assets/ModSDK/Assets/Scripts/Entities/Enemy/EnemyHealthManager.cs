@@ -132,11 +132,6 @@ internal class EnemyContactCooldown
 
 public class EnemyHealthManager : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private EnemyComponents _self;
-    
-    [Header("Settings")]
-    [SerializeField] private float _dodgeCooldown ;
     
     public void FinishDying()
 {throw new System.NotImplementedException();}    

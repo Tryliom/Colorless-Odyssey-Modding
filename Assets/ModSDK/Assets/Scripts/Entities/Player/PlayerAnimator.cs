@@ -13,20 +13,6 @@ public enum PlayerAnimation
 
 public class PlayerAnimator : MonoBehaviour
 {
-	[SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private TraditionalAnimation _idle;
-    [SerializeField] private TraditionalAnimation _run;
-    [FormerlySerializedAs("_hubIdle")] 
-    [SerializeField] private TraditionalAnimation _sitting;
-    [SerializeField] private PlayerAnimation _defaultAnimation ;
-
-    [Header("Mask")] 
-    [SerializeField] private bool _useMask;
-    [SerializeField] private TraditionalAnimation _maskAnimation;
-
-    [Header("Him class settings")] 
-    [SerializeField] private RunData _runData;
-    [SerializeField] private int _classMimicIndex;
     
     public void SetAnimation(PlayerAnimation playerAnimation)
 {throw new System.NotImplementedException();}    

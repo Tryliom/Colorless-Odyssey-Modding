@@ -16,19 +16,6 @@ public class ShopSlotState
 
 public class ShopSlot : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private List<SpriteRenderer> _itemSpriteRenderers;
-    [SerializeField] private TextMeshPro _priceText;
-    [SerializeField] private Transform _pillar;
-    [SerializeField] private Material _weaponMaterial;
-    
-    [Header("Global Settings")]
-    [SerializeField] private float _exoticPriceMultiplier;
-    [SerializeField] private float _discountPriceMultiplier;
-    [SerializeField] private Color _cannotAffordColor;
-    [SerializeField] private Color _canAffordColor;
-    [SerializeField] private Color _discountColor;
-    [SerializeField] private Color _exoticColor;
     
     public void EmptySlot()
 {throw new System.NotImplementedException();}

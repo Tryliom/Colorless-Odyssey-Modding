@@ -8,32 +8,6 @@ using UnityEngine.UI;
 
 public class SynthesizerMenu : BaseMenu
 {
-    [SerializeField] private WeaponsData _weaponsData;
-    
-    [Header("Prefabs")]
-    [SerializeField] private WeaponImage _weaponImagePrefab;
-    [SerializeField] private TextMeshProUGUI _text;
-    [SerializeField] private RelicImage _relicImagePrefab;
-    [SerializeField] private UiImage _uiImagePrefab;
-    
-    [Header("References")]
-    [SerializeField] private ScrollRect _mainScrollRect;
-    [SerializeField] private ButtonController _unlockAllButton;
-    [SerializeField] private TextMeshProUGUI _additionalText;
-    [SerializeField] private Image _panel;
-    
-    [Header("Weapons")]
-    [SerializeField] private ButtonController _weaponPageButton;
-    [SerializeField] private RectTransform _weaponPageScrollView;
-    
-    [Header("Relics")]
-    [SerializeField] private ButtonController _relicPageButton;
-    [SerializeField] private RectTransform _relicPageScrollView;
-    [SerializeField] private ButtonController _pickupAllRelicsButton;
-    
-    [Header("Collectibles")]
-    [SerializeField] private ButtonController _collectiblePageButton;
-    [SerializeField] private RectTransform _collectiblePageScrollView;
 
     protected override void OnDisplay()
 {throw new System.NotImplementedException();}

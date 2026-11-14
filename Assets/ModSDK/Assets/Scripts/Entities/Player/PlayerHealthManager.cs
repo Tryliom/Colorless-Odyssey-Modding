@@ -29,20 +29,6 @@ public class PlayerDamage
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private SpriteRenderer _shadowSpriteRenderer;
-    
-    [Header("Parameters")]
-    [SerializeField] private float _invulnerableDuration ;
-    [SerializeField] private float _fallTimerDuration ;
-    [SerializeField] private float _onDamageHeartsDuration ;
-    [SerializeField] private float _distanceBetweenHearts ;
-    [SerializeField] private Material _heartMaterial;
-    [SerializeField] private float _dodgeCooldown ;
-    
-    [Header("References")]
-    [SerializeField] private List<SpriteRenderer> _spriteRenderers;
-    [SerializeField] private Transform _onDamageHearts;
 
     public void StopFalling()
 {throw new System.NotImplementedException();}

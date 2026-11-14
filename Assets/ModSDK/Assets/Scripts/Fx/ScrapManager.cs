@@ -58,8 +58,6 @@ public class ScrapsSpawnSettings
 
 public class ScrapManager : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private Scrap _scrapPrefab;
 
     public void SpawnScraps(ScrapsSpawnSettings settings)
 {throw new System.NotImplementedException();}}

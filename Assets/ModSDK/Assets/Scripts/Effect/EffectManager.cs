@@ -27,12 +27,6 @@ public class EffectSettings
 
 public class EffectManager : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private EffectUI _effectUI;
-    [SerializeField] private EffectData _effectData;
-    
-    [Header("Enemy References")]
-    [SerializeField] private EnemyComponents _enemyComponents;
     
     /**
      * If the entity has already the effect, it will try to increase its stacks, if it's a stat effect, it will keep the highest remaining duration and add half of the stats of the new effect

@@ -18,24 +18,6 @@ public enum SortingOrderMode
  */
 public class SpriteSortingZ : MonoBehaviour
 {
-    [SerializeField] private bool _noSprite;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private SortingOrderMode _sortingOrderMode ;
-    [SerializeField]
-    private bool _useCustomOffset;
-    [SerializeField,Tooltip("Custom offset applied to the Y position when using Custom sorting mode")]
-    private float _customOffsetY;
-
-    [SerializeField,Tooltip("If enabled, the Z position will be set only once on Start and not updated every frame")]
-    private bool _static;
-    
-    [SerializeField,Tooltip("If enabled, the rotation of the object will be considered when calculating the position")]
-    private bool _allowRotation;
-    [SerializeField]
-    private bool _ignoreScale;
-    
-    [SerializeField,Tooltip("Optional linked SpriteSortingZ object to use its settings + this custom offset")]
-    private SpriteSortingZ _linkedObject;
 
     /**
      * Sets up the SpriteSortingZ component with the specified parameters.

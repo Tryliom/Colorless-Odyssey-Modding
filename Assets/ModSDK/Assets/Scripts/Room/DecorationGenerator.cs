@@ -46,16 +46,6 @@ internal class RatioOfUsablePositionPerSpawnType
 
 public class DecorationGenerator : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private RunData _runData;
-    [SerializeField] private Tilemap _floor;
-    [SerializeField] private GameObject _decorationsParent;
-    
-    [Header("Settings")]
-    [SerializeField] private List<WeightRarity> _rarityWeights;
-    [SerializeField] private DecorationData[] _decorations;
-    [SerializeField] private float _offsetFromWall ;
-    [SerializeField] private List<RatioOfUsablePositionPerSpawnType> _ratioOfUsablePositionPerSpawnType;
 
     public void PlaceDecorations()
 {throw new System.NotImplementedException();}}

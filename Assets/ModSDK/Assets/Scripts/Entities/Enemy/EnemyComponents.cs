@@ -8,7 +8,6 @@ using UnityEngine;
  */
 public class EnemyComponents : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
 	public Enemy Enemy;
 	public EnemyPattern PatternManager;
 	public EnemyStats Stats;

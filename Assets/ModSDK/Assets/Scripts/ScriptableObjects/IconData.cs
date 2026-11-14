@@ -36,9 +36,6 @@ internal class IconColorDictionary : UnitySerializedDictionary<Icon, Color> {}
 [CreateAssetMenu(fileName = "IconData", menuName = "ScriptableObjects/IconData", order = 1)]
 public class IconData : ScriptableObject
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private IconColorDictionary _iconColorDictionary ;
-    [SerializeField] private List<Sprite> _iconSprites ;
     
     /**
      * Get all icons that have an explanation

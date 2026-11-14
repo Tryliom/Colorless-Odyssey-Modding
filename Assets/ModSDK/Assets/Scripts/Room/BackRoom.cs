@@ -7,27 +7,6 @@ using Random = UnityEngine.Random;
 
 public class BackRoom : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    
-    [Header("Things to spawn")]
-    [SerializeField] private Shop _shop;
-    [SerializeField] private Shop _weaponShop;
-    [SerializeField] private GameObject _treasure;
-    [SerializeField] private SacrificialAltar _sacrificialAltar;
-    
-    [Header("Tilemaps")]
-    [SerializeField] private Tilemap _walls;
-    [SerializeField] private Tilemap _floor;
-    [SerializeField] private Tilemap _aboveFloor;
-    [SerializeField] private Tilemap _grassFloor;
-    
-    [Header("Tiles")] 
-    [SerializeField] private Tile _defaultGroundTile;
-    [SerializeField] private RuleTile _flameTile;
-    
-    [Header("Decorations")]
-    [SerializeField] private GameObject _torch;
-    [SerializeField] private GameObject _flambo;
 
     public void Reset()
 {throw new System.NotImplementedException();}    

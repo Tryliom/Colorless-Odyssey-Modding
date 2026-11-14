@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class WeaponChangeMenu : BaseMenu
 {
-    [SerializeField] private WeaponsData _weaponsData;
-    
-    [SerializeField] private WeaponImage _weaponToPick;
-    [SerializeField] private WeaponImage _leftWeapon;
-    [SerializeField] private WeaponImage _rightWeapon;
 
     public void Display(Weapon weaponToChange, bool deleteReplacedWeapon = false)
 {throw new System.NotImplementedException();}    

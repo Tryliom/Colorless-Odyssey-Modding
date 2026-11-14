@@ -239,9 +239,6 @@ public enum WeaponShootType
 [Serializable]
 public class WeaponShootSettings
 {
-    // Internal description used to describe the shoot settings in the editor
-    [SerializeField] 
-    private string _description;
     public MinMaxRange<int> ShootNumber ;
     [Range(0f, 1f)] 
     public float ChanceToUse ;
@@ -329,56 +326,6 @@ public class ShootSettings
 
 public class Weapon : MonoBehaviour
 {
-    
-    [SerializeField] private RunData _runData;
-    [SerializeField] 
-    private WeaponRotationDictionary _rotationAnimationCurves ;
-    [SerializeField] 
-    private List<SpriteRenderer> _spritesPerLevel;
-    [SerializeField] 
-    private List<AfterImageGenerator> _afterImagePerLevel;
-    [SerializeField] 
-    private List<SpriteSortingZ> _spriteSortingZPerLevel;
-    [SerializeField] 
-    private GameObject _projectileSpawnPoint;
-    [SerializeField]
-    private WeaponDropAnimator _weaponDropAnimator;
-    [SerializeField] private List<TraditionalAnimation> _idleAnimation ;
-    [SerializeField] private List<TraditionalAnimation> _attackAnimation ;
-    [Tooltip("Played once the attack animation is finished, before going back to idle. If empty, idle is played directly after the attack.")]
-    [SerializeField] private List<TraditionalAnimation> _postAttackAnimation ;
-
-    [Tooltip("Used instead of Attack Animation while a Charged weapon is charging (driven by the charge percentage, not by delta time). Falls back to Attack Animation if empty.")]
-    [SerializeField] private List<TraditionalAnimation> _chargedAttackAnimation ;
-    [Tooltip("Used instead of Post Attack Animation once a Charged weapon has fired. Falls back to Post Attack Animation if empty.")]
-    [SerializeField] private List<TraditionalAnimation> _chargedPostAttackAnimation ;
-    [SerializeField] private WeaponName _weaponName;
-    [SerializeField] private Rarity _rarity;
-    [FormerlySerializedAs("_weaponType")]
-    [SerializeField] private WeaponHandType _weaponHandType;
-    [SerializeField]
-    private ThemeColor _weaponTypeColor;
-    [SerializeField] private SoundEnum _weaponSound;
-    [SerializeField] private List<StatName> _statsPerLevel ;
-    // Add auto tags based on weapon properties, like the type of weapon, if it has piercing, homing, etc.
-    [SerializeField,Tooltip("Get automatically the tags based on the weapon properties, should add more if a projectile/aoe/ray/summon has special properties")]
-    private List<Tag> _tags;
-    [SerializeField] private List<StatName> _scalingStats;
-    [SerializeField] private bool _isEnergyWeapon;
-    [SerializeField,Range(0f, 100f),Tooltip("Energy gained per shot (max 100)")]
-    private float _energyGainPerShot ;
-    [SerializeField,Tooltip("Shoot settings used in sequence when energy is full; energy is consumed after the last one")]
-    private List<WeaponShootSettings> _energyShootSettings ;
-    [SerializeField] private bool _isManaWeapon;
-    [SerializeField,Range(0f, 200f),Tooltip("Mana consumed per shot (weapon fires with reduced damage if not enough mana)")]
-    private float _manaCostPerShot ;
-    [SerializeField,Tooltip("Shoot settings used in sequence when mana is full (overcharge); mana is consumed after the last one")]
-    private List<WeaponShootSettings> _manaOverchargeShootSettings ;
-    [SerializeField] private List<WeaponShootSettings> _shootSettings ;
-    [SerializeField] private float _minDamage;
-    [SerializeField] private float _maxDamage;
-    [SerializeField] private float _attackSpeed;
-    [SerializeField] private float _radiusOffset;
     [Tooltip("Offset from player applied ignoring the weapon rotation")]
     public Vector2 FixedOffsetFromPlayer;
     

@@ -9,50 +9,6 @@ using Random = UnityEngine.Random;
 
 public class Ray : MonoBehaviour
 {
-    [Header("Assets")]
-    [SerializeField] private RunData _runData;
-    [SerializeField] private EffectData _effectData;
-    
-    [SerializeField] private BoxCollider2D _hitCollider;
-    [SerializeField] private List<SpriteRenderer> _spritesPerLevel ;
-    [SerializeField] private List<SpriteRenderer> _startRay ;
-    [SerializeField] private List<SpriteRenderer> _endRay ;
-    
-    [Header("General Properties")]
-    [SerializeField] private RayType _rayType;
-    [SerializeField] private DamageType _damageType ;
-    [SerializeField,Tooltip("Chance to apply effect linked to the damage type")] 
-    private float _chanceToApplyEffect;
-    [SerializeField]
-    private int _effectStacks ;
-    
-    [Header("Animations")]
-    [SerializeField] private List<TraditionalAnimation> _animationLevels ;
-    [SerializeField] private List<TraditionalAnimation> _startAnimationLevels ;
-    [SerializeField] private bool _useStartForEndAnimation;
-    [SerializeField] 
-    private List<TraditionalAnimation> _endAnimationLevels ;
-
-    [Header("Settings")] 
-    [SerializeField] private float _globalScale ;
-    [SerializeField] private float _apparitionTime ;
-    [SerializeField] private float _disparitionTime ;
-    [SerializeField] private bool _disableStartEnd;
-    [SerializeField] private bool _disableYVariation;
-
-    [Header("Particles Properties")]
-    [SerializeField] private bool _spawnClouds;
-    [SerializeField] private Color _cloudColor;
-    [SerializeField] private bool _adaptColorToLevel;
-
-    [Header("Effects")]
-    [SerializeField] private List<StatOverTime> _statsOverTime ;
-    [SerializeField] private List<EffectOnHit> _effectsOnHit;
-    [SerializeField] private List<AoeOnHit> _aoeOnHit;
-
-    [Header("Default Properties")] 
-    [SerializeField] private float _defaultBaseDamage;
-    [SerializeField] private StatsData _baseStats;
     
     // Fires when this ray gets deactivated to return it to the pool. Cleared in Reset() to avoid stale subscriptions.
     public event Action<Ray> OnDeactivated;

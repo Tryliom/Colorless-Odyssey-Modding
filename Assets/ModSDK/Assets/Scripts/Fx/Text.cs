@@ -23,9 +23,6 @@ internal class TextAnimation
 
 public class Text : MonoBehaviour
 {
-    [SerializeField] private RunData _runData;
-    [SerializeField] private TextAnimation _damageTextAnimation;
-    [SerializeField] private TextAnimation _pickupTextAnimation;
     
     public void SetTextType(TextType textType)
 {throw new System.NotImplementedException();}    

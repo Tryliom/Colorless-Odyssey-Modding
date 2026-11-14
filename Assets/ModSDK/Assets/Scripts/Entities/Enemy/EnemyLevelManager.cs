@@ -16,15 +16,6 @@ public class Experience
 
 public class EnemyLevelManager : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-	[SerializeField] private EnemyComponents _self;
-	[SerializeField] private TextMeshPro _levelText;
-	[SerializeField] private SpriteRenderer _levelFillerSprite;
-	[SerializeField] private SpriteRenderer _levelExpFillerSprite;
-	[SerializeField] private SpriteRenderer _levelAdditionalBackgroundSprite;
-	[SerializeField] private float _weakExperienceMultiplier ;
-	[SerializeField] private float _eliteExperienceMultiplier ;
-	[SerializeField] private float _bossExperienceMultiplier ;
 
 	public int Level { get; private set; } 	
 	// Only for allies that gain experience

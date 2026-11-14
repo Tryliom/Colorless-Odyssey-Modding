@@ -9,21 +9,6 @@ using UnityEngine;
  */
 public class DamageNumberText : MonoBehaviour
 {
-	[SerializeField] private RunData _runData;
-    [SerializeField] private TextMeshPro _textMeshPro;
-
-    [Header("Bump animation on hit")]
-    [SerializeField] private AnimationCurve _bumpScaleCurve ;
-    [SerializeField] private float _bumpDuration ;
-
-    [Header("Fade-out")]
-    [SerializeField] private AnimationCurve _fadeOutCurve ;
-    [SerializeField] private float _fadeOutDuration ;
-    [SerializeField] private float _inactivityBeforeFade ;
-    
-    [Header("Other Settings")]
-    [SerializeField] private float _moveSpeed ;
-    [SerializeField] private float _maxFontSizeMultiplier ;
 
     // Fires when this text gets deactivated (either by fading out or forced by the manager when the enemy deactivates) to return it to the pool. Passes itself as a parameter for easy reference.
     public event Action<DamageNumberText> OnDeactivated;
