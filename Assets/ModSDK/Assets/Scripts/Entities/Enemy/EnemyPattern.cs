@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ColorlessCore.Inspector;
+using MyInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -41,12 +41,11 @@ public class EnemyPattern : MonoBehaviour
     [FormerlySerializedAs("_fly")] [SerializeField]
     public bool Flying;
     
-    public GridManager GridManager =>throw null;
     
     [Title("Patterns")]
-    [SerializeReference,OnValueChanged("OnPatternsChanged")]
+    [SerializeReference,OnValueChanged(nameof(OnPatternsChanged))]
     public List<Pattern> NoTargetPatterns;
-    [SerializeField]
+    [SerializeField,ListDrawerSettings(ShowFoldout = true)]
     private List<CombinedPattern> _combinedPatterns ;
 
     private IEnumerable<ValueDropdownItem> GetCombinedPatternIndices()
@@ -56,7 +55,7 @@ public class EnemyPattern : MonoBehaviour
     
     // Odin
     private bool DisplayBossType => EnemyType == EnemyType.Boss;
-
+    
     private void OnPatternsChanged()
     {
         foreach (var pattern in NoTargetPatterns)

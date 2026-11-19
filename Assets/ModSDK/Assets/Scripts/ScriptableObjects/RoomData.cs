@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ColorlessCore.Inspector;
+using MyInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -57,8 +57,8 @@ public class EnemyWaveSettings
 {
 	public int MaxEnemiesInRoom;
 	public int EnemyCountThatTriggerNextWave;
-	[MinMaxSlider(1, 10)]
-	public Vector2Int WaveSize;
+	[NumberRangeSettings(NumberType.Int, 1, 10, 1)]
+	public NumberRange WaveSizeRange ;
 
 	public EnemyWaveSettings Clone()
 {throw new System.NotImplementedException();}}

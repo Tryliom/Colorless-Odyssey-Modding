@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ColorlessOdyssey;
-using ColorlessCore.Inspector;
+using MyInspector;
 using TryliomUtility;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -414,7 +414,8 @@ public class Projectile : MonoBehaviour
     [SerializeField,ShowIf(nameof(_rotate)),Foldout("Rotate")]
 	private bool _randomizeRotationSign;
     [SerializeField,ShowIf(nameof(_rotate)),Foldout("Rotate")]
-	private MinMaxRange<float> _randomBaseRotation ;
+	[NumberRangeSettings(NumberType.Float, 0f, 360f)]
+	private NumberRange _baseRotationRange ;
 	[SerializeField,ShowIf(nameof(_rotate)),Foldout("Rotate")]
 	private bool _increaseRotationOverTime;
 	[SerializeField,ShowIf(nameof(ShowRotationMaxMultiplier)),Foldout("Rotate")]
@@ -817,7 +818,6 @@ public class Projectile : MonoBehaviour
      */
     public float GetDefaultChanceToApplyEffect()
 {throw new System.NotImplementedException();}    
-    
     public int GetDefaultEffectStacks()
 {throw new System.NotImplementedException();}    
     public void OverrideDamageType(DamageType damageType, float chanceToApplyEffect = 0f, int effectStacks = 0)

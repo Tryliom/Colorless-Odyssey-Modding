@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ColorlessOdyssey;
-using ColorlessCore.Inspector;
+using MyInspector;
 using TryliomUtility;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -50,9 +50,6 @@ public class RunData : ScriptableObject
     public bool ExpoMode;
     public bool LanMode; // Unlock all classes at level 1 and altar but no color shard gain
     public bool AskLanguageOnStart;
-    
-    [Title("Global Settings")]
-    public float EnemyHealthMultiplier ;
     
     [Title("Debug"),InfoBox("Start game with these items when isDebug is enabled")]
     [ValueDropdown(nameof(GetRelicOptions))]
@@ -255,7 +252,7 @@ public class RunData : ScriptableObject
     public int GetExperienceGain(int enemyLevel)
 {throw new System.NotImplementedException();}    
     public long GetMaxWeaponExperience(int level)
-{throw new System.NotImplementedException();}
+{throw new System.NotImplementedException();}    
     public float GetHealth(float ratio, int level)
 {throw new System.NotImplementedException();}    
     public float GetWeaponMasteryExperiencePercentage(WeaponName weaponName)
@@ -349,4 +346,9 @@ public class RunData : ScriptableObject
      * Create a mana restoring projectile that will follow the player and restore mana when it reaches him. The projectile will have a random speed and size, and will be colored blue. The amount of mana restored is given by the amount parameter, and the origin of the mana restoration is given by the origin parameter.
      */
     public void CreateManaRestoringProjectile(Vector3 position, float amount, SourceOrigin origin)
+{throw new System.NotImplementedException();}
+    /**
+     * Calculate the chance effect multiplier based on the ratio of damage absorbed by armor. The more damage is absorbed by armor, the lower the chance effect multiplier will be.
+     */
+	public float CalculateChanceEffectMultiplier(float ratioOfDamageAbsorbedByArmor)
 {throw new System.NotImplementedException();}}

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using ColorlessOdyssey;
 using System.Linq;
-using ColorlessCore.Inspector;
+using MyInspector;
 using TryliomUtility;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -310,7 +310,8 @@ public class WeaponShootSettings
 {
 
     [Foldout("Conditions"),InfoBox("The number of shots that will use the shoot settings until the next shoot settings are applied")]
-    public MinMaxRange<int> ShootNumber ;
+    [NumberRangeSettings(NumberType.Int, 0, 100)]
+    public NumberRange ShootCount ;
     [Foldout("Conditions"),InfoBox("The chance to use the shoot settings, 1 means 100% chance, 0 means 0% chance"),Range(0f, 1f)]
     public float ChanceToUse ;
 
@@ -351,7 +352,7 @@ public class WeaponShootSettings
     public ShootSettings ShootSettings ;
     
     // Odin
-    private bool HasMoreThanOneShoot => ShootNumber.MaxValue > 1;
+    private bool HasMoreThanOneShoot => ShootCount.Max > 1;
 }
 
 [Serializable]
@@ -536,7 +537,6 @@ public class Weapon : MonoBehaviour
     [Title("Mana Weapon")]
     [SerializeField] private bool _isManaWeapon;
 
-    private RunData RunData => RunData.Asset;
     [Tooltip("Offset from player applied ignoring the weapon rotation")]
     public Vector2 FixedOffsetFromPlayer;
     
@@ -552,7 +552,7 @@ public class Weapon : MonoBehaviour
      * Total stats of the weapon calculated for the frame, reset every frame
      */
     [NonSerialized] public readonly StatsData FinalStats ;
-
+    
     public int CurrentShootSettingsIndex { get; private set; }     public int CurrentShootNumber { get; private set; }
     public int CurrentMaxShootNumber { get; private set; }
 
@@ -560,6 +560,8 @@ public class Weapon : MonoBehaviour
     public GameObject ProjectileSpawnPoint =>throw null;
     public WeaponDropAnimator WeaponDropAnimator =>throw null;
     public List<ThemeColor> ThemeColorsPerLevel { get; set; } 
+    private RunData RunData => RunData.Asset;
+    
     public List<Tag> Tags
     {
         get
@@ -675,8 +677,6 @@ public class Weapon : MonoBehaviour
     public float GetMaxCooldown()
 {throw new System.NotImplementedException();}
     public int GetFinalProjectileNumber()
-{throw new System.NotImplementedException();}
-    public int RollFinalProjectileNumber()
 {throw new System.NotImplementedException();}
     public int GetMinFinalDamage()
 {throw new System.NotImplementedException();}    
