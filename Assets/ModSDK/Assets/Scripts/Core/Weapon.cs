@@ -61,7 +61,7 @@ public class WeaponRaySettings
     public RayGrowSettings RayGrowSettings;
     public StatsData Stats;
 
-    [Header("Common settings")]
+    [Title("Common settings")]
     public float MaxScaleX;
     [FormerlySerializedAs("APS")] public float AttackPerSeconds ;
     
@@ -536,8 +536,6 @@ public class Weapon : MonoBehaviour
     private List<SpriteSortingZ> _spriteSortingZPerLevel;
     [SerializeField,Foldout("Static References")]
     private GameObject _projectileSpawnPoint;
-    [SerializeField,Foldout("Static References")]
-    private WeaponDropAnimator _weaponDropAnimator;
     
     [SerializeField,Foldout("Sprite Animations")] private List<TraditionalAnimation> _idleAnimation ;
     [SerializeField,Foldout("Sprite Animations")] private List<TraditionalAnimation> _attackAnimation ;

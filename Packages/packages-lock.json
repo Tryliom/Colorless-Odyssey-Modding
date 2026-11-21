@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "554300e7808cc8daebc24923796a9fcb59bd9962"
+      "hash": "ca809658e73654aaefaea0b6ce08e8b1c339b775"
     },
     "com.tryliom.my-inspector": {
       "version": "https://github.com/Tryliom/MyInspector.git",

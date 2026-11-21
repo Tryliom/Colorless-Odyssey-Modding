@@ -10,7 +10,9 @@ using UnityEngine.Rendering.Universal;
  */
 public class WeaponDropAnimator : MonoBehaviour
 {
-    
+
+    public void Setup(Weapon weapon, List<SpriteRenderer> spritesPerLevel, CircleCollider2D pickupCollider)
+{throw new System.NotImplementedException();}    
     public void SkipScale()
 {throw new System.NotImplementedException();}    
     public void LinkToWeaponChest(WeaponChest chest)

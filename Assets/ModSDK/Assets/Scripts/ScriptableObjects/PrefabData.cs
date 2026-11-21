@@ -15,6 +15,8 @@ public class PrefabData : ScriptableObject
 	public List<Ray> RayPrefabs ;
 	public DangerCircle DangerCirclePrefab;
 	public AfterImage AfterImagePrefab;
+	public WeaponDropAnimator WeaponDropAnimatorPrefab;
+	
 	public Material DefaultSpriteMaterial;
 	public Material OcclusionMaterial;
 	

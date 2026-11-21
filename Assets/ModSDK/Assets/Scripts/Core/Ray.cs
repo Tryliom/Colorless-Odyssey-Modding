@@ -11,15 +11,12 @@ using Random = UnityEngine.Random;
 
 public class Ray : MonoBehaviour
 {
-    [Header("Assets")]
-    [SerializeField] private EffectData _effectData;
-    
-    [SerializeField,Foldout("Internal References")] private BoxCollider2D _hitCollider;
+	[SerializeField,Foldout("Internal References")] private BoxCollider2D _hitCollider;
     [SerializeField,Foldout("Internal References")] private List<SpriteRenderer> _spritesPerLevel ;
     [SerializeField,Foldout("Internal References")] private List<SpriteRenderer> _startRay ;
     [SerializeField,Foldout("Internal References")] private List<SpriteRenderer> _endRay ;
     
-    [Header("General Properties")]
+    [Title("General Properties")]
     [SerializeField] private RayId _rayId;
     [SerializeField] private DamageType _damageType ;
     [SerializeField,Tooltip("Chance to apply effect linked to the damage type"),ShowIf(nameof(HasDamageTypeAnEffect))]
@@ -27,31 +24,31 @@ public class Ray : MonoBehaviour
     [SerializeField,ShowIf(nameof(HasDamageTypeAnEffect))]
     private int _effectStacks ;
     
-    [Header("Animations")]
+    [Title("Animations")]
     [SerializeField] private List<TraditionalAnimation> _animationLevels ;
     [SerializeField] private List<TraditionalAnimation> _startAnimationLevels ;
     [SerializeField] private bool _useStartForEndAnimation;
     [SerializeField,HideIf(nameof(_useStartForEndAnimation))]
     private List<TraditionalAnimation> _endAnimationLevels ;
 
-    [Header("Settings")]
+    [Title("Settings")]
     [SerializeField] private float _globalScale ;
     [SerializeField] private float _apparitionTime ;
     [SerializeField] private float _disparitionTime ;
     [SerializeField] private bool _disableStartEnd;
     [SerializeField] private bool _disableYVariation;
 
-    [Header("Particles Properties")]
+    [Title("Particles Properties")]
     [SerializeField] private bool _spawnClouds;
     [SerializeField] private Color _cloudColor;
     [SerializeField] private bool _adaptColorToLevel;
 
-    [Header("Effects")]
+    [Title("Effects")]
     [SerializeField] private List<StatOverTime> _statsOverTime ;
     [SerializeField] private List<EffectOnHit> _effectsOnHit;
     [SerializeField] private List<AoeOnHit> _aoeOnHit;
 
-    [Header("Default Properties")]
+    [Title("Default Properties")]
     [SerializeField] private float _defaultBaseDamage;
     [SerializeField] private StatsData _baseStats;
     

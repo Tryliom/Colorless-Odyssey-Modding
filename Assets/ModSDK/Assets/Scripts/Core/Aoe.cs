@@ -31,7 +31,6 @@ public class Aoe : MonoBehaviour
         public EnemyComponents Enemy;
         public float PullDuration;
     }
-
     
     [SerializeField,Foldout("Sprite & Animation")] private SpriteRenderer _spriteRenderer;
     [SerializeField,Foldout("Sprite & Animation")] private Sprite _appearanceForPlayer;
