@@ -33,16 +33,6 @@ public enum WeaponHandType
     OneHanded, TwoHanded
 }
 
-public enum WeaponName
-{
-    Axe, BouncingBall, CosmicRay, DragonicStaff, PrismaticLightTome, FireStaff, GravityPearlStaff, Gun, Katana, Knife, MagicWand, MegaShark, MiniShark, PlasmaRay,
-    Shotgun, SnowBall, SpikyStaff, Sword, ThermalRay, ThunderCannon, ZeusThunder, LaserStaff, CrossBow, HolyCross, Bow, Rapier, Dagger, ElfBow, QiSword,
-    Shuriken, ShadowScythe, PinkBlossomKatana, ElementalBow, VolcanoStaff, MagicalBow, KwakLauncher, StarStick, SagittariusArc, SmallScythe,
-    SoulExploiter, StarGun, FusionStaff, GoldenShotgun, UnstableSpear, MagicPortal, Izanagi, TurretDeployer, FrostTome, PaperPlane, FrostChakram, GiantArrow, Bonk,
-    Fist, LightScythe, TalismanBag, CrystalArtefact, IcePop, DeadlyWeapon, CombatPickaxe, CompoundBow,
-    None = -1
-}
-
 public enum WeaponProjectileType
 {
     Projectile,
@@ -62,7 +52,8 @@ public enum RayControlType
 public class WeaponRaySettings
 {
     [Title("Main Settings")]
-    public RayType Type;
+    [SerializeField] private RayId _rayId;
+    public RayId Type { get =>throw null;set =>throw null;}
     public RayControlType RayControlType;
     
     [Title("Settings")]
@@ -129,7 +120,8 @@ public class WeaponProjectileSettings
     [BoolTitle("Aoe Line Spawner"),Foldout("Aoe Line Spawner")]
     public bool AoeLineSpawner;
     [ShowIf(nameof(AoeLineSpawner)),Foldout("Aoe Line Spawner")]
-    public AoeType AoeType;
+    [SerializeField] private AoeId _aoeTypeId;
+    public AoeId AoeType { get =>throw null;set =>throw null;}
     
     [BoolTitle("Pull Enemies"),Foldout("Pull Enemies")]
     public bool PullEnemies;
@@ -169,7 +161,8 @@ public class WeaponProjectileSettings
 [Serializable]
 public class WeaponAoeSettings
 {
-    public AoeType Type;
+    [SerializeField] private AoeId _aoeId;
+    public AoeId Type { get =>throw null;set =>throw null;}
     
     [BoolTitle("Radius Settings")]
     public bool Use2DRadius;
@@ -308,6 +301,10 @@ public enum WeaponShootType
 [Serializable]
 public class WeaponShootSettings
 {
+    // Internal description used to describe the shoot settings in the editor
+    [SerializeField]
+    [HideLabel]
+    private string _description;
 
     [Foldout("Conditions"),InfoBox("The number of shots that will use the shoot settings until the next shoot settings are applied")]
     [NumberRangeSettings(NumberType.Int, 0, 100)]
@@ -443,15 +440,14 @@ public class ShootSettings
     [ShowIf(nameof(IsNotMeleeWeaponOnly))]
     public float CriticalChance;
     [ShowIf(nameof(IsNotMeleeWeaponOnly))]
-    public int ProjectileNumber ;
+    [NumberRangeSettings(NumberType.Int, 1, 50, 1)]
+    public NumberRange ProjectileNumberRange ;
     [ShowIf(nameof(IsNotMeleeWeaponOnly))]
-    public float ProjectileSpeed;
+    [NumberRangeSettings(NumberType.Float, 1, 50, 0.5f)]
+    public NumberRange ProjectileSpeedRange ;
     [ShowIf(nameof(IsNotMeleeWeaponOnly))]
-    public float SpeedRandomPercentage;
-    [ShowIf(nameof(IsNotMeleeWeaponOnly))]
-    public float LifeTime;
-    [ShowIf(nameof(IsNotMeleeWeaponOnly))]
-    public float LifeTimeRandomPercentage;
+    [NumberRangeSettings(NumberType.Float, 0.01f, 20, 0.25f)]
+    public NumberRange LifeTimeRange ;
     [ShowIf(nameof(IsNotMeleeWeaponOnly))]
     public float Knockback;
     [ShowIf(nameof(IsNotMeleeWeaponOnly))]
@@ -529,13 +525,68 @@ public class ShootSettings
 
 public class Weapon : MonoBehaviour
 {
+    
+    [SerializeField,Foldout("Static References")]
+    private WeaponRotationDictionary _rotationAnimationCurves ;
+    [SerializeField,Foldout("Static References")]
+    private List<SpriteRenderer> _spritesPerLevel;
+    [SerializeField,Foldout("Static References")]
+    private List<AfterImageGenerator> _afterImagePerLevel;
+    [SerializeField,Foldout("Static References")]
+    private List<SpriteSortingZ> _spriteSortingZPerLevel;
+    [SerializeField,Foldout("Static References")]
+    private GameObject _projectileSpawnPoint;
+    [SerializeField,Foldout("Static References")]
+    private WeaponDropAnimator _weaponDropAnimator;
+    
+    [SerializeField,Foldout("Sprite Animations")] private List<TraditionalAnimation> _idleAnimation ;
+    [SerializeField,Foldout("Sprite Animations")] private List<TraditionalAnimation> _attackAnimation ;
+    [Tooltip("Played once the attack animation is finished, before going back to idle. If empty, idle is played directly after the attack.")]
+    [SerializeField,Foldout("Sprite Animations")] private List<TraditionalAnimation> _postAttackAnimation ;
+
+    [Tooltip("Used instead of Attack Animation while a Charged weapon is charging (driven by the charge percentage, not by delta time). Falls back to Attack Animation if empty.")]
+    [SerializeField,Foldout("Sprite Animations")] private List<TraditionalAnimation> _chargedAttackAnimation ;
+    [Tooltip("Used instead of Post Attack Animation once a Charged weapon has fired. Falls back to Post Attack Animation if empty.")]
+    [SerializeField,Foldout("Sprite Animations")] private List<TraditionalAnimation> _chargedPostAttackAnimation ;
+    
+    [Title("Information")]
+    [SerializeField] private WeaponId _weaponId;
     [SerializeField] private Rarity _rarity;
+    [FormerlySerializedAs("_weaponType")]
+    [SerializeField] private WeaponHandType _weaponHandType;
+    [SerializeField,ShowIf(nameof(_rarity), Rarity.Unique)]
+    private ThemeColor _weaponTypeColor;
+    [SerializeField,ValueDropdown("SoundEnumDropdown.GetValues")] private SoundEnum _weaponSound;
+    [SerializeField] private List<StatName> _statsPerLevel ;
+    // Add auto tags based on weapon properties, like the type of weapon, if it has piercing, homing, etc.
+    [SerializeField,Tooltip("Get automatically the tags based on the weapon properties, should add more if a projectile/aoe/ray/summon has special properties")]
+    private List<Tag> _tags;
+    [SerializeField] private List<StatName> _scalingStats;
     
     [Title("Energy Weapon")]
     [SerializeField] private bool _isEnergyWeapon;
+    [SerializeField,ShowIf(nameof(_isEnergyWeapon)),Range(0f, 100f),Tooltip("Energy gained per shot (max 100)")]
+    private float _energyGainPerShot ;
+    [SerializeField,ShowIf(nameof(_isEnergyWeapon)),Tooltip("Shoot settings used in sequence when energy is full; energy is consumed after the last one")]
+    private List<WeaponShootSettings> _energyShootSettings ;
     
     [Title("Mana Weapon")]
     [SerializeField] private bool _isManaWeapon;
+    [SerializeField,ShowIf(nameof(_isManaWeapon)),Range(0f, 200f),Tooltip("Mana consumed per shot (weapon fires with reduced damage if not enough mana)")]
+    private float _manaCostPerShot ;
+    [SerializeField,ShowIf(nameof(_isManaWeapon)),Tooltip("Shoot settings used in sequence when mana is full (overcharge); mana is consumed after the last one")]
+    private List<WeaponShootSettings> _manaOverchargeShootSettings ;
+
+    [Title("Shoot Settings")]
+    [SerializeField] private List<WeaponShootSettings> _shootSettings ;
+
+    [Title("Stats")]
+    [SerializeField,NumberRangeSettings(NumberType.Int, 1, 200)]
+    private NumberRange _damage ;
+    [SerializeField] private float _attackSpeed;
+
+    [Title("Other parameters")]
+    [SerializeField] private float _radiusOffset;
 
     [Tooltip("Offset from player applied ignoring the weapon rotation")]
     public Vector2 FixedOffsetFromPlayer;
@@ -569,7 +620,7 @@ public class Weapon : MonoBehaviour
     
     public List<StatName> ScalingStats =>throw null;
 
-    public WeaponName WeaponName =>throw null;
+    public WeaponId WeaponName =>throw null;
     public ThemeColor WeaponTypeColor =>throw null;
 
     public StatsData StatsGainPerLevel
@@ -628,10 +679,14 @@ public class Weapon : MonoBehaviour
 {throw new System.NotImplementedException();}
     public string GetDescription(bool minified = false)
 {throw new System.NotImplementedException();}
-    /**
-     * Called before shooting, returns true if the weapon is going to shoot a mana overcharge shot (mana is full and energy is not armed), false otherwise
-     */
-    public bool OnWillShoot()
+    /// <summary>True when mana is full, no overcharge is reserved and the weapon is able to start a mana overcharge.</summary>
+    public bool CanStartManaOvercharge()
+{throw new System.NotImplementedException();}
+    /// <summary>
+    /// Called when the active mana attack key is pressed: starts the overcharge attack if possible, or stops it if already active.
+    /// Returns true if the key was handled by this weapon.
+    /// </summary>
+    public bool OnActiveManaAttackPressed()
 {throw new System.NotImplementedException();}
     public void ShootFromWeaponController(bool perfectTiming)
 {throw new System.NotImplementedException();}
@@ -711,9 +766,9 @@ public class Weapon : MonoBehaviour
 {throw new System.NotImplementedException();}    
     public WeaponProjectileType GetWeaponProjectileType()
 {throw new System.NotImplementedException();}    
-    public RayType GetRayType()
+    public RayId GetRayType()
 {throw new System.NotImplementedException();}    
-    public AoeType GetAoeType()
+    public AoeId GetAoeType()
 {throw new System.NotImplementedException();}
     public bool CanShoot()
 {throw new System.NotImplementedException();}    

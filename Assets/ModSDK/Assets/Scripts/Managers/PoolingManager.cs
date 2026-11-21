@@ -4,19 +4,6 @@ using System.Collections.Generic;
 using ColorlessOdyssey;
 using UnityEngine;
 
-public enum AoeType
-{
-    Thunder, FireStorm, HolyAura, MegaMagic, Explosion, ThermalExplosion, FrostExplosion, GlacialWave, Wave, PoisonSpike, PoisonPool, GoldenPileCry, SteroidBullCry,
-    MagicalBuff, IceSpikes, StarExplosion, Emotional, ElectricAura, Shockwave, PrismaticBuff, IceTrailSpike, AcidCloud, Maelstrom, SunAura, PoisonCloud,
-    None = -1
-}
-
-public enum RayType
-{
-    Thermal, Plasma, Energy, Cosmic, ChainLightning,
-    None = -1
-}
-
 public static class ProjectileTypeExtensions
 {
     /**
@@ -60,11 +47,11 @@ public class PoolingManager : MonoBehaviour
         public float DisabledTimer;
     }
 
-    public Aoe CreateAoe(AoeType type, Vector3 position, bool playerTeam)
+    public Aoe CreateAoe(AoeId type, Vector3 position, bool playerTeam)
 {throw new System.NotImplementedException();}    
     public Projectile CreateProjectile(ProjectileId type, Vector3 position, bool playerTeam)
 {throw new System.NotImplementedException();}    
-    public Ray CreateRay(RayType type, Vector3 position, bool playerTeam)
+    public Ray CreateRay(RayId type, Vector3 position, bool playerTeam)
 {throw new System.NotImplementedException();}    
     public DangerCircle CreateDangerCircle(Vector3 position, DangerType type, float duration = 0f)
 {throw new System.NotImplementedException();}    
@@ -81,7 +68,7 @@ public class PoolingManager : MonoBehaviour
 {throw new System.NotImplementedException();}    
     public int GetProjectileCount(ProjectileId type, bool activeOnly = false)
 {throw new System.NotImplementedException();}    
-    public int GetAoeCount(AoeType type, bool activeOnly = false)
+    public int GetAoeCount(AoeId type, bool activeOnly = false)
 {throw new System.NotImplementedException();}
     public void DisableAll()
 {throw new System.NotImplementedException();}    

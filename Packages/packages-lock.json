@@ -5,14 +5,14 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "1ae52dd8eca52568ddb48768bca4f3177a9464a8"
+      "hash": "554300e7808cc8daebc24923796a9fcb59bd9962"
     },
     "com.tryliom.my-inspector": {
       "version": "https://github.com/Tryliom/MyInspector.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "fa0d94f947556a5a49b7b1cea1397bf2fb916456"
+      "hash": "df1a7c7db5790d82abcd75fe3e09f75de3041bab"
     },
     "com.unity.2d.animation": {
       "version": "15.1.0",

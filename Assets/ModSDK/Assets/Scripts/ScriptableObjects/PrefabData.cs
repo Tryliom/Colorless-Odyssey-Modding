@@ -19,9 +19,9 @@ public class PrefabData : ScriptableObject
 	public Material OcclusionMaterial;
 	
 	
-	public Ray GetRayPrefab(RayType type)
+	public Ray GetRayPrefab(RayId type)
 {throw new System.NotImplementedException();}
 	public Projectile GetProjectilePrefab(ProjectileId id)
 {throw new System.NotImplementedException();}    
-	public Aoe GetAoePrefab(AoeType type)
+	public Aoe GetAoePrefab(AoeId type)
 {throw new System.NotImplementedException();}}

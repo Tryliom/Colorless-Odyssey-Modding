@@ -14,12 +14,12 @@ public class PlayerDamage
     public readonly PlayerDamageType PlayerDamageType;
     public bool TakeDamage ;
     public ProjectileId ProjectileId;
-    public readonly AoeType AoeType;
+    public readonly AoeId AoeType;
     public Enemy Enemy;
     
     public PlayerDamage(ProjectileId projectileId)
 {throw new System.NotImplementedException();}    
-    public PlayerDamage(AoeType aoeType)
+    public PlayerDamage(AoeId aoeType)
 {throw new System.NotImplementedException();}    
     public PlayerDamage(Enemy enemy)
 {throw new System.NotImplementedException();}    

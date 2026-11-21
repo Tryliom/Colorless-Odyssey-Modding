@@ -27,6 +27,7 @@ public class PlayerInputController : MonoBehaviour
 	[NonSerialized] public bool GlossaryValue;
 	[NonSerialized] public bool RecycleValue;
 	[NonSerialized] public bool MoreInfoValue;
+	[NonSerialized] public bool ActiveManaAttackValue;
 
 	[NonSerialized] public bool PressedAnyKey;
 
@@ -63,4 +64,6 @@ public class PlayerInputController : MonoBehaviour
     public void OnRecycle(InputValue context)
 {throw new System.NotImplementedException();}    
     public void OnMoreInfo(InputValue context)
+{throw new System.NotImplementedException();}    
+    public void OnActiveManaAttack(InputValue context)
 {throw new System.NotImplementedException();}}

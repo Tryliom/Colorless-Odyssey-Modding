@@ -11,7 +11,7 @@ internal class IllOmenEffectData
 {
 	public readonly bool IsProjectile;
 	public readonly ProjectileId ProjectileId ;
-	public readonly AoeType AoeType ;
+	public readonly AoeId AoeType ;
 	public readonly float BaseDamage;
 	public readonly float BaseKnockback;
 	public readonly StatsData AdditionalStats ;

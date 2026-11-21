@@ -24,7 +24,7 @@ public class PlayerAllyData
     public long Experience;
     public StatsData Stats;
     public bool SummonedByWeapon;
-    public WeaponName SummonedWeapon;
+    public WeaponId SummonedWeapon { get =>throw null;set =>throw null;}
     public ThemeColor Level3ThemeColorEffect;
     public List<Effect> Effects;
     public string DisplayName;
@@ -255,9 +255,9 @@ public class RunData : ScriptableObject
 {throw new System.NotImplementedException();}    
     public float GetHealth(float ratio, int level)
 {throw new System.NotImplementedException();}    
-    public float GetWeaponMasteryExperiencePercentage(WeaponName weaponName)
+    public float GetWeaponMasteryExperiencePercentage(WeaponId weaponName)
 {throw new System.NotImplementedException();}    
-    public void AddExperienceToWeapon(WeaponName weaponName, int experience)
+    public void AddExperienceToWeapon(WeaponId weaponName, int experience)
 {throw new System.NotImplementedException();}    
     public Rarity GetWeaponRarity(float bonusLevel)
 {throw new System.NotImplementedException();}

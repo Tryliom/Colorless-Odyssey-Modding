@@ -61,5 +61,7 @@ public class Reward : ScriptableObject
     public string Name =>throw null;
     public string Description =>throw null;
     
+    protected RunData RunData =>throw null;
+    
     protected float GetLootRateModifier()
 {throw new System.NotImplementedException();}}

@@ -14,7 +14,7 @@ public enum ParticleType
     Circle,
     BigExplosion,
     FrostBurn, Burn, Charmed, Decay, Holy, Poison, Bleeding, Radiation,
-    Mind, Treasure, ShadowCurse, Block, Slash, OnHit
+    Mind, Treasure, ShadowCurse, Block, Slash, OnHit, Mana
 }
 
 /**
@@ -185,23 +185,23 @@ public class ParticleManager : MonoBehaviour
     /**
      * Create a static particle at a given position.
      */
-    public void CreateStaticParticle(ParticleType particleType, Vector3 position, float lifetime, float scale = 1f, Color color = default, string sortingLayer = "Cloud", string layer = "Default")
+    public void CreateStaticParticle(ParticleType particleType, Vector3 position, float lifetime, float scale = 1f, Color color = default, string sortingLayer = "Cloud", string layer = "Default", int sortingOrder = -1)
 {throw new System.NotImplementedException();}    
     /**
      * Create a random particle at a given position with a random velocity.
      */
-    public void CreateRandomParticle(ParticleType particleType, Vector3 position, float lifetime, float scale = 1f, Color color = default, float velocityMultiplier = 1f, string sortingLayer = "Cloud", string layer = "Default")
+    public void CreateRandomParticle(ParticleType particleType, Vector3 position, float lifetime, float scale = 1f, Color color = default, float velocityMultiplier = 1f, string sortingLayer = "Cloud", string layer = "Default", int sortingOrder = -1)
 {throw new System.NotImplementedException();}    
     /**
      * Create a directional particle at a given position with a given velocity.
      */
-    public void CreateDirectionalParticle(ParticleType particleType, Vector3 position, Vector2 velocity, float lifetime, float scale = 1f, Color color = default, string sortingLayer = "Cloud", string layer = "Default")
+    public void CreateDirectionalParticle(ParticleType particleType, Vector3 position, Vector2 velocity, float lifetime, float scale = 1f, Color color = default, string sortingLayer = "Cloud", string layer = "Default", int sortingOrder = -1)
 {throw new System.NotImplementedException();}
     /**
      * Create a circle of particles at a given position with a given velocity.
      */
     public void CreateArcParticles(ParticleType particleType, Vector3 position, Vector2 direction, float lifetime, float scale = 1f, Color color = default, float directionMultiplier = 1f,
-        float arcTotalAngle = 120f, int row = 2, float baseVelocity = 2f, float velocityPerRow = 0.5f, int cloudPerRow = 10, string sortingLayer = "Above", string layer = "Default")
+        float arcTotalAngle = 120f, int row = 2, float baseVelocity = 2f, float velocityPerRow = 0.5f, int cloudPerRow = 10, string sortingLayer = "Above", string layer = "Default", int sortingOrder = -1)
 {throw new System.NotImplementedException();}
     /**
      * Create a trail particle attached to a game object. The particle will follow the game object and emit a trail. The trail will be disabled after a certain time if the game object is destroyed or deactivated.

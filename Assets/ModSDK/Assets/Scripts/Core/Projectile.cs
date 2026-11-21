@@ -121,8 +121,10 @@ public class ProjectileSettings
     public int EffectStacks ;
     
     [Title("Stats")]
-    public float Speed;
-    public float LifeTime;
+    [NumberRangeSettings(NumberType.Float, 1, 50, 0.5f)]
+    public NumberRange SpeedRange ;
+    [NumberRangeSettings(NumberType.Float, 0f, 30, 0.25f)]
+    public NumberRange LifeTimeRange ;
     public float Knockback;
     public float BaseDamage;
     public StatsData AdditionalStats ;
@@ -146,7 +148,8 @@ public class ProjectileSettings
     [BoolTitle,Foldout("AoeLineSpawner")]
     public bool AoeLineSpawner;
     [ShowIf(nameof(AoeLineSpawner)),Foldout("AoeLineSpawner")]
-    public AoeType AoeType;
+    [SerializeField] private AoeId _aoeId;
+    public AoeId AoeType { get =>throw null;set =>throw null;}
     [ShowIf(nameof(AoeLineSpawner)),Foldout("AoeLineSpawner")]
     [Tooltip("Delay before each spawned aoe activates. 0 = use the aoe default.")]
     public float AoeLineDurationBeforeLaunch;
@@ -184,8 +187,8 @@ public class ProjectileSettings
         return new ProjectileSettings
         {
             Id = Id,
-            Speed = Speed,
-            LifeTime = LifeTime,
+            SpeedRange = new NumberRange(SpeedRange.Min, SpeedRange.Max, SpeedRange.Type),
+            LifeTimeRange = new NumberRange(LifeTimeRange.Min, LifeTimeRange.Max, LifeTimeRange.Type),
             Knockback = Knockback,
             BaseDamage = BaseDamage,
             AdditionalStats = new StatsData(AdditionalStats),
@@ -239,24 +242,48 @@ public class TrajectorySettings
     }
 }
 
-/// <summary>Settings used to spawn a burst of projectiles in a circle when the carrier projectile is destroyed.</summary>
+/// <summary>How the concentrated projectiles are distributed around the carrier projectile.</summary>
+public enum ConcentratedSplitMode
+{
+    Circle,
+    Spread
+}
+
+/// <summary>Settings used to spawn a burst of projectiles when the carrier projectile is destroyed.</summary>
 [Serializable]
 public class ConcentratedProjectileSettings
 {
-    public int Amount ;
+	[NumberRangeSettings(NumberType.Int, 1, 50, 1)]
+    public NumberRange AmountRange ;
     [Tooltip("If true, the spawned projectiles will inherit all settings from the source projectile before applying the override settings below")]
     public bool CopyFromSource ;
     [Tooltip("Damage percentage of the source projectile to apply to the spawned projectiles, applied after the source projectile's damage modifiers")]
     public float DamagePercentage ;
     
+    [EnumTitle]
+    [Tooltip("Circle: projectiles are evenly distributed on 360 degrees. Spread: projectiles are fanned out around the direction of the source projectile")]
+    public ConcentratedSplitMode SplitMode ;
+    [HideIf(nameof(SplitMode), ConcentratedSplitMode.Circle)]
+    [Tooltip("Angle in degrees between two consecutive projectiles")]
+    public float AnglePerProjectile ;
+    [HideIf(nameof(SplitMode), ConcentratedSplitMode.Circle)]
+    [Tooltip("Max random angle in degrees added to (or removed from) each projectile direction")]
+    public float RandomAngle;
+    
     public ProjectileSettings Settings ;
 
+    /// <summary>Returns the direction of the projectile at the given index according to the split mode.</summary>
+    public Vector2 GetDirection(int index, float count, Vector2 sourceDirection, float circleOffset)
+{throw new System.NotImplementedException();}
     /// <summary>Returns a copy of these settings.</summary>
     public ConcentratedProjectileSettings Clone()
     {
         return new ConcentratedProjectileSettings
         {
-            Amount = Amount,
+            SplitMode = SplitMode,
+            AnglePerProjectile = AnglePerProjectile,
+            RandomAngle = RandomAngle,
+            AmountRange = new NumberRange(AmountRange.Min, AmountRange.Max, AmountRange.Type),
             CopyFromSource = CopyFromSource,
             DamagePercentage = DamagePercentage,
             Settings = Settings.Clone()
@@ -309,7 +336,8 @@ public class ProjectileOverTimeSettings
 public class ProjectileAttachedRaySettings
 {
     [Title("Ray")]
-    public RayType Type;
+    [SerializeField] private RayId _rayId;
+    public RayId Type { get =>throw null;set =>throw null;}
     public RayControlType RayControlType;
 
     [Title("Settings")]
@@ -844,17 +872,17 @@ public class Projectile : MonoBehaviour
 {throw new System.NotImplementedException();}
     public Transform GetSenderTransform()
 {throw new System.NotImplementedException();}
-    public void SetupAoeLineSpawner(AoeType aoeType, float durationBeforeLaunch = 0f)
+    public void SetupAoeLineSpawner(AoeId aoeType, float durationBeforeLaunch = 0f)
 {throw new System.NotImplementedException();}
     public void SetLevel3Color(ThemeColor level3Color)
 {throw new System.NotImplementedException();}
     public ThemeColor GetLevel3Color()
 {throw new System.NotImplementedException();}
-    public void SetFromWeapon(WeaponName weaponName = WeaponName.None)
+    public void SetFromWeapon(WeaponId weaponName = default)
 {throw new System.NotImplementedException();}
     public bool IsFromWeapon()
 {throw new System.NotImplementedException();}
-    public WeaponName GetWeaponName() {throw new System.NotImplementedException();}
+    public WeaponId GetWeaponName() {throw new System.NotImplementedException();}
     /**
      * The target game object must have a collider in order to trigger collision.
      */

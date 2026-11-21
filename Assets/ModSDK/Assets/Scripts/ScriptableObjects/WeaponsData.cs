@@ -12,9 +12,9 @@ public class WeaponsData : ScriptableObject
 public StatsData PerfectTimingBoostStats ;
     
     
-    public Weapon GetRandomWeapon(Rarity rarity, ThemeColor themeColor = default, WeaponName excludeWeaponName = default)
+    public Weapon GetRandomWeapon(Rarity rarity, ThemeColor themeColor = default, WeaponId excludeWeaponName = default)
 {throw new System.NotImplementedException();}    
-    public Weapon GetWeaponByName(WeaponName weaponName)
+    public Weapon GetWeaponByName(WeaponId weaponName)
 {throw new System.NotImplementedException();}    
     public List<Weapon> GetAllWeapons()
 {throw new System.NotImplementedException();}    
