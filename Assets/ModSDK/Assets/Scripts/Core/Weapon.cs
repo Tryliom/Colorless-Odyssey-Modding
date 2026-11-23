@@ -51,35 +51,11 @@ public enum RayControlType
 [Serializable]
 public class WeaponRaySettings
 {
-    [Title("Main Settings")]
-    [SerializeField] private RayId _rayId;
-    public RayId Type { get =>throw null;set =>throw null;}
-    public RayControlType RayControlType;
-    
-    [Title("Settings")]
-    public RayInstantSettings RayInstantSettings;
-    public RayGrowSettings RayGrowSettings;
-    public StatsData Stats;
+    [InlineProperty]
+    public RaySettings Settings ;
 
-    [Title("Common settings")]
-    public float MaxScaleX;
-    [FormerlySerializedAs("APS")] public float AttackPerSeconds ;
-    
     public WeaponRaySettings Clone()
 {throw new System.NotImplementedException();}}
-
-[Serializable]
-public class RayInstantSettings
-{
-    [FormerlySerializedAs("ActiveTime")] public float LifeTime;
-}
-
-[Serializable]
-public class RayGrowSettings
-{
-    public float RotationSpeed;
-    public float GrowSpeed;
-}
 
 [Serializable]
 public class WeaponProjectileSettings
@@ -125,7 +101,7 @@ public class WeaponProjectileSettings
     
     [BoolTitle("Pull Enemies"),Foldout("Pull Enemies")]
     public bool PullEnemies;
-    [ShowIf(nameof(PullEnemies)),Foldout("Pull Enemies")]
+    [ShowIf(nameof(PullEnemies)),Foldout("Pull Enemies"),InlineProperty]
     public PullEnemiesSettings PullEnemiesSettings ;
     
     [BoolTitle("Trajectory"),Foldout("Trajectory")]
@@ -161,32 +137,8 @@ public class WeaponProjectileSettings
 [Serializable]
 public class WeaponAoeSettings
 {
-    [SerializeField] private AoeId _aoeId;
-    public AoeId Type { get =>throw null;set =>throw null;}
-    
-    [BoolTitle("Radius Settings")]
-    public bool Use2DRadius;
-    [ShowIf(nameof(Use2DRadius))]
-    public Vector2 RadiusXRange;
-    [ShowIf(nameof(Use2DRadius))]
-    public Vector2 RadiusYRange;
-    [HideIf(nameof(Use2DRadius))]
-    public Vector2 RadiusRange;
-    [Tooltip("Additional random radius space used if there is more than 1 projectile")]
-    public float RadiusPerProjectile;
-    
-    [Title("Settings")]
-    public float RandomDurationBeforeActivation;
-    public bool ScaleDurationWithRadius;
-    public Vector2 RandomScaleRange;
-    
-    [BoolTitle,Tooltip("Will use projectile lifetime and speed to make it follow an enemy")]
-    public bool FollowEnemy;
-    
-    [BoolTitle("Pull Enemies")]
-    public bool PullEnemies;
-    [ShowIf(nameof(PullEnemies))]
-    public PullEnemiesSettings PullEnemiesSettings ;
+    [InlineProperty]
+    public AoeSettings Settings ;
 }
 
 [Serializable]
@@ -216,6 +168,8 @@ public class WeaponMeleeSettings
     public List<StatOverTime> StatsOverTime ;
     public List<EffectOnHit> EffectsOnHit ;
     public List<AoeOnHit> AoeOnHit ;
+    public List<ProjectileOnHit> ProjectileOnHit ;
+    public List<RayOnHit> RayOnHit ;
 
     public WeaponMeleeSettings Clone()
 {throw new System.NotImplementedException();}    
@@ -224,7 +178,7 @@ public class WeaponMeleeSettings
         return string.IsNullOrEmpty(Id.Value) ? ProjectileIds.None : Id;
     }
     
-    // Odin
+    // Inspector
     private bool HasDamageTypeAnEffect => DamageType != DamageType.Typeless && DamageType != DamageType.Normal && DamageType != DamageType.Soul && OverrideDamageType;
 }
 
@@ -348,7 +302,7 @@ public class WeaponShootSettings
     [InlineProperty]
     public ShootSettings ShootSettings ;
     
-    // Odin
+    // Inspector
     private bool HasMoreThanOneShoot => ShootCount.Max > 1;
 }
 
@@ -395,27 +349,31 @@ public class ShootSettings
     [ShowIf(nameof(IsCustomRotation)),Foldout("Rotation Animation")]
     public float InAnimationRadiusMultiplier;
     
-    [ShowIf(nameof(IsNotMeleeWeaponOnly)),Foldout("Effects")]
+    [ShowIf(nameof(IsNotMeleeWeaponOnly)),Tab("On-hit effects", LabelMethod = nameof(GetOnHitEffectsLabel))]
     public List<StatOverTime> StatsOverTime ;
-    [ShowIf(nameof(IsNotMeleeWeaponOnly)),Foldout("Effects")]
+    [ShowIf(nameof(IsNotMeleeWeaponOnly)),Tab("On-hit effects")]
     public List<EffectOnHit> EffectsOnHit ;
-    [ShowIf(nameof(IsNotMeleeWeaponOnly)),Foldout("Effects")]
+    [ShowIf(nameof(IsNotMeleeWeaponOnly)),Tab("On-hit effects")]
     public List<AoeOnHit> AoeOnHit ;
+    [ShowIf(nameof(IsNotMeleeWeaponOnly)),Tab("On-hit effects")]
+    public List<ProjectileOnHit> ProjectileOnHit ;
+    [ShowIf(nameof(IsNotMeleeWeaponOnly)),Tab("On-hit effects")]
+    public List<RayOnHit> RayOnHit ;
     
     [BoolTitle("Spawn at mouse position"),ShowIf(nameof(IsNotMeleeWeaponOnly))]
-    [Tab("Misc")]
+    [Foldout("ShootNearMouse")]
     public bool ShootNearMouse;
     [ShowIf(nameof(IsNotMeleeWeaponOnly)),Range(0f, 40f)]
-    [Tab("Misc")]
+    [Foldout("ShootNearMouse")]
     public float NearMouseRadius;
     [ShowIf(nameof(IsNotMeleeWeaponOnly)),Range(0f, 2f)]
-    [Tab("Misc")]
+    [Foldout("ShootNearMouse")]
     public float MouseRadiusPerProjectiles;
     [ShowIf(nameof(IsNotMeleeWeaponOnly)),Tooltip("Force the projectile to spawn outside the radius, if false it will spawn inside the radius")]
-    [Tab("Misc")]
+    [Foldout("ShootNearMouse")]
     public bool NearMouseForceExteriorRadius;
     [ShowIf(nameof(IsNotMeleeWeaponOnly)),Tooltip("List of angle range from the direction of the player to the mouse position, used to spawn projectiles in a specific angle range")]
-    [Tab("Misc")]
+    [Foldout("ShootNearMouse")]
     public List<Vector2> NearMouseAngleRangeFromDirection ;
     
     [ShowIf(nameof(UseMelee)),Foldout("Melee Settings")]
@@ -459,13 +417,20 @@ public class ShootSettings
     [ShowIf(nameof(IsNotMeleeWeaponOnly))]
     public StatsData AdditionalStats;
     
-    // Odin conditional fields
+    // Inspector conditional fields
     private bool IsCustomRotation() => RotationAnimationType == WeaponRotationAnimationType.Custom;
     private bool IsProjectileWeapon() => WeaponProjectileType == WeaponProjectileType.Projectile;
     private bool IsRayWeapon() => WeaponProjectileType == WeaponProjectileType.Ray;
     private bool IsAoeWeapon() => WeaponProjectileType == WeaponProjectileType.Aoe;
     private bool IsSummonWeapon() => WeaponProjectileType == WeaponProjectileType.Summon;
     private bool IsNotMeleeWeaponOnly() => WeaponProjectileType != WeaponProjectileType.None || !UseMelee;
+
+    private string GetOnHitEffectsLabel()
+    {
+        var count = (StatsOverTime?.Count ?? 0) + (EffectsOnHit?.Count ?? 0) + (AoeOnHit?.Count ?? 0) + (ProjectileOnHit?.Count ?? 0) + (RayOnHit?.Count ?? 0);
+
+        return count > 0 ? $"On-hit effects ({count})" : "On-hit effects";
+    }
     private bool HasDamageTypeAnEffect => DamageType != DamageType.Typeless && DamageType != DamageType.Normal && DamageType != DamageType.Soul && OverrideDamageType;
     private bool CanOverrideDamageType => WeaponProjectileType is not WeaponProjectileType.None and not WeaponProjectileType.Summon;
 
@@ -495,7 +460,7 @@ public class ShootSettings
 		    }
 		    case WeaponProjectileType.Ray:
 		    {
-			    var proj = RunData.Asset.PrefabData.GetRayPrefab(RaySettings.Type);
+			    var proj = RunData.Asset.PrefabData.GetRayPrefab(RaySettings.Settings.RayId);
 			    var chance = proj.GetDefaultChanceToApplyEffect();
 			    
 			    _damageType += proj.GetDefaultDamageType().ToString();
@@ -508,7 +473,7 @@ public class ShootSettings
 		    }
 		    case WeaponProjectileType.Aoe:
 		    {
-			    var proj = RunData.Asset.PrefabData.GetAoePrefab(AoeSettings.Type);
+			    var proj = RunData.Asset.PrefabData.GetAoePrefab(AoeSettings.Settings.AoeId);
 			    var chance = proj.GetDefaultChanceToApplyEffect();
 			    
 			    _damageType += proj.GetDefaultDamageType().ToString();
@@ -635,7 +600,7 @@ public class Weapon : MonoBehaviour
     public float MinDamage =>throw null;
     public float MaxDamage =>throw null;
     public float AttackSpeed =>throw null;
-    public bool ShootNearMouse =>throw null;
+    public bool ShootNearMouse => _shootSetting.ShootNearMouse;
     
     public float BaseRotationZ { get; private set; }
 

@@ -9,6 +9,65 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// All configurable settings that can be applied to a spawned ray.
+/// BaseDamage, MaxScaleX and the lifetime/grow speed ranges are only applied when greater than 0 so they can be left at 0 to inherit from the source.
+/// </summary>
+[Serializable]
+public class RaySettings
+{
+    [Title("Ray")]
+    public RayId RayId;
+    public RayControlType RayControlType;
+
+    [BoolTitle("Override Damage Type"),Foldout("OverrideDamageType")]
+    public bool OverrideDamageType;
+    [ShowIf(nameof(OverrideDamageType)),Foldout("OverrideDamageType")]
+    public DamageType DamageType ;
+    [ShowIf(nameof(OverrideDamageType)),Tooltip("Chance to apply effect linked to the damage type"),Foldout("OverrideDamageType")]
+    public float ChanceToApplyEffect;
+    [ShowIf(nameof(OverrideDamageType)),Foldout("OverrideDamageType")]
+    public int EffectStacks ;
+
+    [Title("Stats")]
+    public float BaseDamage;
+    public float AttackPerSeconds ;
+    public float MaxScaleX;
+    public StatsData AdditionalStats ;
+
+    [Title("Instant")]
+    [ShowIf(nameof(RayControlType), RayControlType.Instant)]
+    [NumberRangeSettings(NumberType.Float, 0f, 30f, 0.25f)]
+    public NumberRange LifeTimeRange ;
+
+    [Title("Grow")]
+    [HideIf(nameof(RayControlType), RayControlType.Instant)]
+    public float RotationSpeed;
+    [HideIf(nameof(RayControlType), RayControlType.Instant)]
+    [NumberRangeSettings(NumberType.Float, 0f, 50f, 0.5f)]
+    public NumberRange GrowSpeedRange ;
+
+    [Title("Effects")]
+    public List<StatOverTime> StatsOverTime ;
+    public List<EffectOnHit> EffectsOnHit ;
+    public List<AoeOnHit> AoeOnHit ;
+    public List<ProjectileOnHit> ProjectileOnHit ;
+    public List<RayOnHit> RayOnHit ;
+
+    [Title("Miscellaneous")]
+    [BoolField]
+    public bool PassThroughWall;
+
+    /// <summary>
+    /// Applies all non-zero settings to the given ray.
+    /// For an Instant ray, <paramref name="direction"/> defines its rotation; for a Grow ray, <paramref name="attachedObject"/> is the object the ray follows (ignored if null).
+    /// </summary>
+    public void ApplyTo(Ray ray, Vector2 direction, GameObject attachedObject = null, Vector3 attachedObjectOffset = default)
+{throw new System.NotImplementedException();}
+    /// <summary>Returns a copy of these settings.</summary>
+    public RaySettings Clone()
+{throw new System.NotImplementedException();}}
+
 public class Ray : MonoBehaviour
 {
 	[SerializeField,Foldout("Internal References")] private BoxCollider2D _hitCollider;
@@ -47,13 +106,20 @@ public class Ray : MonoBehaviour
     [SerializeField] private List<StatOverTime> _statsOverTime ;
     [SerializeField] private List<EffectOnHit> _effectsOnHit;
     [SerializeField] private List<AoeOnHit> _aoeOnHit;
+    [SerializeField] private List<ProjectileOnHit> _projectileOnHit ;
+    [SerializeField] private List<RayOnHit> _rayOnHit ;
 
     [Title("Default Properties")]
     [SerializeField] private float _defaultBaseDamage;
     [SerializeField] private StatsData _baseStats;
     
-    // Odin
+    // Inspector
     private bool HasDamageTypeAnEffect => _damageType != DamageType.Typeless && _damageType != DamageType.Normal && _damageType != DamageType.Soul;
+
+    // Current damage type
+    private DamageType _currentDamageType;
+    private float _currentChanceToApplyEffect;
+    private int _currentEffectStacks;
     
     // Fires when this ray gets deactivated to return it to the pool. Cleared in Reset() to avoid stale subscriptions.
     public event Action<Ray> OnDeactivated;
@@ -164,6 +230,14 @@ public class Ray : MonoBehaviour
     public void AddAoeTriggerOnHit(AoeOnHit aoeOnHit)
 {throw new System.NotImplementedException();}    
     public List<AoeOnHit> GetDefaultAoeTriggerOnHit()
+{throw new System.NotImplementedException();}
+    public void AddProjectileTriggerOnHit(ProjectileOnHit projectileOnHit)
+{throw new System.NotImplementedException();}
+    public void AddRayTriggerOnHit(RayOnHit rayOnHit)
+{throw new System.NotImplementedException();}
+    public List<ProjectileOnHit> GetDefaultProjectileTriggerOnHit()
+{throw new System.NotImplementedException();}
+    public List<RayOnHit> GetDefaultRayTriggerOnHit()
 {throw new System.NotImplementedException();}    
     public void Link(GameObject start, GameObject end)
 {throw new System.NotImplementedException();}    
@@ -177,7 +251,12 @@ public class Ray : MonoBehaviour
     public int GetDefaultEffectStacks()
 {throw new System.NotImplementedException();}    
     public void OverrideDamageType(DamageType damageType, float chanceToApplyEffect = 0f, int effectStacks = 0)
-{throw new System.NotImplementedException();}
+    {
+        _currentDamageType = damageType;
+        _currentChanceToApplyEffect = chanceToApplyEffect;
+        _currentEffectStacks = effectStacks;
+    }
+
     /**
      * Total stats of the weapon calculated for the frame, reset every frame
      */

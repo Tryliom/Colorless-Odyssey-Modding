@@ -14,7 +14,7 @@ public class PatternConditions
 	[SerializeReference]
 	public List<PatternConditionBase> Conditions ;
 	
-	// Odin
+	// Inspector
 	private bool ShowIfConditions => Conditions.Count > 1;
 
 	public bool IsMet(Pattern currentPattern, bool duringExecution)

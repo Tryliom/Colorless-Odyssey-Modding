@@ -194,6 +194,8 @@ public class RunData : ScriptableObject
     public EnemyRoomComposition NextRoomEnemies;
     public NextRoomReward NextRoomReward;
     public readonly List<PlayerAllyData> PlayerAllies ;
+    // Mana carried over a scene change (the player and its mana manager are destroyed), negative when nothing is stored
+    public float StoredMana ;
 
     /**
      * Total stats of the weapon calculated for the frame, reset every frame

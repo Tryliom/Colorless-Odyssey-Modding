@@ -133,10 +133,14 @@ public class ProjectileSettings
     public List<StatOverTime> StatsOverTime ;
     public List<EffectOnHit> EffectsOnHit ;
     public List<AoeOnHit> AoeOnHit ;
+    public List<ProjectileOnHit> ProjectileOnHit ;
+    public List<RayOnHit> RayOnHit ;
     
-    [Title("Miscellaneous")]
-    [BoolField]
+    [BoolTitle,Foldout("StuckOnEnemies")]
     public bool StuckOnEnemies;
+    
+    [BoolTitle,Foldout("Falling")]
+    public bool Falling;
 	
     [BoolTitle,Foldout("StaticLatentHoming")]
     public bool StaticLatentHoming;
@@ -172,6 +176,20 @@ public class ProjectileSettings
     [InlineProperty]
     public ReturnToSenderSettings ReturnToSenderSettings ;
 
+    [BoolTitle,Foldout("Concentrated")]
+    public bool Concentrated;
+    // SerializeReference + null by default avoids the infinite serialization loop between ProjectileSettings and ConcentratedProjectileSettings
+    [ShowIf(nameof(Concentrated)),Foldout("Concentrated")]
+    [SerializeReference,InlineProperty]
+    public ConcentratedProjectileSettings ConcentratedSettings;
+
+    [BoolTitle,Foldout("ProjectileOverTime")]
+    public bool ProjectileOverTime;
+    // SerializeReference + null by default avoids the infinite serialization loop between ProjectileSettings and ProjectileOverTimeSettings
+    [ShowIf(nameof(ProjectileOverTime)),Foldout("ProjectileOverTime")]
+    [SerializeReference,InlineProperty]
+    public ProjectileOverTimeSettings ProjectileOverTimeSettings;
+
     /// <summary>
     /// Applies all non-zero settings to the given projectile.
     /// The <paramref name="sender"/> is required to activate <see cref="ReturnToSender"/>; if left null, the ReturnToSender option is ignored.
@@ -195,6 +213,8 @@ public class ProjectileSettings
             StatsOverTime = new List<StatOverTime>(StatsOverTime),
             EffectsOnHit = new List<EffectOnHit>(EffectsOnHit),
             AoeOnHit = new List<AoeOnHit>(AoeOnHit),
+            ProjectileOnHit = new List<ProjectileOnHit>(ProjectileOnHit),
+            RayOnHit = new List<RayOnHit>(RayOnHit),
             OverrideDamageType = OverrideDamageType,
             DamageType = DamageType,
             ChanceToApplyEffect = ChanceToApplyEffect,
@@ -211,7 +231,11 @@ public class ProjectileSettings
             Trajectory = Trajectory,
             TrajectorySettings = TrajectorySettings?.Clone(),
             ReturnToSender = ReturnToSender,
-            ReturnToSenderSettings = ReturnToSenderSettings?.Clone()
+            ReturnToSenderSettings = ReturnToSenderSettings?.Clone(),
+            Concentrated = Concentrated,
+            ConcentratedSettings = ConcentratedSettings?.Clone(),
+            ProjectileOverTime = ProjectileOverTime,
+            ProjectileOverTimeSettings = ProjectileOverTimeSettings?.Clone()
         };
     }
 }
@@ -243,7 +267,7 @@ public class TrajectorySettings
 }
 
 /// <summary>How the concentrated projectiles are distributed around the carrier projectile.</summary>
-public enum ConcentratedSplitMode
+public enum SplitMode
 {
     Circle,
     Spread
@@ -262,13 +286,15 @@ public class ConcentratedProjectileSettings
     
     [EnumTitle]
     [Tooltip("Circle: projectiles are evenly distributed on 360 degrees. Spread: projectiles are fanned out around the direction of the source projectile")]
-    public ConcentratedSplitMode SplitMode ;
-    [HideIf(nameof(SplitMode), ConcentratedSplitMode.Circle)]
+    public SplitMode SplitMode ;
+    [HideIf(nameof(SplitMode), SplitMode.Circle)]
     [Tooltip("Angle in degrees between two consecutive projectiles")]
     public float AnglePerProjectile ;
-    [HideIf(nameof(SplitMode), ConcentratedSplitMode.Circle)]
+    [HideIf(nameof(SplitMode), SplitMode.Circle)]
     [Tooltip("Max random angle in degrees added to (or removed from) each projectile direction")]
     public float RandomAngle;
+    [Tooltip("If true, the burst is aimed at the nearest enemy instead of the source projectile direction (Spread) or a random offset (Circle)")]
+    public bool TargetNearestEnemy;
     
     public ProjectileSettings Settings ;
 
@@ -283,6 +309,7 @@ public class ConcentratedProjectileSettings
             SplitMode = SplitMode,
             AnglePerProjectile = AnglePerProjectile,
             RandomAngle = RandomAngle,
+            TargetNearestEnemy = TargetNearestEnemy,
             AmountRange = new NumberRange(AmountRange.Min, AmountRange.Max, AmountRange.Type),
             CopyFromSource = CopyFromSource,
             DamagePercentage = DamagePercentage,
@@ -294,34 +321,52 @@ public class ConcentratedProjectileSettings
 [Serializable]
 public class ProjectileOverTimeSettings
 {
-	public bool DisabledInRoomClear;
+	[NumberRangeSettings(NumberType.Int, 1, 50, 1)]
+	public NumberRange AmountRange ;
+	[StepRange(0f, 2f, 0.05f),Tooltip("Time in seconds between each spawned projectile")]
 	public float SpawnInterval ;
-	public bool RandomizeSpawnAngle;
+	
+	[EnumTitle]
+	[Tooltip("Circle: projectiles are evenly distributed on 360 degrees. Spread: projectiles are fanned out around the direction of the source projectile")]
+	public SplitMode SplitMode ;
+	[HideIf(nameof(SplitMode), SplitMode.Circle)]
+	[Tooltip("Angle in degrees between two consecutive projectiles")]
+	public float AnglePerProjectile ;
+	[HideIf(nameof(SplitMode), SplitMode.Circle)]
+	[Tooltip("Max random angle in degrees added to (or removed from) each projectile direction")]
+	public float RandomAngle;
+	[HideIf(nameof(SplitMode), SplitMode.Spread)]
+	[Tooltip("Angle offset in degrees to add to the spawn direction each shoots")]
+	public float SpawnAngleIncrease ;
 	[Tooltip("If true, the first spawned projectiles will be aimed at the nearest enemy")]
 	public bool TargetNearestEnemy;
-	[HideIf(nameof(RandomizeSpawnAngle)),Tooltip("Angle offset in degrees to add to the spawn direction each shoots")]
-	public float SpawnAngleIncrease ;
-	public int Amount ;
 	
-	public float BaseDamage;
+	[Title("Damage")]
 	[Tooltip("Damage percentage of the source projectile to apply to the spawned projectiles, applied after the source projectile's damage modifiers")]
 	public float DamagePercentage;
 	
+	[Title("Misc")]
+	public bool DisabledInRoomClear;
+	
 	public ProjectileSettings Settings ;
 
+	/// <summary>Returns the direction of the projectile at the given index according to the split mode.</summary>
+	public Vector2 GetDirection(int index, float count, float baseAngle)
+{throw new System.NotImplementedException();}
 	/// <summary>Returns a copy of these settings.</summary>
 	public ProjectileOverTimeSettings Clone()
 	{
 		return new ProjectileOverTimeSettings
 		{
-			DisabledInRoomClear = DisabledInRoomClear,
+			AmountRange = new NumberRange(AmountRange.Min, AmountRange.Max, AmountRange.Type),
 			SpawnInterval = SpawnInterval,
-			RandomizeSpawnAngle = RandomizeSpawnAngle,
-			TargetNearestEnemy = TargetNearestEnemy,
+			SplitMode = SplitMode,
+			AnglePerProjectile = AnglePerProjectile,
+			RandomAngle = RandomAngle,
 			SpawnAngleIncrease = SpawnAngleIncrease,
-			Amount = Amount,
-			BaseDamage = BaseDamage,
+			TargetNearestEnemy = TargetNearestEnemy,
 			DamagePercentage = DamagePercentage,
+			DisabledInRoomClear = DisabledInRoomClear,
 			Settings = Settings.Clone()
 		};
 	}
@@ -336,19 +381,10 @@ public class ProjectileOverTimeSettings
 public class ProjectileAttachedRaySettings
 {
     [Title("Ray")]
-    [SerializeField] private RayId _rayId;
-    public RayId Type { get =>throw null;set =>throw null;}
-    public RayControlType RayControlType;
+    [InlineProperty]
+    public RaySettings RaySettings ;
 
-    [Title("Settings")]
-    [ShowIf(nameof(RayControlType), RayControlType.Instant)]
-    public RayInstantSettings RayInstantSettings ;
-    [ShowIf(nameof(RayControlType), RayControlType.Grow)]
-    public RayGrowSettings RayGrowSettings ;
-
-    [Header("Common settings")]
-    public float MaxScaleX ;
-    public float AttackPerSeconds ;
+    [Title("Damage")]
     [Tooltip("Damage ratio applied from the projectile's damage to the ray's damage")]
     public float DamageRatio ;
 
@@ -357,34 +393,15 @@ public class ProjectileAttachedRaySettings
     [Tooltip("Rotation, in degrees around the Z axis and added on top of the projectile's own rotation, defining the direction the ray points to")]
     public float RotationOffset;
 
-    [Title("Other")]
-    public StatsData AdditionalStats ;
-    public List<StatOverTime> StatsOverTime ;
-    public List<EffectOnHit> EffectsOnHit ;
-    public List<AoeOnHit> AoeOnHit ;
-
     /// <summary>Returns a copy of these settings.</summary>
     public ProjectileAttachedRaySettings Clone()
     {
         return new ProjectileAttachedRaySettings
         {
-            Type = Type,
-            RayControlType = RayControlType,
-            RayInstantSettings = new RayInstantSettings
-            {
-                LifeTime = RayInstantSettings.LifeTime
-            },
-            RayGrowSettings = new RayGrowSettings
-            {
-                RotationSpeed = RayGrowSettings.RotationSpeed,
-                GrowSpeed = RayGrowSettings.GrowSpeed
-            },
-            MaxScaleX = MaxScaleX,
-            AttackPerSeconds = AttackPerSeconds,
+            RaySettings = RaySettings?.Clone(),
             DamageRatio = DamageRatio,
             PositionOffset = PositionOffset,
-            RotationOffset = RotationOffset,
-            AdditionalStats = new StatsData(AdditionalStats)
+            RotationOffset = RotationOffset
         };
     }
 }
@@ -539,6 +556,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private List<StatOverTime> _statsOverTime ;
     [SerializeField] private List<EffectOnHit> _effectsOnHit ;
     [SerializeField] private List<AoeOnHit> _aoeOnHit ;
+    [SerializeField] private List<ProjectileOnHit> _projectileOnHit ;
+    [SerializeField] private List<RayOnHit> _rayOnHit ;
     
     [Title("Orbiting Properties")]
     [SerializeField,Tooltip("Time is the angle in degrees, R is the radius multiplier"),FormerlySerializedAs("_turnAroundRadiusMultiplier")]
@@ -591,7 +610,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private bool _useCursorDirectionByDefault;
     [SerializeField] private StatsData _baseStats;
     
-    // Odin
+    // Inspector
     private bool HasDamageTypeAnEffect => _damageType != DamageType.Typeless && _damageType != DamageType.Normal && _damageType != DamageType.Soul;
     private bool ShowRotationMaxMultiplier => _increaseRotationOverTime && _rotate;
     private bool ShowCircularFollow => _circularFollow || _followPlayer;
@@ -830,6 +849,14 @@ public class Projectile : MonoBehaviour
     public void AddAoeTriggerOnHit(AoeOnHit aoeTrigger)
 {throw new System.NotImplementedException();}    
     public List<AoeOnHit> GetDefaultAoeTriggerOnHit()
+{throw new System.NotImplementedException();}
+    public void AddProjectileTriggerOnHit(ProjectileOnHit projectileOnHit)
+{throw new System.NotImplementedException();}
+    public void AddRayTriggerOnHit(RayOnHit rayOnHit)
+{throw new System.NotImplementedException();}
+    public List<ProjectileOnHit> GetDefaultProjectileTriggerOnHit()
+{throw new System.NotImplementedException();}
+    public List<RayOnHit> GetDefaultRayTriggerOnHit()
 {throw new System.NotImplementedException();}
     public void SetSaturation(float saturation)
 {throw new System.NotImplementedException();}

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using MyInspector;
 using TryliomUtility;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class EffectOnHit
@@ -22,44 +23,85 @@ public class EffectOnHit
 
 }
 
+public enum OnHitSource
+{
+	Enemy = 1, Expire, Bounce, ExpireOnEnemy
+}
+
 [Serializable]
 public class AoeOnHit
 {
-    [SerializeField] private AoeId _aoeId;
-    public AoeId AoeName { get =>throw null;set =>throw null;}
+    [NumberRangeSettings(NumberType.Int, 1f, 50f, 1f)]
+    public NumberRange SpawnNumberRange ;
+    public float RandomRadiusAround;
+	
+    [Title("Conditions")]
     public bool AllowAllConditions;
     [HideIf(nameof(AllowAllConditions))]
     public List<OnHitSource> AllowedHitSources ;
+    
+    [Title("Chance")]
     public float Chance;
     public float ChanceForEachSpawn;
-    public float RandomRadiusAround;
-    [Range(1, 50)]
-    public int SpawnNumber ;
 
     [Title("Scale")]
-    [NumberRangeSettings(NumberType.Float, 0f, 20f, 0.05f)]
-    public NumberRange ScaleRange ;
+    [Tooltip("Will scale the AOE size based on the source projectile size, like if the projectile is 50% bigger, the AOE will be 50% bigger")]
     public bool ScaleWithProjectileSize;
-    
-    [Title("Time before spawn")]
-    [NumberRangeSettings(NumberType.Float, 0f, 10f, 0.05f)]
-    public NumberRange TimeBeforeSpawnRange ;
-    [ShowIf(nameof(CanShowScaleDistance)),Tooltip("Scale the time before spawn based on the distance from center of the source: time * distanceScale")]
-    public bool ScaleTimeOnDistance;
     
     [Title("Damage")]
     public float BaseDamage;
     [Tooltip("Damage increase per main level (1-7), like 10 x 2 (level 2) = 20")]
     public float LevelRatio;
-    public float ProjectileDamageRatio;
+    [FormerlySerializedAs("ProjectileDamageRatio")]
+    public float SourceDamageRatio;
     
-    // Odin
-    private bool CanShowScaleDistance => RandomRadiusAround > 0;
+    public AoeSettings AoeSettings ;
 }
 
-public enum OnHitSource
+[Serializable]
+public class ProjectileOnHit
 {
-	Enemy = 1, Expire, Bounce
+	[NumberRangeSettings(NumberType.Int, 1f, 50f, 1f)]
+	public NumberRange SpawnNumberRange ;
+	
+	[Title("Conditions")]
+	public bool AllowAllConditions;
+	[HideIf(nameof(AllowAllConditions))]
+	public List<OnHitSource> AllowedHitSources ;
+    
+	[Title("Chance")]
+	public float Chance;
+	public float ChanceForEachSpawn;
+	
+	[Title("Damage")]
+	[Tooltip("Damage increase per main level (1-7), like 10 x 2 (level 2) = 20")]
+	public float LevelRatio;
+	public float SourceDamageRatio;
+	
+	public ProjectileSettings ProjectileSettings ;
+}
+
+[Serializable]
+public class RayOnHit
+{
+	[NumberRangeSettings(NumberType.Int, 1f, 50f, 1f)]
+	public NumberRange SpawnNumberRange ;
+	
+	[Title("Conditions")]
+	public bool AllowAllConditions;
+	[HideIf(nameof(AllowAllConditions))]
+	public List<OnHitSource> AllowedHitSources ;
+    
+	[Title("Chance")]
+	public float Chance;
+	public float ChanceForEachSpawn;
+	
+	[Title("Damage")]
+	[Tooltip("Damage increase per main level (1-7), like 10 x 2 (level 2) = 20")]
+	public float LevelRatio;
+	public float SourceDamageRatio;
+	
+	public RaySettings RaySettings ;
 }
 
 /**
@@ -68,5 +110,8 @@ public enum OnHitSource
 public static class OnHitUtility
 {
     public static void CheckAoeOnHit(RunData runData, StatsData additionalStats, List<AoeOnHit> aoeOnHits, Vector3 position, float baseDamage, OnHitSource onHitSource, GameEvent<Aoe> onCreateAoe = null, bool playerTeam = true, WeaponId fromWeapon = default)
-{throw new System.NotImplementedException();}    
-}
+{throw new System.NotImplementedException();}
+    public static void CheckProjectileOnHit(RunData runData, StatsData additionalStats, List<ProjectileOnHit> projectileOnHits, Vector3 position, float baseDamage, OnHitSource onHitSource, bool playerTeam = true, WeaponId fromWeapon = default)
+{throw new System.NotImplementedException();}
+    public static void CheckRayOnHit(RunData runData, StatsData additionalStats, List<RayOnHit> rayOnHits, Vector3 position, float baseDamage, OnHitSource onHitSource, bool playerTeam = true, WeaponId fromWeapon = default)
+{throw new System.NotImplementedException();}}

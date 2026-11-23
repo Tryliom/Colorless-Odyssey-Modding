@@ -8,6 +8,76 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// All configurable settings that can be applied to a spawned aoe.
+/// BaseDamage, Knockback and the scale range are only applied when greater than 0 so they can be left at 0 to inherit from the source.
+/// </summary>
+[Serializable]
+public class AoeSettings
+{
+    [Title("Aoe")]
+    public AoeId AoeId;
+
+    [BoolTitle("Override Damage Type"),Foldout("OverrideDamageType")]
+    public bool OverrideDamageType;
+    [ShowIf(nameof(OverrideDamageType)),Foldout("OverrideDamageType")]
+    public DamageType DamageType ;
+    [ShowIf(nameof(OverrideDamageType)),Tooltip("Chance to apply effect linked to the damage type"),Foldout("OverrideDamageType")]
+    public float ChanceToApplyEffect;
+    [ShowIf(nameof(OverrideDamageType)),Foldout("OverrideDamageType")]
+    public int EffectStacks ;
+
+    [Title("Radius")]
+    [BoolField]
+    public bool Use2DRadius;
+    [ShowIf(nameof(Use2DRadius)),NumberRangeSettings(NumberType.Float, 0f, 30f, 0.25f)]
+    public NumberRange RadiusXRange ;
+    [ShowIf(nameof(Use2DRadius)),NumberRangeSettings(NumberType.Float, 0f, 30f, 0.25f)]
+    public NumberRange RadiusYRange ;
+    [HideIf(nameof(Use2DRadius)),NumberRangeSettings(NumberType.Float, 0f, 30f, 0.25f)]
+    public NumberRange RadiusRange ;
+    [Tooltip("Additional random radius space used if there is more than 1 projectile")]
+    public float RadiusPerProjectile;
+
+    [Title("Stats")]
+    [NumberRangeSettings(NumberType.Float, 0f, 20f, 0.05f)]
+    public NumberRange ScaleRange ;
+    [NumberRangeSettings(NumberType.Float, 0f, 10f, 0.05f)]
+    public NumberRange DurationBeforeActivationRange ;
+    [Tooltip("Multiply the duration before activation by the distance from the center instead of using it as is")]
+    public bool ScaleDurationWithRadius;
+    public float Knockback;
+    public float BaseDamage;
+    public StatsData AdditionalStats ;
+
+    [Title("Miscellaneous")]
+    [BoolTitle,Foldout("FollowEnemy")]
+    public bool FollowEnemy;
+    [ShowIf(nameof(FollowEnemy)),Foldout("FollowEnemy")]
+    [Tooltip("Lifetime of the follow")]
+    [NumberRangeSettings(NumberType.Float, 0f, 30f, 0.25f)]
+    public NumberRange FollowLifeTimeRange ;
+    [ShowIf(nameof(FollowEnemy)),Foldout("FollowEnemy")]
+    [Tooltip("Follow speed")]
+    [NumberRangeSettings(NumberType.Float, 0f, 50f, 0.5f)]
+    public NumberRange FollowSpeedRange ;
+
+    [BoolTitle,Foldout("PullEnemies")]
+    public bool PullEnemies;
+    [ShowIf(nameof(PullEnemies)),Foldout("PullEnemies")]
+    [InlineProperty]
+    public PullEnemiesSettings PullEnemiesSettings ;
+
+    /// <summary>
+    /// Applies all non-zero settings to the given aoe.
+    /// <paramref name="radiusDistance"/> is the distance from the spawn center, only used when <see cref="ScaleDurationWithRadius"/> is enabled.
+    /// </summary>
+    public void ApplyTo(Aoe aoe, float radiusDistance = 0f)
+{throw new System.NotImplementedException();}
+    /// <summary>Returns a copy of these settings.</summary>
+    public AoeSettings Clone()
+{throw new System.NotImplementedException();}}
+
 [Serializable]
 internal class AoeAnimation
 {
@@ -115,8 +185,13 @@ public class Aoe : MonoBehaviour
     [Title("Default")]
     [SerializeField] private StatsData _baseStats ;
     
-    // Odin
+    // Inspector
     private bool HasDamageTypeAnEffect => _damageType != DamageType.Typeless && _damageType != DamageType.Normal && _damageType != DamageType.Soul;
+    
+    // Current damage type
+    private DamageType _currentDamageType;
+    private float _currentChanceToApplyEffect;
+    private int _currentEffectStacks;
     
     public AoeId AoeType =>throw null;
 
@@ -193,7 +268,12 @@ public class Aoe : MonoBehaviour
     public int GetDefaultEffectStacks()
 {throw new System.NotImplementedException();}    
     public void OverrideDamageType(DamageType damageType, float chanceToApplyEffect = 0f, int effectStacks = 0)
-{throw new System.NotImplementedException();}
+    {
+        _currentDamageType = damageType;
+        _currentChanceToApplyEffect = chanceToApplyEffect;
+        _currentEffectStacks = effectStacks;
+    }
+
     /**
      * Get the real size of the AOE in world units (considering the scale, the texture size and the direction)
      */

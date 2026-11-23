@@ -61,7 +61,7 @@ public class Relic : MonoBehaviour
     [SerializeField] [Tooltip("Tags that the relic has, what things it affects")]
     private List<Tag> _tags; 
     
-    // Odin
+    // Inspector
     private bool ShowThemeColor() => _relicType is RelicType.Boss or RelicType.Altar;
     
 

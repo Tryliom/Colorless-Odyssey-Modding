@@ -54,7 +54,7 @@ public class EnemyPattern : MonoBehaviour
         return _combinedPatterns.Select((t, i) => new ValueDropdownItem(t.Name, i));
     }
     
-    // Odin
+    // Inspector
     private bool DisplayBossType => EnemyType == EnemyType.Boss;
     
     private void OnPatternsChanged()
